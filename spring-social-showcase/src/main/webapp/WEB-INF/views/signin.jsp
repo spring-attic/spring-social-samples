@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib uri="http://www.springframework.org/spring-social/facebook/tags" prefix="facebook" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -45,13 +46,10 @@
 	</form>
 
 <!-- FACEBOOK SIGNIN -->
-	<script src='http://connect.facebook.net/en_US/all.js'></script>
 	<form id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
 		<div id="fb-root"></div>
 		<p><fb:login-button onlogin="$('#fb_signin').submit();" v="2" length="long">Signin with Facebook</fb:login-button></p>
 	</form>
-	<script type='text/javascript'>	
-		FB.init({appId: '0b754d95f9c9899b0d6c4454b6f2dde7', status: true, cookie: true, xfbml: true});
-	</script>	
+	<facebook:init />
 </body>
 </html>

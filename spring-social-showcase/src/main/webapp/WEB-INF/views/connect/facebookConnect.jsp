@@ -35,7 +35,7 @@
 		<p><fb:login-button perms="email,publish_stream,offline_access" onlogin="signInWithFacebook();" v="2" length="long">Connect to Facebook</fb:login-button></p>
 	</form>
 	
-	<facebook:init apiKey="0b754d95f9c9899b0d6c4454b6f2dde7" />
+	<facebook:init />
 	
 </body>
 </html>
