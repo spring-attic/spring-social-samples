@@ -19,7 +19,7 @@ import java.security.Principal;
 
 import javax.inject.Inject;
 
-import org.springframework.social.facebook.FacebookOperations;
+import org.springframework.social.facebook.FacebookApi;
 import org.springframework.social.facebook.FacebookProfile;
 import org.springframework.social.facebook.connect.FacebookServiceProvider;
 import org.springframework.stereotype.Controller;
@@ -52,7 +52,7 @@ public class FacebookShowcaseController {
 		return "redirect:/facebook";
 	}
 
-	private FacebookOperations getFacebookApi(Principal user) {
+	private FacebookApi getFacebookApi(Principal user) {
 		return facebookProvider.getConnections(user.getName()).get(0).getServiceApi();
 	}
 }

@@ -22,7 +22,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.twitter.TwitterOperations;
+import org.springframework.social.twitter.TwitterApi;
 import org.springframework.social.twitter.TwitterProfile;
 import org.springframework.social.twitter.connect.TwitterServiceProvider;
 import org.springframework.stereotype.Controller;
@@ -42,9 +42,9 @@ public class TwitterShowcaseController {
 
 	@RequestMapping(value = "/twitter", method = RequestMethod.GET)
 	public String home(Principal user, Model model) {
-		List<ServiceProviderConnection<TwitterOperations>> connections = twitterProvider.getConnections(user.getName());
+		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(user.getName());
 		List<TwitterProfile> connectedProfiles = new ArrayList<TwitterProfile>();
-		for (ServiceProviderConnection<TwitterOperations> serviceProviderConnection : connections) {
+		for (ServiceProviderConnection<TwitterApi> serviceProviderConnection : connections) {
 			connectedProfiles.add(serviceProviderConnection.getServiceApi().getUserProfile());
 		}
 
@@ -59,10 +59,10 @@ public class TwitterShowcaseController {
 
 	@RequestMapping(value = "/twitter/tweet", method = RequestMethod.POST)
 	public String postTweet(Principal user, TweetForm tweetForm) {
-		List<ServiceProviderConnection<TwitterOperations>> connections = twitterProvider.getConnections(user.getName());
+		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(user.getName());
 
-		for (ServiceProviderConnection<TwitterOperations> connection : connections) {
-			TwitterOperations twitter = connection.getServiceApi();
+		for (ServiceProviderConnection<TwitterApi> connection : connections) {
+			TwitterApi twitter = connection.getServiceApi();
 			if (tweetForm.isTweetToAll() || twitter.getProfileId().equals(tweetForm.getScreenName())) {
 				twitter.updateStatus(tweetForm.getMessage());
 			}

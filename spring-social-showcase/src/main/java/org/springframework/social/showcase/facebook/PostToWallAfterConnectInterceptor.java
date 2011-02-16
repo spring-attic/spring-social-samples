@@ -17,22 +17,21 @@ package org.springframework.social.showcase.facebook;
 
 import org.springframework.social.connect.ServiceProvider;
 import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.facebook.FacebookOperations;
+import org.springframework.social.facebook.FacebookApi;
 import org.springframework.social.twitter.DuplicateTweetException;
 import org.springframework.social.web.connect.ConnectInterceptor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
-public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<FacebookOperations> {
+public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<FacebookApi> {
 
-	public void preConnect(ServiceProvider<FacebookOperations> provider, WebRequest request) {
+	public void preConnect(ServiceProvider<FacebookApi> provider, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TO_WALL_PARAMETER))) {
 			request.setAttribute(POST_TO_WALL_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
 	}
 
-	public void postConnect(ServiceProvider<FacebookOperations> provider,
-			ServiceProviderConnection<FacebookOperations> connection, WebRequest request) {
+	public void postConnect(ServiceProvider<FacebookApi> provider, ServiceProviderConnection<FacebookApi> connection, WebRequest request) {
 		if (request.getAttribute(POST_TO_WALL_ATTRIBUTE, WebRequest.SCOPE_SESSION) != null) {
 			try {
 				connection.getServiceApi().updateStatus("I've connected with the Spring Social Showcase!");
