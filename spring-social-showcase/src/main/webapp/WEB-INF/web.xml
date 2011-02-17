@@ -8,7 +8,12 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
-		
+
+	<context-param>
+		<param-name>contextInitializerClasses</param-name>
+		<param-value>org.springframework.social.showcase.ShowcaseContextInitializer</param-value>
+	</context-param>
+			
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
