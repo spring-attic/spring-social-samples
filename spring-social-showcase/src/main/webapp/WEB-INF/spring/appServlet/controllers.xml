@@ -14,9 +14,6 @@
 	
 	<bean class="org.springframework.social.web.connect.ConnectController">
 		<constructor-arg value="${application.url}" />
-		<constructor-arg>
-			<bean class="org.springframework.social.showcase.ShowcaseAccountIdExtractor" />
-		</constructor-arg>
 		<property name="interceptors">
 			<list>
 				<bean class="org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor" />
