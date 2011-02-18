@@ -13,7 +13,13 @@
 		<param-name>contextInitializerClasses</param-name>
 		<param-value>org.springframework.social.showcase.ShowcaseContextInitializer</param-value>
 	</context-param>
-			
+
+	<!-- Oddly, this isn't available at context initialization time. -->
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>embedded</param-value>
+	</context-param>
+				
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

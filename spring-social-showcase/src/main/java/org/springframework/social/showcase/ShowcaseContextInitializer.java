@@ -15,8 +15,16 @@ public class ShowcaseContextInitializer extends PropertiesLoaderSupport implemen
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
 		ConfigurableEnvironment environment = context.getEnvironment();
-		Properties defaultProperties = buildDefaultProperties();
-		environment.getPropertySources().addFirst(new PropertiesPropertySource("showcase.default", defaultProperties));
+		Properties properties = null;
+		
+		// ideally, the else would also be able to check acceptsProfiles("embedded"), but it seems that spring.profiles.default
+		// set in web.xml isn't available here.
+		if (environment.acceptsProfiles("standard")) {
+			properties = loadProperties(context, "classpath:application.properties");
+		} else {
+			properties = buildDefaultProperties();
+		}
+		environment.getPropertySources().addFirst(new PropertiesPropertySource("showcaseProperties", properties));
 	}
 
 	private Properties buildDefaultProperties() {
