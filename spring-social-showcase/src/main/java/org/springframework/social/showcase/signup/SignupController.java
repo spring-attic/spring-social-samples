@@ -21,11 +21,14 @@ import javax.validation.Valid;
 import org.springframework.social.showcase.ShowcaseUser;
 import org.springframework.social.showcase.UserRepository;
 import org.springframework.social.showcase.UsernameAlreadyInUseException;
+import org.springframework.social.web.connect.ConnectController;
 import org.springframework.social.web.connect.SignInControllerGateway;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class SignupController {
@@ -40,18 +43,25 @@ public class SignupController {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public SignupForm signupForm() {
+	public SignupForm signupForm(@RequestParam(required = false) String deferredConnectionUrl, WebRequest request) {
+		if(deferredConnectionUrl != null) {
+			request.setAttribute("redirectAfterSignupUrl", deferredConnectionUrl, WebRequest.SCOPE_SESSION);
+		}
 		return new SignupForm();
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@Valid SignupForm form, BindingResult formBinding) {
+	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
 
-		boolean result = createUser(form, formBinding);
-		return result ? "redirect:/" : null;
+		if (createUser(form, formBinding)) {
+			String deferredConnectUri = (String) request.getAttribute("redirectAfterSignupUrl", WebRequest.SCOPE_SESSION);
+			return deferredConnectUri != null ? "redirect:" + deferredConnectUri : "redirect:/";
+		}
+
+		return null;
 	}
 
 	private boolean createUser(SignupForm form, BindingResult formBinding) {
