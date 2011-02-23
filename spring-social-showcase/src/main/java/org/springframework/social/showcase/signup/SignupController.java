@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import org.springframework.social.showcase.ShowcaseUser;
 import org.springframework.social.showcase.UserRepository;
 import org.springframework.social.showcase.UsernameAlreadyInUseException;
-import org.springframework.social.web.connect.SignInControllerService;
+import org.springframework.social.web.connect.SignInService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +33,10 @@ import org.springframework.web.context.request.WebRequest;
 public class SignupController {
 
 	private final UserRepository userRepository;
-	private final SignInControllerService signinService;
+	private final SignInService signinService;
 
 	@Inject
-	public SignupController(UserRepository userRepository, SignInControllerService signinService) {
+	public SignupController(UserRepository userRepository, SignInService signinService) {
 		this.userRepository = userRepository;
 		this.signinService = signinService;
 	}

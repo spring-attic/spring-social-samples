@@ -51,6 +51,7 @@
 		<div id="fb-root"></div>
 		<p><fb:login-button onlogin="$('#fb_signin').submit();" v="2" length="long">Signin with Facebook</fb:login-button></p>
 	</form>
-	<facebook:init />
+	<s:eval expression="@environment.getProperty('facebook.apiKey')" var="apiKey" />
+	<facebook:init apiKey="${apiKey}" />
 </body>
 </html>

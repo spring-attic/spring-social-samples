@@ -19,9 +19,9 @@ import java.io.Serializable;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.web.connect.SignInControllerService;
+import org.springframework.social.web.connect.SignInService;
 
-public class AccountIdAsPrincipalSigninService implements SignInControllerService {
+public class AccountIdAsPrincipalSigninService implements SignInService {
 
 	public void signIn(Serializable accountId) {
 		SecurityContextHolder.getContext().setAuthentication(
