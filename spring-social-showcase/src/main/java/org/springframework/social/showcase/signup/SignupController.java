@@ -26,8 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class SignupController {
@@ -42,25 +40,16 @@ public class SignupController {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public SignupForm signupForm(@RequestParam(required = false) String deferredConnectionUrl, WebRequest request) {
-		if(deferredConnectionUrl != null) {
-			request.setAttribute("redirectAfterSignupUrl", deferredConnectionUrl, WebRequest.SCOPE_SESSION);
-		}
+	public SignupForm signupForm() {
 		return new SignupForm();
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
+	public String signup(@Valid SignupForm form, BindingResult formBinding) {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-
-		if (createUser(form, formBinding)) {
-			String deferredConnectUri = (String) request.getAttribute("redirectAfterSignupUrl", WebRequest.SCOPE_SESSION);
-			return deferredConnectUri != null ? "redirect:" + deferredConnectUri : "redirect:/";
-		}
-
-		return null;
+		return createUser(form, formBinding) ? "redirect:/" : null;
 	}
 
 	private boolean createUser(SignupForm form, BindingResult formBinding) {
