@@ -31,7 +31,6 @@
 	<bean class="org.springframework.social.facebook.web.FacebookSigninController">
 		<constructor-arg ref="connectionRepository" />
 		<constructor-arg ref="signinService" />
-		<constructor-arg value="#{environment['application.url']}" />
 		<constructor-arg value="#{environment['facebook.apiKey']}" />
 		<constructor-arg value="#{environment['facebook.appSecret']}" />
 	</bean>
