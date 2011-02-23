@@ -14,16 +14,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class PostSignupHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
 		BindingResult bindingResult = BindingResultUtils.getBindingResult(modelAndView.getModelMap(), "signupForm");
-
 		if (!bindingResult.hasErrors() && request.getMethod().equals("POST")) {
 			Properties deferredConnectionDetails = (Properties) request.getSession().getAttribute(ConnectController.DEFERRED_CONNECTION_DETAILS_ATTRIBUTE);
 			if (deferredConnectionDetails != null) {
-				String targetView = modelAndView.getViewName();
-				deferredConnectionDetails.setProperty("targetView", targetView);
+				deferredConnectionDetails.setProperty("targetView", modelAndView.getViewName());
 				modelAndView.setViewName("redirect:/connect/" + deferredConnectionDetails.getProperty("providerId") + "?deferred");
 			}
 		}
