@@ -1,11 +1,10 @@
 package org.springframework.social.showcase.signup;
 
-import java.util.Properties;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.web.connect.ConnectController;
+import org.springframework.social.web.connect.DeferredConnectionDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +17,10 @@ public class PostSignupHandlerInterceptor extends HandlerInterceptorAdapter {
 
 		BindingResult bindingResult = BindingResultUtils.getBindingResult(modelAndView.getModelMap(), "signupForm");
 		if (!bindingResult.hasErrors() && request.getMethod().equals("POST")) {
-			Properties deferredConnectionDetails = (Properties) request.getSession().getAttribute(ConnectController.DEFERRED_CONNECTION_DETAILS_ATTRIBUTE);
+			DeferredConnectionDetails deferredConnectionDetails = (DeferredConnectionDetails) request.getSession().getAttribute(ConnectController.DEFERRED_CONNECTION_DETAILS_ATTRIBUTE);
 			if (deferredConnectionDetails != null) {
-				deferredConnectionDetails.setProperty("targetView", modelAndView.getViewName());
-				modelAndView.setViewName("redirect:/connect/" + deferredConnectionDetails.getProperty("providerId") + "?deferred");
+				modelAndView.setViewName("redirect:/connect/" + deferredConnectionDetails.getProviderId()
+						+ "?deferred&targetView=" + modelAndView.getViewName());
 			}
 		}
 
