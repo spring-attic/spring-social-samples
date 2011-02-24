@@ -23,16 +23,16 @@
 	</bean>
 	
 	<bean class="org.springframework.social.twitter.web.TwitterSigninController">
+		<constructor-arg ref="twitter" />
 		<constructor-arg ref="connectionRepository" />
 		<constructor-arg ref="signinService" />
 		<constructor-arg value="#{environment['application.url']}" />
 	</bean>
 	
 	<bean class="org.springframework.social.facebook.web.FacebookSigninController">
+		<constructor-arg ref="facebook" />
 		<constructor-arg ref="connectionRepository" />
 		<constructor-arg ref="signinService" />
-		<constructor-arg value="#{environment['facebook.apiKey']}" />
-		<constructor-arg value="#{environment['facebook.appSecret']}" />
 	</bean>
 	
 	<bean id="signinService" class="org.springframework.social.showcase.AccountIdAsPrincipalSigninService" />
