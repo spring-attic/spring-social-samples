@@ -6,9 +6,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:property-placeholder 
-		location="classpath:application.properties" 
-		properties-ref="defaultProperties" />
+	<context:property-placeholder properties-ref="defaultProperties" />
 	
 	<util:properties id="defaultProperties">
 		<prop key="application.url">http://localhost:8080/spring-social-showcase</prop>
