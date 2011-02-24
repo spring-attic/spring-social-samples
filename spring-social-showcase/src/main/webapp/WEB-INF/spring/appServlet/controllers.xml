@@ -20,16 +20,9 @@
 		</property>
 	</bean>
 	
-	<bean class="org.springframework.social.facebook.web.FacebookSigninController">
-		<constructor-arg ref="facebook" />
-		<constructor-arg ref="connectionRepository" />
-		<constructor-arg ref="signinService" />
-	</bean>
+	<bean class="org.springframework.social.facebook.web.FacebookSigninController" />
 	
 	<bean class="org.springframework.social.twitter.web.TwitterSigninController">
-		<constructor-arg ref="twitter" />
-		<constructor-arg ref="connectionRepository" />
-		<constructor-arg ref="signinService" />
 		<constructor-arg value="${application.url}" />
 	</bean>
 	
