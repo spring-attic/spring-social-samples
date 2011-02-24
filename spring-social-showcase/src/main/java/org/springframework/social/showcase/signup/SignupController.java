@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import org.springframework.social.showcase.ShowcaseUser;
 import org.springframework.social.showcase.UserRepository;
 import org.springframework.social.showcase.UsernameAlreadyInUseException;
-import org.springframework.social.web.signin.ProviderSignInAccount;
+import org.springframework.social.web.signin.ProviderSignInAttempt;
 import org.springframework.social.web.signin.SignInService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -78,9 +78,9 @@ public class SignupController {
 	}
 
 	private void createConnection(WebRequest request, Serializable accountId) {
-		ProviderSignInAccount signInAccount = (ProviderSignInAccount) request.getAttribute(ProviderSignInAccount.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
+		ProviderSignInAttempt signInAccount = (ProviderSignInAttempt) request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
 		if(signInAccount != null) {
-			request.removeAttribute(ProviderSignInAccount.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
+			request.removeAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
 			signInAccount.connect(accountId);
 		}
 	}
