@@ -78,6 +78,11 @@
 			<version>4.1.0.Final</version>
 		</dependency>
 	    
+	    <dependency>
+	    	<groupId>commons-codec</groupId>
+	    	<artifactId>commons-codec</artifactId>
+	    	<version>1.4</version>
+	    </dependency>
 
 		<!-- Security -->	    
 		<dependency>

@@ -36,7 +36,7 @@
 		<p><fb:login-button perms="email,publish_stream,offline_access" onlogin="signInWithFacebook();" v="2" length="long">Connect to Facebook</fb:login-button></p>
 	</form>
 	
-	<s:eval expression="@environment.getProperty('facebook.apiKey')" var="appId" />
+	<s:eval expression="@facebook.appId" var="appId" />
 	<facebook:init appId="${appId}" />
 	
 </body>
