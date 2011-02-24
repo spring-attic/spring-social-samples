@@ -9,17 +9,6 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>contextInitializerClasses</param-name>
-		<param-value>org.springframework.social.showcase.ShowcaseContextInitializer</param-value>
-	</context-param>
-
-	<!-- Oddly, this isn't available at context initialization time. -->
-	<context-param>
-		<param-name>spring.profiles.default</param-name>
-		<param-value>embedded</param-value>
-	</context-param>
-				
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -72,7 +61,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-		<!-- Enables support for DELETE and PUT request methods with web browser clients -->
+	<!-- Enables support for DELETE and PUT request methods with web browser clients -->
 	<filter>
 		<filter-name>hiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -82,4 +71,5 @@
 		<filter-name>hiddenHttpMethodFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 </web-app>

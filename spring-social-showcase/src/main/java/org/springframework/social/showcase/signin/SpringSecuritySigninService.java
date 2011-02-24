@@ -13,10 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase;
+package org.springframework.social.showcase.signin;
 
-public interface UserRepository {
-	public void createUser(ShowcaseUser user) throws UsernameAlreadyInUseException;
+import java.io.Serializable;
 
-	public ShowcaseUser findUserByUsername(String username);
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.web.signin.SignInService;
+
+public class SpringSecuritySigninService implements SignInService {
+
+	public void signIn(Serializable accountId) {
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(accountId, null, null));
+	}
+
 }

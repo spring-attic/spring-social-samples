@@ -9,7 +9,7 @@
 <body>
 <h1>Spring Social Showcase</h1>
 
-<p>Welcome, <c:out value="${user.firstName}"/>!</p>
+<p>Welcome, <c:out value="${account.firstName}"/>!</p>
 
 <a href="<c:url value="/signout" />">Sign Out</a>
 

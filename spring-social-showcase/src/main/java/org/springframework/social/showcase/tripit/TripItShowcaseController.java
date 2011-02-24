@@ -36,10 +36,10 @@ public class TripItShowcaseController {
 		this.tripitProvider = tripitProvider;
 	}
 
-	@RequestMapping(value = "/tripit", method = RequestMethod.GET)
-	public String home(Principal user, Model model) {
-		if (tripitProvider.isConnected(user.getName())) {
-			TripItApi tripit = tripitProvider.getConnections(user.getName()).get(0).getServiceApi();
+	@RequestMapping(value="/tripit", method=RequestMethod.GET)
+	public String home(Principal currentUser, Model model) {
+		if (tripitProvider.isConnected(currentUser.getName())) {
+			TripItApi tripit = tripitProvider.getConnections(currentUser.getName()).get(0).getServiceApi();
 			model.addAttribute("tripItUser", tripit.getUserProfile());
 			model.addAttribute("trips", tripit.getUpcomingTrips());
 			return "tripit/tripit";

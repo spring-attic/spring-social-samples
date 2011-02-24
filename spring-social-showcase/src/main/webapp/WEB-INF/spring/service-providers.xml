@@ -10,25 +10,25 @@
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="stringEncryptor" />
 	</bean>
-	
-	<!-- Configure a Twitter service provider -->
-	<bean id="twitter" class="org.springframework.social.twitter.connect.TwitterServiceProvider">
-		<constructor-arg value="#{environment['twitter.consumerKey']}" />
-		<constructor-arg value="#{environment['twitter.consumerSecret']}" />
-		<constructor-arg ref="connectionRepository" />
-	</bean>
 
 	<!-- Configure a Facebook service provider -->
 	<bean id="facebook" class="org.springframework.social.facebook.connect.FacebookServiceProvider">
-		<constructor-arg value="#{environment['facebook.apiKey']}" />
-		<constructor-arg value="#{environment['facebook.appSecret']}" />
+		<constructor-arg value="${facebook.appId}" />
+		<constructor-arg value="${facebook.appSecret}" />
 		<constructor-arg ref="connectionRepository" />
 	</bean>
-	
+		
+	<!-- Configure a Twitter service provider -->
+	<bean id="twitter" class="org.springframework.social.twitter.connect.TwitterServiceProvider">
+		<constructor-arg value="${twitter.consumerKey}" />
+		<constructor-arg value="${twitter.consumerSecret}" />
+		<constructor-arg ref="connectionRepository" />
+	</bean>
+
 	<!-- Configure a TripIt service provider -->
 	<bean class="org.springframework.social.tripit.connect.TripItServiceProvider">
-		<constructor-arg value="#{environment['tripit.consumerKey']}" />
-		<constructor-arg value="#{environment['tripit.consumerSecret']}" />
+		<constructor-arg value="${tripit.consumerKey}" />
+		<constructor-arg value="${tripit.consumerSecret}" />
 		<constructor-arg ref="connectionRepository" />
 	</bean>
 

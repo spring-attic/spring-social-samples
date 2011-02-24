@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class FacebookShowcaseController {
+	
 	private final FacebookServiceProvider facebookProvider;
 
 	@Inject
@@ -36,19 +37,19 @@ public class FacebookShowcaseController {
 		this.facebookProvider = facebookServiceProvider;
 	}
 
-	@RequestMapping(value = "/facebook", method = RequestMethod.GET)
-	public String home(Principal user, Model model) {
-		if (facebookProvider.isConnected(user.getName())) {
-			FacebookProfile userProfile = getFacebookApi(user).getUserProfile();
-			model.addAttribute("fbUser", userProfile);
+	@RequestMapping(value="/facebook", method=RequestMethod.GET)
+	public String home(Principal currentUser, Model model) {
+		if (facebookProvider.isConnected(currentUser.getName())) {
+			FacebookProfile userProfile = getFacebookApi(currentUser).getUserProfile();
+			model.addAttribute("facebookUser", userProfile);
 			return "facebook/facebook";
 		}
 		return "redirect:/connect/facebook";
 	}
 
-	@RequestMapping(value = "/facebook/wall", method = RequestMethod.POST)
-	public String postToWall(Principal user, String message) {
-		getFacebookApi(user).updateStatus(message);
+	@RequestMapping(value="/facebook/wall", method=RequestMethod.POST)
+	public String postToWall(Principal currentUser, String message) {
+		getFacebookApi(currentUser).updateStatus(message);
 		return "redirect:/facebook";
 	}
 

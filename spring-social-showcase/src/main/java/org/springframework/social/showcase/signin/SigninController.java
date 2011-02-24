@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase;
+package org.springframework.social.showcase.signin;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.web.signin.SignInService;
+@Controller
+public class SigninController {
 
-public class AccountIdAsPrincipalSigninService implements SignInService {
-
-	public void signIn(Serializable accountId) {
-		SecurityContextHolder.getContext().setAuthentication(
-				new UsernamePasswordAuthenticationToken(accountId, null, null));
+	@RequestMapping(value="/signin", method=RequestMethod.GET)
+	public void signin() {
 	}
-
 }

@@ -20,9 +20,9 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.social.showcase.ShowcaseUser;
-import org.springframework.social.showcase.UserRepository;
-import org.springframework.social.showcase.UsernameAlreadyInUseException;
+import org.springframework.social.showcase.account.Account;
+import org.springframework.social.showcase.account.AccountRepository;
+import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
 import org.springframework.social.web.signin.ProviderSignInAttempt;
 import org.springframework.social.web.signin.SignInService;
 import org.springframework.stereotype.Controller;
@@ -34,42 +34,41 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class SignupController {
 
-	private final UserRepository userRepository;
+	private final AccountRepository accountRepository;
 
 	private final SignInService signinService;
 
 	@Inject
-	public SignupController(UserRepository userRepository, SignInService signinService) {
-		this.userRepository = userRepository;
+	public SignupController(AccountRepository accountRepository, SignInService signinService) {
+		this.accountRepository = accountRepository;
 		this.signinService = signinService;
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public SignupForm signupForm() {
 		return new SignupForm();
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		boolean userCreated = createUser(form, formBinding);
-		if (userCreated) {
-			createConnection(request, form.getUsername());
+		boolean accountCreated = createAccount(form, formBinding);
+		if (accountCreated) {
+			handleProviderSignInAttempt(request, form.getUsername());
 			return "redirect:/";
 		}
-
 		return null;
 	}
 
-	private boolean createUser(SignupForm form, BindingResult formBinding) {
+	// internal helpers
+	
+	private boolean createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			ShowcaseUser user = new ShowcaseUser(form.getUsername(), form.getPassword(),
-					form.getFirstName(), form.getLastName());
-			userRepository.createUser(user);
-
-			signinService.signIn(user.getUsername());
+			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
+			accountRepository.createAccount(account);
+			signinService.signIn(account.getUsername());
 			return true;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
@@ -77,11 +76,11 @@ public class SignupController {
 		}
 	}
 
-	private void createConnection(WebRequest request, Serializable accountId) {
-		ProviderSignInAttempt signInAccount = (ProviderSignInAttempt) request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
-		if(signInAccount != null) {
+	private void handleProviderSignInAttempt(WebRequest request, Serializable accountId) {
+		ProviderSignInAttempt signInAttempt = (ProviderSignInAttempt) request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
+		if (signInAttempt != null) {
+			signInAttempt.connect(accountId);
 			request.removeAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
-			signInAccount.connect(accountId);
 		}
 	}
 

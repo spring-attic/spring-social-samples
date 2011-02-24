@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase;
+package org.springframework.social.showcase.account;
 
-public class ShowcaseUser {
+public class Account {
 
 	private final String username;
 
@@ -25,7 +25,7 @@ public class ShowcaseUser {
 
 	private final String lastName;
 
-	public ShowcaseUser(String username, String password, String firstName, String lastName) {
+	public Account(String username, String password, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;

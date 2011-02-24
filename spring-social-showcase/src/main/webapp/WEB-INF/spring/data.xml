@@ -27,4 +27,5 @@
 		<jdbc:script location="classpath:/org/springframework/social/showcase/db/Account.sql" />
 		<jdbc:script location="classpath:/org/springframework/social/showcase/db/data.sql" />
 	</jdbc:embedded-database>	
+	
 </beans>

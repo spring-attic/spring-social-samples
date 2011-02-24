@@ -21,29 +21,30 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProvider;
+import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ShowcaseController {
+public class HomeController {
+	
 	private final List<ServiceProvider<?>> serviceProviders;
-	private final UserRepository userRepository;
+	
+	private final AccountRepository accountRepository;
 
 	@Inject
-	public ShowcaseController(List<ServiceProvider<?>> serviceProviders, UserRepository userRepository) {
+	public HomeController(List<ServiceProvider<?>> serviceProviders, AccountRepository userRepository) {
 		this.serviceProviders = serviceProviders;
-		this.userRepository = userRepository;
+		this.accountRepository = userRepository;
 	}
 
 	@RequestMapping("/")
-	public String home(Principal user, Model model) {
+	public String home(Principal currentUser, Model model) {
 		for (ServiceProvider<?> serviceProvider : serviceProviders) {
-			model.addAttribute(serviceProvider.getId() + "_status", serviceProvider.getConnections(user.getName())
-					.size() > 0 ? "Yes" : "No");
+			model.addAttribute(serviceProvider.getId() + "_status", serviceProvider.getConnections(currentUser.getName()).size() > 0 ? "Yes" : "No");
 		}
-
-		model.addAttribute("user", userRepository.findUserByUsername(user.getName()));
+		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		return "home";
 	}
 }

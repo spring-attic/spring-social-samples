@@ -16,8 +16,11 @@
 package org.springframework.social.showcase.twitter;
 
 public class TweetForm {
+	
 	private String screenName;
+	
 	private boolean tweetToAll;
+	
 	private String message;
 
 	public void setScreenName(String screenName) {
@@ -28,6 +31,14 @@ public class TweetForm {
 		return screenName;
 	}
 
+	public void setTweetToAll(boolean tweetToAll) {
+		this.tweetToAll = tweetToAll;
+	}
+
+	public boolean isTweetToAll() {
+		return tweetToAll;
+	}
+	
 	public void setMessage(String message) {
 		this.message = message;
 	}
@@ -36,11 +47,4 @@ public class TweetForm {
 		return message;
 	}
 
-	public void setTweetToAll(boolean tweetToAll) {
-		this.tweetToAll = tweetToAll;
-	}
-
-	public boolean isTweetToAll() {
-		return tweetToAll;
-	}
 }

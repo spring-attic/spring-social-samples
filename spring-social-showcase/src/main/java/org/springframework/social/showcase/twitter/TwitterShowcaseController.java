@@ -40,34 +40,31 @@ public class TwitterShowcaseController {
 		this.twitterProvider = twitterProvider;
 	}
 
-	@RequestMapping(value = "/twitter", method = RequestMethod.GET)
-	public String home(Principal user, Model model) {
-		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(user.getName());
-		List<TwitterProfile> connectedProfiles = new ArrayList<TwitterProfile>();
-		for (ServiceProviderConnection<TwitterApi> serviceProviderConnection : connections) {
-			connectedProfiles.add(serviceProviderConnection.getServiceApi().getUserProfile());
-		}
-
+	@RequestMapping(value="/twitter", method=RequestMethod.GET)
+	public String home(Principal currentUser, Model model) {
+		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(currentUser.getName());
 		if (connections.size() > 0) {
+			List<TwitterProfile> connectedProfiles = new ArrayList<TwitterProfile>(connections.size());
+			for (ServiceProviderConnection<TwitterApi> connection : connections) {
+				connectedProfiles.add(connection.getServiceApi().getUserProfile());
+			}			
 			model.addAttribute("connectedProfiles", connectedProfiles);
 			model.addAttribute(new TweetForm());
 			return "twitter/twitter";
 		}
-
 		return "redirect:/connect/twitter";
 	}
 
-	@RequestMapping(value = "/twitter/tweet", method = RequestMethod.POST)
-	public String postTweet(Principal user, TweetForm tweetForm) {
-		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(user.getName());
-
+	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
+	public String postTweet(Principal currentUser, TweetForm tweetForm) {
+		List<ServiceProviderConnection<TwitterApi>> connections = twitterProvider.getConnections(currentUser.getName());
 		for (ServiceProviderConnection<TwitterApi> connection : connections) {
 			TwitterApi twitter = connection.getServiceApi();
 			if (tweetForm.isTweetToAll() || twitter.getProfileId().equals(tweetForm.getScreenName())) {
 				twitter.updateStatus(tweetForm.getMessage());
 			}
 		}
-
 		return "redirect:/twitter";
 	}
+
 }

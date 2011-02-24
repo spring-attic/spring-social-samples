@@ -9,24 +9,15 @@
 
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<context:component-scan base-package="org.springframework.social.showcase" />
-	<context:component-scan base-package="org.springframework.social.showcase.twitter" />
-	<context:component-scan base-package="org.springframework.social.showcase.facebook" />
 	
 	<bean class="org.springframework.social.web.connect.ConnectController">
-		<constructor-arg value="#{environment['application.url']}" />
+		<constructor-arg value="${application.url}" />
 		<property name="interceptors">
 			<list>
-				<bean class="org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor" />
 				<bean class="org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor" />
+				<bean class="org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor" />
 			</list>
 		</property>
-	</bean>
-	
-	<bean class="org.springframework.social.twitter.web.TwitterSigninController">
-		<constructor-arg ref="twitter" />
-		<constructor-arg ref="connectionRepository" />
-		<constructor-arg ref="signinService" />
-		<constructor-arg value="#{environment['application.url']}" />
 	</bean>
 	
 	<bean class="org.springframework.social.facebook.web.FacebookSigninController">
@@ -35,6 +26,13 @@
 		<constructor-arg ref="signinService" />
 	</bean>
 	
-	<bean id="signinService" class="org.springframework.social.showcase.AccountIdAsPrincipalSigninService" />
+	<bean class="org.springframework.social.twitter.web.TwitterSigninController">
+		<constructor-arg ref="twitter" />
+		<constructor-arg ref="connectionRepository" />
+		<constructor-arg ref="signinService" />
+		<constructor-arg value="${application.url}" />
+	</bean>
+	
+	<bean id="signinService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
 	
 </beans>

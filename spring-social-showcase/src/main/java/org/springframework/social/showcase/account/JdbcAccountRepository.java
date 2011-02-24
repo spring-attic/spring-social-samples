@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase;
+package org.springframework.social.showcase.account;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,19 +28,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class JdbcUserRepository implements UserRepository {
+public class JdbcAccountRepository implements AccountRepository {
 
 	private final JdbcTemplate jdbcTemplate;
 	private final PasswordEncoder passwordEncoder;
 
 	@Inject
-	public JdbcUserRepository(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
+	public JdbcAccountRepository(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Transactional
-	public void createUser(ShowcaseUser user) throws UsernameAlreadyInUseException {
+	public void createAccount(Account user) throws UsernameAlreadyInUseException {
 		try {
 			jdbcTemplate.update(
 					"insert into ShowcaseUser (firstName, lastName, username, password) values (?, ?, ?, ?)",
@@ -51,11 +51,11 @@ public class JdbcUserRepository implements UserRepository {
 		}
 	}
 
-	public ShowcaseUser findUserByUsername(String username) {
+	public Account findAccountByUsername(String username) {
 		return jdbcTemplate.queryForObject("select username, firstName, lastName from ShowcaseUser where username = ?",
-				new RowMapper<ShowcaseUser>() {
-					public ShowcaseUser mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new ShowcaseUser(rs.getString("username"), null, rs.getString("firstName"), rs
+				new RowMapper<Account>() {
+					public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return new Account(rs.getString("username"), null, rs.getString("firstName"), rs
 								.getString("lastName"));
 					}
 				}, username);

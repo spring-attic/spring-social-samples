@@ -9,14 +9,14 @@
 <body>
 	<h1>Spring Social Showcase: Facebook</h1>
 
-	<p>Hello, <c:out value="${fbUser.firstName}"/>!  (<a href="<c:url value="/connect/facebook"/>">Disconnect from Facebook</a>)</p>
+	<p>Hello, <c:out value="${facebookUser.firstName}"/>!  (<a href="<c:url value="/connect/facebook"/>">Disconnect from Facebook</a>)</p>
 	
 	<p>Your Facebook profile:</p>
 	<dl>
 		<dt>Facebook ID:</dt>
-		<dd><c:out value="${fbUser.id}"/></dd>
+		<dd><c:out value="${facebookUser.id}"/></dd>
 		<dt>Name:</dt>
-		<dd><c:out value="${fbUser.name}"/></dd>
+		<dd><c:out value="${facebookUser.name}"/></dd>
 		<dt>Email:</dt>
 		<dd><c:out value="${email}"/></dd>
 	</dl>
