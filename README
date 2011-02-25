@@ -1,0 +1,6 @@
+This repository contains sample projects illustrating usage of the Spring Social project.
+
+Samples include:
+- spring-social-showcase, illustrating the features of the Spring Social project
+ 
+See the README in each sub directory for information on the sample and instructions on how to run it.
