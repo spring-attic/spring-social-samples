@@ -15,15 +15,13 @@
  */
 package org.springframework.social.showcase.signup;
 
-import java.io.Serializable;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
-import org.springframework.social.web.signin.ProviderSignInAttempt;
+import org.springframework.social.web.signin.ProviderSignInUtils;
 import org.springframework.social.web.signin.SignInService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -56,7 +54,7 @@ public class SignupController {
 		}
 		boolean accountCreated = createAccount(form, formBinding);
 		if (accountCreated) {
-			handleProviderSignInAttempt(request, form.getUsername());
+			ProviderSignInUtils.handleConnectPostSignUp(form.getUsername(), request);
 			return "redirect:/";
 		}
 		return null;
@@ -73,14 +71,6 @@ public class SignupController {
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
 			return false;
-		}
-	}
-
-	private void handleProviderSignInAttempt(WebRequest request, Serializable accountId) {
-		ProviderSignInAttempt signInAttempt = (ProviderSignInAttempt) request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
-		if (signInAttempt != null) {
-			signInAttempt.connect(accountId);
-			request.removeAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, WebRequest.SCOPE_SESSION);
 		}
 	}
 
