@@ -15,15 +15,13 @@
  */
 package org.springframework.social.showcase.signin;
 
-import java.io.Serializable;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.web.signin.SignInService;
 
-public class SpringSecuritySigninService implements SignInService {
+public class SpringSecuritySigninService implements SignInService<String> {
 
-	public void signIn(Serializable accountId) {
+	public void signIn(String accountId) {
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(accountId, null, null));
 	}
 
