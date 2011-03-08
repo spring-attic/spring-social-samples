@@ -4,10 +4,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Spring Social Showcase</title>
+	<title>Spring Social NetFlix Sample</title>
 </head>
 <body>
-<h1>Spring Social Showcase</h1>
+<h1>Spring Social NetFlix Sample</h1>
 
 <p>Welcome, <c:out value="${account.firstName}"/>!</p>
 

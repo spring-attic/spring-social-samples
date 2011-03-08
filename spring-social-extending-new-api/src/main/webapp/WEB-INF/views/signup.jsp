@@ -5,11 +5,11 @@
 
 <html>
 <head>
-	<title>Spring Social Showcase: Sign Up</title>
+	<title>Spring Social NetFlix Sample: Sign Up</title>
 	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
 </head>
 <body>
-	<h1>Spring Social Showcase: Sign Up</h1>
+	<h1>Spring Social NetFlix Sample: Sign Up</h1>
 	
 	<c:if test="${not empty message}">
 	<div class="${message.type.cssClass}">${message.text}</div>

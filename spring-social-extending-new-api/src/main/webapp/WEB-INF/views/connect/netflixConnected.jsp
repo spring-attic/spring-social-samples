@@ -3,14 +3,14 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Spring Social Showcase: Connected to NetFlix</title>
+	<title>Spring Social NetFlix Sample: Connected to NetFlix</title>
 </head>
 <body>
-<h1>Spring Social Showcase: Connected to NetFlix</h1>
+<h1>Spring Social NetFlix Sample: Connected to NetFlix</h1>
 
 <form id="disconnect" method="post">
 	<div class="formInfo">
-		<p>The Spring Social Showcase sample application is already connected to your NetFlix account.
+		<p>The Spring Social NetFlix Sample application is already connected to your NetFlix account.
 			Click the button if you wish to disconnect.			
 	</div>
 

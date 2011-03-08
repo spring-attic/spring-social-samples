@@ -5,10 +5,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Spring Social Showcase: NetFlix</title>
+	<title>Spring Social NetFlix Sample</title>
 </head>
 <body>
-<h1>Spring Social Showcase: NetFlix</h1>
+<h1>Spring Social NetFlix Sample</h1>
 
 <p>Your NetFlix disc queue:</p>
 <c:forEach items="${discQueue}" var="queueItem">

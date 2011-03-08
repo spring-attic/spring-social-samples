@@ -5,12 +5,12 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Spring Social Showcase: Sign In</title>
+	<title>Spring Social NetFlix Sample: Sign In</title>
 	<script type="text/javascript" src="<c:url value="/resources/jquery/1.4/jquery.js" />"></script>	
 	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
 </head>
 <body>
-<h1>Spring Social Showcase: Sign In</h1>
+<h1>Spring Social NetFlix Sample: Sign In</h1>
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
 	<div class="formInfo">
