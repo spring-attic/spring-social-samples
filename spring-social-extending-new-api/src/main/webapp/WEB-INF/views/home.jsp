@@ -27,6 +27,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
+<a href="connect/netflix">Disconnect from NetFlix</a>
 
 </body>
 </html>
