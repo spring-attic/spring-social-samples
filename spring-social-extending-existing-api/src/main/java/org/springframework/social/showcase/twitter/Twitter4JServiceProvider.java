@@ -17,13 +17,11 @@ package org.springframework.social.showcase.twitter;
 
 import java.util.Properties;
 
-import org.springframework.social.AccountNotConnectedException;
 import org.springframework.social.connect.oauth1.AbstractOAuth1ServiceProvider;
 import org.springframework.social.connect.support.ConnectionRepository;
 import org.springframework.social.oauth1.OAuth1Template;
 
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.PropertyConfiguration;
