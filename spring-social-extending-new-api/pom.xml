@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.social.samples</groupId>
-	<artifactId>spring-social-extending-new-api</artifactId>
+	<artifactId>spring-social-movies</artifactId>
 	<name>Spring Social New API Extension Sample</name>
 	<packaging>war</packaging>
 	<version>1.0.0.M2</version>

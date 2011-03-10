@@ -2,5 +2,9 @@ This repository contains sample projects illustrating usage of the Spring Social
 
 Samples include:
 - spring-social-showcase, illustrating the features of the Spring Social project
+- spring-social-extending-new-api, illustrating how to extend Spring Social with a new service 
+        provider and API binding
+- spring-social-extending-existing-api, illustrating how to extend Spring Social with a new service
+        provider that uses some existing API binding
  
 See the README in each sub directory for information on the sample and instructions on how to run it.

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 
-<h1>Connect to NetFlix</h1>
+<h3>Connect to NetFlix</h3>
 
 <form action="<c:url value="/connect/netflix" />" method="POST">
 	<div class="formInfo">

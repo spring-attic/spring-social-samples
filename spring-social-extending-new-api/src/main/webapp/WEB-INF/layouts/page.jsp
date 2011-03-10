@@ -4,13 +4,13 @@
 <%@ page session="false" %>
 <html>
 	<head>
-		<title>Spring Social Netflix Sample</title>
+		<title>Spring Social Movies Sample</title>
 		<link rel="stylesheet" href="<c:url value="/resources/page.css" />" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
 	</head>
 	<body>
 		<div id="header"">
-			<h1>Spring Social NetFlix Sample</h1>
+			<h1>Spring Social Movies Sample</h1>
 		</div>
 		
 		<div id="content">

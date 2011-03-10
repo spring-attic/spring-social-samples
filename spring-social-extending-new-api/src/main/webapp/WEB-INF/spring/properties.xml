@@ -9,7 +9,7 @@
 	<context:property-placeholder properties-ref="defaultProperties" />
 	
 	<util:properties id="defaultProperties">
-		<prop key="application.url">http://localhost:8080/spring-social-extending-new-api</prop>
+		<prop key="application.url">http://localhost:8080/spring-social-movies</prop>
 		<prop key="netflix.consumerKey">qvxmshk3jmthe7t2hzggfs65</prop>
 		<prop key="netflix.consumerSecret">KmXEUfjBzn</prop>
 	</util:properties>

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
 
-<h1>Write a review</h1>
+<h3>Write a review</h3>
 
 <form method="POST">
 	<input type="hidden" name="netflixId" value="${review.netflixId}"/>

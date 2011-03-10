@@ -1,7 +1,7 @@
 <%@ page session="false" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 
-<h1>Connected to NetFlix</h1>
+<h3>Connected to NetFlix</h3>
 
 <form id="disconnect" method="post">
 	<div class="formInfo">

@@ -32,6 +32,20 @@ public class NetFlixTemplate implements NetFlixApi {
 		this.restTemplate = ProtectedResourceClientFactory.create(apiKey, apiSecret, accessToken, accessTokenSecret);
 		this.userBaseUrl = getUserBaseUrl();
 	}
+	
+	public List<CatalogTitle> searchForTitles(String searchTerm) {
+		Map<String, Object> resultMap = restTemplate.getForObject(SEARCH_TITLES_URL, Map.class, searchTerm);
+		Map<String, Object> titlesMap = (Map<String, Object>) resultMap.get("catalog_titles");
+		List<Map<String, Object>> titlesList = (List<Map<String, Object>>) titlesMap.get("catalog_title");
+		List<CatalogTitle> titles = new ArrayList<CatalogTitle>();
+		for (Map<String, Object> titleMap : titlesList) {
+			String id = String.valueOf(titleMap.get("id"));
+			String title = ((Map<String, String>) titleMap.get("title")).get("regular");
+			String releaseYear = String.valueOf(titleMap.get("release_year"));
+			titles.add(new CatalogTitle(id, title, releaseYear));
+		}
+		return titles;
+	}
 
 	public List<QueueItem> getDiscQueue() {
 		Map<String, Object> resultMap = restTemplate.getForObject(userBaseUrl + QUEUE_PATH, Map.class);
@@ -48,20 +62,6 @@ public class NetFlixTemplate implements NetFlixApi {
 		}
 		return queueItems;
 	}
-	
-	public List<CatalogTitle> searchForTitles(String searchTerm) {
-		Map<String, Object> resultMap = restTemplate.getForObject(SEARCH_TITLES_URL, Map.class, searchTerm);
-		Map<String, Object> titlesMap = (Map<String, Object>) resultMap.get("catalog_titles");
-		List<Map<String, Object>> titlesList = (List<Map<String, Object>>) titlesMap.get("catalog_title");
-		List<CatalogTitle> titles = new ArrayList<CatalogTitle>();
-		for (Map<String, Object> titleMap : titlesList) {
-			String id = String.valueOf(titleMap.get("id"));
-			String title = ((Map<String, String>) titleMap.get("title")).get("regular");
-			String releaseYear = String.valueOf(titleMap.get("release_year"));
-			titles.add(new CatalogTitle(id, title, releaseYear));
-		}
-		return titles;
-	}
 
 	private String findItemId(List<Map<String, String>> linkList) {
 		for (Map<String, String> linkMap : linkList) {
@@ -77,7 +77,7 @@ public class NetFlixTemplate implements NetFlixApi {
 		return result.get("resource").get("link").get("href");
 	}
 
+	private static final String SEARCH_TITLES_URL = "http://api.netflix.com/catalog/titles?term={term}&max_results=5&output=json";
 	private static final String CURRENT_USER_URL = "http://api.netflix.com/users/current?output=json";
 	private static final String QUEUE_PATH = "/queues/disc?output=json";
-	private static final String SEARCH_TITLES_URL = "http://api.netflix.com/catalog/titles?term={term}&max_results=5&output=json";
 }

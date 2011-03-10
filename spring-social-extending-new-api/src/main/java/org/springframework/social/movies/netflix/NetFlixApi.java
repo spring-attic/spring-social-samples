@@ -19,8 +19,8 @@ import java.util.List;
 
 public interface NetFlixApi {
 
-	List<QueueItem> getDiscQueue();
-
 	List<CatalogTitle> searchForTitles(String searchTerms);
+
+	List<QueueItem> getDiscQueue();
 	
 }
