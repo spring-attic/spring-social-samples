@@ -1,16 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social NetFlix Sample: Sign In</title>
-	<script type="text/javascript" src="<c:url value="/resources/jquery/1.4/jquery.js" />"></script>	
-	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
-</head>
-<body>
-<h1>Spring Social NetFlix Sample: Sign In</h1>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
 	<div class="formInfo">
@@ -38,6 +28,3 @@
 	
 	<p>Or you can <a href="<c:url value="/signup"/>">signup</a> with a new account.</p>
 </form>
-
-</body>
-</html>

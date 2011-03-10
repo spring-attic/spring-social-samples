@@ -13,11 +13,18 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
+		
+	<!-- Maps view names to Tiles Definitions -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</beans:bean>
+	        
+	<!-- Initializes the Apache Tiles CompositeView system -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:value>/WEB-INF/layouts/tiles.xml,/WEB-INF/views/**/tiles.xml</beans:value>
+		</beans:property>
+		<beans:property name="checkRefresh" value="true" />
 	</beans:bean>
 	
 	<!-- Imports user-defined @Controller beans that process client requests -->

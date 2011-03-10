@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.signin;
+package org.springframework.social.movies.netflix;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+public class CatalogTitle {
+	private final String id;
+	private final String title;
+	private final String releaseYear;
 
-@Controller
-public class SigninController {
-
-	@RequestMapping(value="/signin", method=RequestMethod.GET)
-	public void signin() {
-		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	public CatalogTitle(String id, String title, String releaseYear) {
+		this.id = id;
+		this.title = title;
+		this.releaseYear = releaseYear;		
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getReleaseYear() {
+		return releaseYear;
+	}
+
 }

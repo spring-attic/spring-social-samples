@@ -1,0 +1,42 @@
+
+body {
+	font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif !important;
+}
+
+#recentReviews {
+	position: absolute; 
+	top: auto; 
+	left: 0; 
+	width: 49%;
+	background-color: #ffcc99;
+}
+
+#discQueue {
+	position: absolute;
+	left: auto;
+	top: auto; 
+	right: 0; 
+	width: 49%;
+	background-color: #ffffcc;
+}
+
+#header {
+	margin: 0 auto;
+	width: 100%;
+	height: 92px;
+	position: relative;
+	display: block;
+	background-color: #660000;
+}
+
+#header h1 {
+	color: #ffcc99;
+}
+
+.queueItem {
+	font-size: 10pt;
+}
+
+.queueReview {
+	font-size: 8pt;
+}

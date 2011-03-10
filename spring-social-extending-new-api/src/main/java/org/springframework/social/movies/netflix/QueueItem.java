@@ -23,10 +23,13 @@ public class QueueItem {
 
 	private final String releaseYear;
 
-	public QueueItem(String id, String title, String releaseYear) {
+	private final String boxArtUrl;
+
+	public QueueItem(String id, String title, String releaseYear, String boxArtUrl) {
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.id = id;
+		this.boxArtUrl = boxArtUrl;
 	}
 
 	public String getId() {
@@ -41,4 +44,7 @@ public class QueueItem {
 		return title;
 	}
 
+	public String getBoxArtUrl() {
+		return boxArtUrl;
+	}
 }

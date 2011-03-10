@@ -16,12 +16,21 @@
 package org.springframework.social.movies;
 
 import java.security.Principal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.social.movies.account.AccountRepository;
 import org.springframework.social.movies.netflix.NetFlixApi;
 import org.springframework.social.movies.netflix.NetFlixServiceProvider;
+import org.springframework.social.movies.netflix.QueueItem;
+import org.springframework.social.movies.review.Review;
+import org.springframework.social.movies.review.ReviewRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,20 +42,36 @@ public class HomeController {
 	
 	private final AccountRepository accountRepository;
 
+	private final ReviewRepository reviewRepository;
+
+
 	@Inject
-	public HomeController(NetFlixServiceProvider netflixProvider, AccountRepository userRepository) {
+	public HomeController(NetFlixServiceProvider netflixProvider, AccountRepository userRepository, ReviewRepository reviewRepository) {
 		this.netflixProvider = netflixProvider;
 		this.accountRepository = userRepository;
+		this.reviewRepository = reviewRepository;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
 		if (netflixProvider.isConnected(currentUser.getName())) {
 			NetFlixApi netflix = netflixProvider.getConnections(currentUser.getName()).get(0).getServiceApi();
-			model.addAttribute("discQueue", netflix.getDiscQueue());
+			List<QueueItem> discQueue = netflix.getDiscQueue();
+			
+			List<String> queueItemIds = new ArrayList<String>();
+			for (QueueItem queueItem : discQueue) {
+				queueItemIds.add(queueItem.getId());
+			}
+			
+			List<Review> queueReviews = reviewRepository.findReviewsForQueueItems(queueItemIds);
+			
+			model.addAttribute("discQueue", discQueue);
+			model.addAttribute("queueReviews", queueReviews);
 			model.addAttribute("netflix_connected", true);
 		}
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
+		model.addAttribute("recentReviews", reviewRepository.getRecentReviews());
 		return "home";
 	}
+	
 }

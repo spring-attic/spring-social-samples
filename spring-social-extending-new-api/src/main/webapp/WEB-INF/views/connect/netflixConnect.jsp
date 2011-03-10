@@ -1,13 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social NetFlix Sample: Connect to NetFlix</title>
-</head>
-<body>
-<h1>Spring Social NetFlix Sample: Connect to NetFlix</h1>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+
+<h1>Connect to NetFlix</h1>
 
 <form action="<c:url value="/connect/netflix" />" method="POST">
 	<div class="formInfo">
@@ -17,6 +12,5 @@
 	<p><button type="submit">Connect to NetFlix</button></p>
 </form>
 
+<p><a href="<s:url value="/" />">Return to home page</a></p>
 
-</body>
-</html>

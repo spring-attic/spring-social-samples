@@ -21,4 +21,6 @@ public interface NetFlixApi {
 
 	List<QueueItem> getDiscQueue();
 
+	List<CatalogTitle> searchForTitles(String searchTerms);
+	
 }
