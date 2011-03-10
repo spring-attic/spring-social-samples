@@ -28,7 +28,7 @@ public final class NetFlixServiceProvider extends AbstractOAuth1ServiceProvider<
 				"http://api.netflix.com/oauth/request_token",
 				"https://api-user.netflix.com/oauth/login?oauth_token={requestToken}&" +
 					"oauth_callback={redirectUri}&oauth_consumer_key=" + consumerKey,
-				"http://api.netflix.com/oauth/access_token", OAuth1Version.OAUTH_10));
+				"http://api.netflix.com/oauth/access_token", OAuth1Version.CORE_10));
 	}
 
 	@Override
