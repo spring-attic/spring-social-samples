@@ -2,12 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social NetFlix Sample</title>
-</head>
-<body>
-<h1>Spring Social NetFlix Sample: Pick a Movie</h1>
+
+<h3>Pick a Movie to review</h3>
 
 <form method="GET">
 	<input type="text" name="searchTerm" value="${param.searchTerm}"/>

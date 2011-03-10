@@ -2,12 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social NetFlix Sample</title>
-</head>
-<body>
-<h1>Spring Social NetFlix Sample: Select a Movie</h1>
+
+<h1>Write a review</h1>
 
 <form method="POST">
 	<input type="hidden" name="netflixId" value="${review.netflixId}"/>
@@ -17,5 +13,3 @@
 	<input type="submit" value="Submit Review"/>
 </form>
 
-</body>
-</html>

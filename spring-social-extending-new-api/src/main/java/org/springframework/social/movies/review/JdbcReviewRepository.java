@@ -50,7 +50,7 @@ public class JdbcReviewRepository implements ReviewRepository {
 		NamedParameterJdbcTemplate npJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, List> parameters = new HashMap<String, List>();
 		parameters.put("netflixIds", queueItemIds);
-		return npJdbcTemplate.query("select movieTitle, author, submitted, text, netflixId from Review where netflixId in (:netflixIds) order by submitted desc limit 3", 
+		return npJdbcTemplate.query("select movieTitle, author, submitted, text, netflixId from Review where netflixId in (:netflixIds) order by submitted desc", 
 			parameters, new ReviewRowMapper());
 	}
 	
