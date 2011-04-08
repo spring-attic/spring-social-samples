@@ -8,20 +8,9 @@
 <head>
 	<title>Spring Social Showcase: Connect to Facebook</title>
 	<script type="text/javascript" src="<c:url value="/resources/jquery/1.4/jquery.js" />"></script>	
-	<script>
-		function signInWithFacebook() {
-			FB.getLoginStatus(function(response) {
-		        if (response.session) {
-		    		$('#fb_signin').submit();
-		        }
-		      });
-	
-		}
-	</script>
 </head>
 <body>
 	<h1>Spring Social Showcase: Connect to Facebook</h1>
-	
 	<form action="<c:url value="/connect/facebook" />" method="POST">
 		<input type="hidden" name="scope" value="publish_stream,offline_access" />
 		<div class="formInfo">
@@ -30,14 +19,5 @@
 		<p><button type="submit"><img src="<c:url value="/resources/social/facebook/connect_light_medium_short.gif" />"/></button></p>
 		<label for="postToWall"><input id="postToWall" type="checkbox" name="postToWall" /> Tell your friends about Spring Social Showcase on your Facebook wall</label>
 	</form>
-	
-	<form id="fb_signin" action="<c:url value="/connect/facebook" />" method="POST">
-		<div id="fb-root"></div>	
-		<p><fb:login-button perms="email,publish_stream,offline_access" onlogin="signInWithFacebook();" v="2" length="long">Connect to Facebook</fb:login-button></p>
-	</form>
-	
-	<s:eval expression="@facebook.appId" var="appId" />
-	<facebook:init appId="${appId}" />
-	
 </body>
 </html>

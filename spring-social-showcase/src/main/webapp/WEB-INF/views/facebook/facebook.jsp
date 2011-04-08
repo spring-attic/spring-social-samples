@@ -8,9 +8,7 @@
 </head>
 <body>
 	<h1>Spring Social Showcase: Facebook</h1>
-
 	<p>Hello, <c:out value="${facebookUser.firstName}"/>!  (<a href="<c:url value="/connect/facebook"/>">Disconnect from Facebook</a>)</p>
-	
 	<p>Your Facebook profile:</p>
 	<dl>
 		<dt>Facebook ID:</dt>
@@ -26,6 +24,5 @@
 		<textarea id="message" name="message" rows="5" cols="40"></textarea><br/>
 		<input type="submit" value="Post" />
 	</form>
-
 </body>
 </html>

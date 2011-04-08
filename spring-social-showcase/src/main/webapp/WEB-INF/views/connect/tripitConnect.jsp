@@ -17,6 +17,5 @@
 	<p><button type="submit">Connect to TripIt</button></p>
 </form>
 
-
 </body>
 </html>

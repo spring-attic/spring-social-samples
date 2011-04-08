@@ -54,7 +54,7 @@ public class SignupController {
 		}
 		boolean accountCreated = createAccount(form, formBinding);
 		if (accountCreated) {
-			ProviderSignInUtils.handleConnectPostSignUp(form.getUsername(), request);
+			ProviderSignInUtils.handleConnectPostSignUp(request);
 			return "redirect:/";
 		}
 		return null;

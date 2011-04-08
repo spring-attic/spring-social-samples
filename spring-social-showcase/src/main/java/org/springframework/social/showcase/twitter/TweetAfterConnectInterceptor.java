@@ -15,8 +15,8 @@
  */
 package org.springframework.social.showcase.twitter;
 
-import org.springframework.social.connect.ServiceProvider;
 import org.springframework.social.connect.ServiceProviderConnection;
+import org.springframework.social.connect.ServiceProviderConnectionFactory;
 import org.springframework.social.twitter.DuplicateTweetException;
 import org.springframework.social.twitter.TwitterApi;
 import org.springframework.social.web.connect.ConnectInterceptor;
@@ -25,16 +25,16 @@ import org.springframework.web.context.request.WebRequest;
 
 public class TweetAfterConnectInterceptor implements ConnectInterceptor<TwitterApi> {
 
-	public void preConnect(ServiceProvider<TwitterApi> provider, WebRequest request) {
+	public void preConnect(ServiceProviderConnectionFactory<TwitterApi> provider, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TWEET_PARAMETER))) {
 			request.setAttribute(POST_TWEET_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
 	}
 
-	public void postConnect(ServiceProvider<TwitterApi> provider, ServiceProviderConnection<TwitterApi> connection, WebRequest request) {
+	public void postConnect(ServiceProviderConnection<TwitterApi> connection, WebRequest request) {
 		if (request.getAttribute(POST_TWEET_ATTRIBUTE, WebRequest.SCOPE_SESSION) != null) {
 			try {
-				connection.getServiceApi().updateStatus("I've connected with the Spring Social Showcase!");
+				connection.updateStatus("I've connected with the Spring Social Showcase!");
 			} catch (DuplicateTweetException e) {
 			}
 			request.removeAttribute(POST_TWEET_ATTRIBUTE, WebRequest.SCOPE_SESSION);

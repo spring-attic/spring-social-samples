@@ -20,12 +20,6 @@
 		</property>
 	</bean>
 	
-	<bean class="org.springframework.social.facebook.web.FacebookSigninController" />
-	
-	<bean class="org.springframework.social.twitter.web.TwitterSigninController">
-		<constructor-arg value="${application.url}" />
-	</bean>
-	
 	<bean id="signinService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
 	
 </beans>

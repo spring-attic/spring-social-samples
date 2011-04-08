@@ -51,7 +51,7 @@
 		<div id="fb-root"></div>
 		<p><fb:login-button onlogin="$('#fb_signin').submit();" v="2" length="long">Signin with Facebook</fb:login-button></p>
 	</form>
-	<s:eval expression="@facebook.appId" var="appId" />
+	<s:eval expression="@environment.getProperty('facebookAppId')" var="appId" />
 	<facebook:init appId="${appId}" />
 </body>
 </html>

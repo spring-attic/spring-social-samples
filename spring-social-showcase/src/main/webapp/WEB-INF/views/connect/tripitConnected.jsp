@@ -10,10 +10,11 @@
 
 <form id="disconnect" method="post">
 	<div class="formInfo">
-		<p>The Spring Social Showcase sample application is already connected to your TripIt account.
-			Click the button if you wish to disconnect.			
+		<p>
+			The Spring Social Showcase sample application is already connected to your TripIt account.
+			Click the button if you wish to disconnect.
+		</p>			
 	</div>
-
 	<button type="submit">Disconnect</button>	
 	<input type="hidden" name="_method" value="delete" />
 </form>

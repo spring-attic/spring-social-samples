@@ -15,13 +15,10 @@
  */
 package org.springframework.social.showcase.facebook;
 
-import java.security.Principal;
-
 import javax.inject.Inject;
 
+import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.facebook.FacebookApi;
-import org.springframework.social.facebook.FacebookProfile;
-import org.springframework.social.facebook.connect.FacebookServiceProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,30 +27,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookShowcaseController {
 	
-	private final FacebookServiceProvider facebookProvider;
+	private final ServiceProviderConnection<FacebookApi> facebookConnection;
 
 	@Inject
-	public FacebookShowcaseController(FacebookServiceProvider facebookServiceProvider) {
-		this.facebookProvider = facebookServiceProvider;
+	public FacebookShowcaseController(ServiceProviderConnection<FacebookApi> facebookConnection) {
+		this.facebookConnection = facebookConnection;
 	}
 
 	@RequestMapping(value="/facebook", method=RequestMethod.GET)
-	public String home(Principal currentUser, Model model) {
-		if (facebookProvider.isConnected(currentUser.getName())) {
-			FacebookProfile userProfile = getFacebookApi(currentUser).getUserProfile();
-			model.addAttribute("facebookUser", userProfile);
-			return "facebook/facebook";
+	public String home(Model model) {
+		if (facebookConnection == null) {
+			return "redirect:/connect/facebook";
 		}
-		return "redirect:/connect/facebook";
+		model.addAttribute("connection", facebookConnection);
+		return "facebook/facebook";
 	}
 
 	@RequestMapping(value="/facebook/wall", method=RequestMethod.POST)
-	public String postToWall(Principal currentUser, String message) {
-		getFacebookApi(currentUser).updateStatus(message);
+	public String postToWall(String message) {
+		facebookConnection.updateStatus(message);
 		return "redirect:/facebook";
 	}
 
-	private FacebookApi getFacebookApi(Principal user) {
-		return facebookProvider.getConnections(user.getName()).get(0).getServiceApi();
-	}
 }

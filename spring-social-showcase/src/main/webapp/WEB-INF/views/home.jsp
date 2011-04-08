@@ -13,11 +13,5 @@
 
 <a href="<c:url value="/signout" />">Sign Out</a>
 
-<ul>
-	<li><a href="twitter">Twitter</a> (Connected? <c:out value="${twitter_status}"/>)</li>
-	<li><a href="facebook">Facebook</a> (Connected? <c:out value="${facebook_status}"/>)</li>
-	<li><a href="tripit">TripIt</a> (Connected? <c:out value="${tripit_status}"/>)</li>
-</ul>
-
 </body>
 </html>
