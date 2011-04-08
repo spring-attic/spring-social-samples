@@ -22,7 +22,7 @@
 					<constructor-arg value="${facebook.appId}" />
 					<constructor-arg value="${facebook.appSecret}" />				
 				</bean>
-				<bean class="org.springframework.social.twitter.connect.TripItServiceProviderConnectionFactory">
+				<bean class="org.springframework.social.tripit.connect.TripItServiceProviderConnectionFactory">
 					<constructor-arg value="${tripit.consumerKey}" />
 					<constructor-arg value="${tripit.consumerSecret}" />				
 				</bean>
