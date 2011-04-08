@@ -13,10 +13,20 @@
 	
 	<bean id="serviceProviderConnectionFactoryLocator" class="org.springframework.social.connect.support.MapServiceProviderConnectionFactoryRegistry">
 		<property name="connectionFactories">
-			<bean class="org.springframework.social.twitter.connect.TwitterServiceProviderConnectionFactory">
-				<constructor-arg value="${twitter.consumerKey}" />
-				<constructor-arg value="${twitter.consumerSecret}" />				
-			</bean>
+			<list>
+				<bean class="org.springframework.social.twitter.connect.TwitterServiceProviderConnectionFactory">
+					<constructor-arg value="${twitter.consumerKey}" />
+					<constructor-arg value="${twitter.consumerSecret}" />				
+				</bean>
+				<bean class="org.springframework.social.facebook.connect.FacebookServiceProviderConnectionFactory">
+					<constructor-arg value="${facebook.appId}" />
+					<constructor-arg value="${facebook.appSecret}" />				
+				</bean>
+				<bean class="org.springframework.social.twitter.connect.TripItServiceProviderConnectionFactory">
+					<constructor-arg value="${tripit.consumerKey}" />
+					<constructor-arg value="${tripit.consumerSecret}" />				
+				</bean>
+			</list>
 		</property>
 	</bean>
 
