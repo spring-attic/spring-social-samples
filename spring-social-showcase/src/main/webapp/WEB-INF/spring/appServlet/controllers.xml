@@ -20,6 +20,10 @@
 		</property>
 	</bean>
 	
+	<bean class="org.springframework.social.web.signin.ProviderSignInController">
+		<constructor-arg value="${application.url}" />	
+	</bean>
+	
 	<bean id="signinService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
 	
 </beans>
