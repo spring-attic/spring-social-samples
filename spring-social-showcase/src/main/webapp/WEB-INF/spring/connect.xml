@@ -30,7 +30,8 @@
 		</property>
 	</bean>
 
-	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionRepositoryConfig" />	
+	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionRepositoryConfig" />
+	
 	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionsConfig" />
 	
 </beans>
