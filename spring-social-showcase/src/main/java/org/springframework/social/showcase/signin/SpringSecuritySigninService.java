@@ -19,10 +19,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.web.signin.SignInService;
 
-public class SpringSecuritySigninService implements SignInService<String> {
+public class SpringSecuritySigninService implements SignInService {
 
-	public void signIn(String accountId) {
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(accountId, null, null));
+	public void signIn(String localUserId) {
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(localUserId, null, null));
 	}
 
 }
