@@ -21,6 +21,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProviderConnection;
+import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.twitter.TwitterApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,15 +31,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterShowcaseController {
 
-	private final List<ServiceProviderConnection<TwitterApi>> twitterConnections;
+	private final ServiceProviderConnectionRepository connectionRepository;
 
 	@Inject
-	public TwitterShowcaseController(List<ServiceProviderConnection<TwitterApi>> twitterConnections) {
-		this.twitterConnections = twitterConnections;
+	public TwitterShowcaseController(ServiceProviderConnectionRepository connectionRepository) {
+		this.connectionRepository = connectionRepository;
 	}
 
 	@RequestMapping(value="/twitter", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
+		List<ServiceProviderConnection<TwitterApi>> twitterConnections = connectionRepository.findConnectionsByServiceApi(TwitterApi.class);
 		if (twitterConnections.size() == 0) {
 			return "redirect:/connect/twitter";
 		}
@@ -49,6 +51,7 @@ public class TwitterShowcaseController {
 
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
 	public String postTweet(Principal currentUser, TweetForm tweetForm) {
+		List<ServiceProviderConnection<TwitterApi>> twitterConnections = connectionRepository.findConnectionsByServiceApi(TwitterApi.class);		
 		for (ServiceProviderConnection<TwitterApi> connection : twitterConnections) {
 			connection.updateStatus(tweetForm.getMessage());
 		}
