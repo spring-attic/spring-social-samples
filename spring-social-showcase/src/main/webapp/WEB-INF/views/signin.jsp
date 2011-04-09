@@ -27,8 +27,8 @@
 		<input id="login" name="j_username" type="text" size="25" <c:if test="${not empty signinErrorMessage}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if> />
 		<label for="password">Password</label>
 		<input id="password" name="j_password" type="password" size="25" />	
-<button type="submit">Sign In</button>
 	</fieldset>
+	<button type="submit">Sign In</button>
 	
 	<p>Some test user/password pairs you may use are:</p>
 	<ul>
@@ -40,18 +40,14 @@
 	<p>Or you can <a href="<c:url value="/signup"/>">signup</a> with a new account.</p>
 </form>
 
-
-<!-- TWITTER SIGNIN -->
+	<!-- TWITTER SIGNIN -->
 	<form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST">
 		<button type="submit"><img src="<c:url value="/resources/social/twitter/sign-in-with-twitter-d.png"/>" /></button>
 	</form>
 
-<!-- FACEBOOK SIGNIN -->
+	<!-- FACEBOOK SIGNIN -->
 	<form id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
-		<div id="fb-root"></div>
-		<p><fb:login-button onlogin="$('#fb_signin').submit();" v="2" length="long">Signin with Facebook</fb:login-button></p>
+		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
-	<s:eval expression="@environment.getProperty('facebookAppId')" var="appId" />
-	<facebook:init appId="${appId}" />
 </body>
 </html>
