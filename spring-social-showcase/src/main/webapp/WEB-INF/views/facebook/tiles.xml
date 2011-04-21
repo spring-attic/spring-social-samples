@@ -15,4 +15,12 @@
 		<put-attribute name="content" value="/WEB-INF/views/facebook/friends.jsp" />
 	</definition>
 
+	<definition name="facebook/albums" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/albums.jsp" />
+	</definition>
+
+	<definition name="facebook/album" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/album.jsp" />
+	</definition>
+
 </tiles-definitions>
