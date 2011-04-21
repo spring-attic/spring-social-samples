@@ -17,9 +17,9 @@ package org.springframework.social.showcase.twitter;
 
 import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionFactory;
-import org.springframework.social.twitter.DuplicateTweetException;
-import org.springframework.social.twitter.TwitterApi;
-import org.springframework.social.web.connect.ConnectInterceptor;
+import org.springframework.social.connect.web.ConnectInterceptor;
+import org.springframework.social.twitter.api.DuplicateTweetException;
+import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 

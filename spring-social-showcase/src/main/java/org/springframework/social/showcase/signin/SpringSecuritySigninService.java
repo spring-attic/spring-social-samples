@@ -17,7 +17,7 @@ package org.springframework.social.showcase.signin;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.web.signin.SignInService;
+import org.springframework.social.connect.signin.web.SignInService;
 
 public class SpringSecuritySigninService implements SignInService {
 

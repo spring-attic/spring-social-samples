@@ -17,9 +17,9 @@ package org.springframework.social.showcase.facebook;
 
 import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionFactory;
-import org.springframework.social.facebook.FacebookApi;
-import org.springframework.social.twitter.DuplicateTweetException;
-import org.springframework.social.web.connect.ConnectInterceptor;
+import org.springframework.social.connect.web.ConnectInterceptor;
+import org.springframework.social.facebook.api.FacebookApi;
+import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 

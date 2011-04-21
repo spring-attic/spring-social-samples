@@ -40,7 +40,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		model.addAttribute("connectionsToProviders", connectionRepository.findConnectionsToProviders());
+		model.addAttribute("connectionsToProviders", connectionRepository.findConnections());
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		return "home";
 	}

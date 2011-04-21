@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
-import org.springframework.social.twitter.TwitterApi;
+import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
