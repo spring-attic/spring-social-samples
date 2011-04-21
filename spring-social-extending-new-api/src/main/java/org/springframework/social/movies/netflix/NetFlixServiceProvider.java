@@ -15,25 +15,23 @@
  */
 package org.springframework.social.movies.netflix;
 
-import org.springframework.social.connect.oauth1.AbstractOAuth1ServiceProvider;
-import org.springframework.social.connect.support.ConnectionRepository;
+import org.springframework.social.oauth1.AbstractOAuth1ServiceProvider;
 import org.springframework.social.oauth1.OAuth1Template;
 import org.springframework.social.oauth1.OAuth1Version;
 
 public final class NetFlixServiceProvider extends AbstractOAuth1ServiceProvider<NetFlixApi> {
 
-	public NetFlixServiceProvider(String consumerKey, String consumerSecret, ConnectionRepository connectionRepository) {
-		super("netflix", connectionRepository, consumerKey, consumerSecret, 
+	public NetFlixServiceProvider(String consumerKey, String consumerSecret) {
+		super(consumerKey, consumerSecret, 
 			new OAuth1Template(consumerKey, consumerSecret, 
 				"http://api.netflix.com/oauth/request_token",
-				"https://api-user.netflix.com/oauth/login?oauth_token={requestToken}&" +
-					"oauth_callback={redirectUri}&oauth_consumer_key=" + consumerKey,
+				"https://api-user.netflix.com/oauth/login", null,
 				"http://api.netflix.com/oauth/access_token", OAuth1Version.CORE_10));
 	}
 
 	@Override
-	protected NetFlixApi getApi(String consumerKey, String consumerSecret, String accessToken, String secret) {
-		return new NetFlixTemplate(consumerKey, consumerSecret, accessToken, secret);
+	public NetFlixApi getServiceApi(String accessToken, String secret) {
+		return new NetFlixTemplate(getConsumerKey(), getConsumerSecret(), accessToken, secret);
 	}
 	
 }

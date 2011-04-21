@@ -2,12 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social Showcase: Connect to TripIt</title>
-</head>
-<body>
-<h1>Spring Social Showcase: Connect to TripIt</h1>
+
+<h3>Connect to TripIt</h3>
 
 <form action="<c:url value="/connect/tripit" />" method="POST">
 	<div class="formInfo">
@@ -16,6 +12,3 @@
 	</div>
 	<p><button type="submit">Connect to TripIt</button></p>
 </form>
-
-</body>
-</html>

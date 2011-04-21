@@ -26,6 +26,6 @@
 	</authentication-manager>
 
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.PlaintextPasswordEncoder" />
-	<beans:bean id="stringEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText" />
+	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText" />
 
 </beans:beans>

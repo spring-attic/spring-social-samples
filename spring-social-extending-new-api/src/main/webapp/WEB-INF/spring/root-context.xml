@@ -12,7 +12,7 @@
 	<import resource="data.xml" />
 
 	<!-- Configures Shared Social Connection Configuration -->
- 	<import resource="service-providers.xml" />
+ 	<import resource="connect.xml" />
 
 	<!-- Configures Shared Security Layer -->
 	<import resource="security.xml" />

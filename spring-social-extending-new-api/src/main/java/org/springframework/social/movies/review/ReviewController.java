@@ -16,14 +16,11 @@
 package org.springframework.social.movies.review;
 
 import java.security.Principal;
-import java.util.Date;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.social.movies.netflix.NetFlixApi;
-import org.springframework.social.movies.netflix.NetFlixServiceProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,14 +29,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/reviews")
 public class ReviewController {
-		
-	private final NetFlixServiceProvider netflixProvider;
 	
 	private final ReviewRepository reviewRepository;
 
+	private final NetFlixApi netflixApi;
+
 	@Inject
-	public ReviewController(NetFlixServiceProvider netflixProvider, ReviewRepository reviewRepository) {
-		this.netflixProvider = netflixProvider;
+	public ReviewController(NetFlixApi netflixApi, ReviewRepository reviewRepository) {
+		this.netflixApi = netflixApi;
 		this.reviewRepository = reviewRepository;
 	}
 
@@ -50,8 +47,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET, params="searchTerm")
 	public String selectMovie(Principal currentUser, String searchTerm, Model model) {
-		NetFlixApi netflix = netflixProvider.getConnections(currentUser.getName()).get(0).getServiceApi();
-		model.addAttribute("titles", netflix.searchForTitles(searchTerm));
+		model.addAttribute("titles", netflixApi.searchForTitles(searchTerm));
 		return "review/movieSearch";
 	}
 	

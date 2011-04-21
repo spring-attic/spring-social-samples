@@ -1,12 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social Showcase: Connected to Twitter</title>
-</head>
-<body>
-<h1>Spring Social Showcase: Connected to Twitter</h1>
+
+<h3>Connected to Twitter</h3>
 
 <form id="disconnect" method="post">
 	<div class="formInfo">
@@ -20,5 +16,3 @@
 
 <p><a href="<s:url value="/" />">Return to home page</a></p>
 
-</body>
-</html>

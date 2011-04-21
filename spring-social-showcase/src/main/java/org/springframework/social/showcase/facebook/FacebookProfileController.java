@@ -18,6 +18,7 @@ package org.springframework.social.showcase.facebook;
 import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProviderConnection;
+import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.facebook.api.FacebookApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,28 +26,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class FacebookShowcaseController {
+public class FacebookProfileController {
 	
-	private final ServiceProviderConnection<FacebookApi> facebookConnection;
+	private final ServiceProviderConnectionRepository connectionRepository;
+	
+	private final FacebookApi facebookApi;
 
 	@Inject
-	public FacebookShowcaseController(ServiceProviderConnection<FacebookApi> facebookConnection) {
-		this.facebookConnection = facebookConnection;
+	public FacebookProfileController(ServiceProviderConnectionRepository connectionRepository, FacebookApi facebookApi) {
+		this.connectionRepository = connectionRepository;
+		this.facebookApi = facebookApi;
 	}
 
 	@RequestMapping(value="/facebook", method=RequestMethod.GET)
 	public String home(Model model) {
-		if (facebookConnection == null) {
+		ServiceProviderConnection<FacebookApi> connection = connectionRepository.findConnectionByServiceApi(FacebookApi.class);
+		if (connection == null) {
 			return "redirect:/connect/facebook";
 		}
-		model.addAttribute("connection", facebookConnection);
-		return "facebook/facebook";
-	}
-
-	@RequestMapping(value="/facebook/wall", method=RequestMethod.POST)
-	public String postToWall(String message) {
-		facebookConnection.updateStatus(message);
-		return "redirect:/facebook";
+		
+		model.addAttribute("profile", facebookApi.userOperations().getUserProfile());
+		
+		return "facebook/profile";
 	}
 
 }

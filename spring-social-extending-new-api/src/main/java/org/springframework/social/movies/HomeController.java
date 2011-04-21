@@ -16,18 +16,15 @@
 package org.springframework.social.movies;
 
 import java.security.Principal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.social.connect.ServiceProviderConnection;
+import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.movies.account.AccountRepository;
 import org.springframework.social.movies.netflix.NetFlixApi;
-import org.springframework.social.movies.netflix.NetFlixServiceProvider;
 import org.springframework.social.movies.netflix.QueueItem;
 import org.springframework.social.movies.review.Review;
 import org.springframework.social.movies.review.ReviewRepository;
@@ -37,26 +34,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	
-	private final NetFlixServiceProvider netflixProvider;
-	
+		
 	private final AccountRepository accountRepository;
 
 	private final ReviewRepository reviewRepository;
 
+	private final ServiceProviderConnectionRepository connectionRepository;
+
+	private final NetFlixApi netflixApi;
+
 
 	@Inject
-	public HomeController(NetFlixServiceProvider netflixProvider, AccountRepository userRepository, ReviewRepository reviewRepository) {
-		this.netflixProvider = netflixProvider;
+	public HomeController(ServiceProviderConnectionRepository connectionRepository,
+			NetFlixApi netflixApi, AccountRepository userRepository, ReviewRepository reviewRepository) {
+		this.connectionRepository = connectionRepository;
+		this.netflixApi = netflixApi;
 		this.accountRepository = userRepository;
 		this.reviewRepository = reviewRepository;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		if (netflixProvider.isConnected(currentUser.getName())) {
-			NetFlixApi netflix = netflixProvider.getConnections(currentUser.getName()).get(0).getServiceApi();
-			List<QueueItem> discQueue = netflix.getDiscQueue();
+		List<ServiceProviderConnection<?>> netflixConnections = connectionRepository.findConnectionsToProvider("netflix");
+		
+		if (!netflixConnections.isEmpty()) {
+			List<QueueItem> discQueue = netflixApi.getDiscQueue();
 			
 			List<String> queueItemIds = new ArrayList<String>();
 			for (QueueItem queueItem : discQueue) {

@@ -4,14 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ taglib uri="http://www.springframework.org/spring-social/facebook/tags" prefix="facebook" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social Showcase: Sign In</title>
-	<script type="text/javascript" src="<c:url value="/resources/jquery/1.4/jquery.js" />"></script>	
-	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
-</head>
-<body>
-<h1>Spring Social Showcase: Sign In</h1>
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
 	<div class="formInfo">
@@ -49,5 +41,3 @@
 	<form id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
 		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
-</body>
-</html>

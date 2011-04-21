@@ -1,12 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social Showcase: Connected to Facebook</title>
-</head>
-<body>
-<h1>Spring Social Showcase: Connected to Facebook</h1>
+
+<h3>Connected to Facebook</h3>
 
 <form id="disconnect" method="post">
 	<div class="formInfo">
@@ -19,7 +15,4 @@
 	<input type="hidden" name="_method" value="delete" />
 </form>
 
-<a href="<c:url value="/"/>">Return to home page</a>
-
-</body>
-</html>
+<a href="<c:url value="/facebook"/>">View your Facebook profile data</a>
