@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 
 <h3>Your Facebook Profile</h3>
-<p>Hello, <c:out value="${profile.firstName}"/>!  (<a href="<c:url value="/connect/facebook"/>">Disconnect from Facebook</a>)</p>
+<p>Hello, <c:out value="${profile.firstName}"/>!</p>
 <dl>
 	<dt>Facebook ID:</dt>
 	<dd><c:out value="${profile.id}"/></dd>
@@ -13,3 +13,9 @@
 	<dt>Email:</dt>
 	<dd><c:out value="${email}"/></dd>
 </dl>
+
+<c:url value="/connect/facebook" var="disconnectUrl"/>
+<form id="disconnect" action="${disconnectUrl}" method="post">
+	<button type="submit">Disconnect from Facebook</button>	
+	<input type="hidden" name="_method" value="delete" />
+</form>
