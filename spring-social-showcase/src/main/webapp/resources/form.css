@@ -2,7 +2,7 @@ form input, form select {
 	display: block;
 }
 
-form input.movieChoice {
+form input[type=checkbox] {
 	display: inline;
 }
 

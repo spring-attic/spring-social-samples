@@ -13,6 +13,14 @@
       
 <h3>Your Twitter <c:out value="${dmListType}" /> Messages</h3>
 
+<c:url var="sendMessageUrl" value="/twitter/messages" />
+<sf:form action="${sendMessageUrl}" method="post" modelAttribute="messageForm">
+	<p>Send a message:</p>
+	<sf:label path="to">To: </sf:label><sf:input path="to"/><br/>
+	<sf:textarea path="text" rows="2" cols="80"/><br/>
+	<input type="submit" value="Send Message"/>
+</sf:form>
+
 <c:url var="messageBaseUrl" value="/twitter/messages" />
 <ul class="choices">
 <li><a href="<c:out value="${messageBaseUrl}"/>">Inbox</a></li>

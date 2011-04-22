@@ -14,7 +14,7 @@
 
 <c:url var="tweetUrl" value="/twitter/tweet" />
 <form action="${tweetUrl}" method="post">
-	<textarea name="message" rows="5" cols="80"></textarea><br/>
+	<textarea name="message" rows="2" cols="80"></textarea><br/>
 	<input type="submit" value="Post Tweet"/>
 </form>
 

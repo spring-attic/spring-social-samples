@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class TwitterDirectMessageController {
+public class TwitterMessageController {
 
 	private final TwitterApi twitterApi;
 	
 	@Inject
-	public TwitterDirectMessageController(TwitterApi twitterApi) {
+	public TwitterMessageController(TwitterApi twitterApi) {
 		this.twitterApi = twitterApi;
 	}
 	
@@ -37,6 +37,7 @@ public class TwitterDirectMessageController {
 	public String inbox(Model model) {
 		model.addAttribute("directMessages", twitterApi.directMessageOperations().getDirectMessagesReceived());
 		model.addAttribute("dmListType", "Received");
+		model.addAttribute("messageForm", new MessageForm());
 		return "twitter/messages";
 	}
 
@@ -44,7 +45,13 @@ public class TwitterDirectMessageController {
 	public String sent(Model model) {
 		model.addAttribute("directMessages", twitterApi.directMessageOperations().getDirectMessagesSent());
 		model.addAttribute("dmListType", "Sent");
+		model.addAttribute("messageForm", new MessageForm());
 		return "twitter/messages";
 	}
 
+	@RequestMapping(value="/twitter/messages", method=RequestMethod.POST)
+	public String sent(MessageForm message) {
+		twitterApi.directMessageOperations().sendDirectMessage(message.getTo(), message.getText());
+		return "redirect:/twitter/messages";
+	}
 }
