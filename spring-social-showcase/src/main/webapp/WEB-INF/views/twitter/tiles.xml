@@ -11,4 +11,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/twitter/timeline.jsp" />
 	</definition>
 
+	<definition name="twitter/messages" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/messages.jsp" />
+	</definition>
+
 </tiles-definitions>

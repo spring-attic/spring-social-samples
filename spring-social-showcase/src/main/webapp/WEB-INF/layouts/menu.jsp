@@ -6,6 +6,7 @@
 <ul class="menu">
 	<li><a href="<c:url value="/twitter"/>">User Profile</a></li>
 	<li><a href="<c:url value="/twitter/timeline"/>">Timeline</a></li>
+	<li><a href="<c:url value="/twitter/messages"/>">Messages</a></li>
 </ul>
 
 <h4><a href="<c:url value="/facebook"/>">Facebook</a></h4>

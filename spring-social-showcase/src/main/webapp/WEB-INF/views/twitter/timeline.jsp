@@ -19,7 +19,7 @@
 </form>
 
 <c:url var="timelineBaseUrl" value="/twitter/timeline" />
-<ul class="timelineChoices">
+<ul class="choices">
 <li><a href="<c:out value="${timelineBaseUrl}"/>/Home">Home Timeline</a></li>
 <li><a href="<c:out value="${timelineBaseUrl}"/>/Friends">Friends Timeline</a></li>
 <li><a href="<c:out value="${timelineBaseUrl}"/>/User">User Timeline</a></li>

@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
-import org.springframework.social.tripit.TripItApi;
+import org.springframework.social.tripit.api.TripItApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

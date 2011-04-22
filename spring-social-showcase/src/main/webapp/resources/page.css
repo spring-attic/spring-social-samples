@@ -72,6 +72,11 @@ span.postTime {
 	color: #999999;
 }
 
+span.dmRecipient {
+	font-size: 8pt;
+	color: #999999;
+}
+
 ul.friends li {
 	padding-top:5px;
 	padding-bottom:5px;
@@ -83,7 +88,7 @@ ul.timelineChoices {
 	margin: 0px;
 }
 
-ul.timelineChoices li {
+ul.choices li {
 	list-style:none;
 	display:inline;
 	font-size:10pt;
@@ -91,7 +96,7 @@ ul.timelineChoices li {
 	border-left: 1px solid #000;
 }
 
-ul.timelineChoices li:first-child {
+ul.choices li:first-child {
 	padding-left: 0px;
 	border-left: none;
 }
