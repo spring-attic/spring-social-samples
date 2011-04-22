@@ -29,13 +29,13 @@
 
 
 <div class="feed">
-<ul class="feedList">
+<ul class="imagedList">
 <c:forEach items="${directMessages}" var="dm">
-	<li class="post">
-		<div class="postImage">
+	<li class="imagedItem">
+		<div class="image">
 			<c:if test="${not empty dm.sender.profileImageUrl}"><img src="<c:out value="${dm.sender.profileImageUrl}"/>" align="left"/></c:if>
 		</div>
-		<div class="postContent">
+		<div class="content">
 		<strong><a href="http://twitter.com/<c:out value="${dm.sender.screenName}" />"><c:out value="${dm.sender.screenName}" /></a></strong><br/>
 		<span class="dmRecipient">to <c:out value="${dm.recipient.screenName}"/></span><br/>
 		<c:out value="${dm.text}" /><br/>

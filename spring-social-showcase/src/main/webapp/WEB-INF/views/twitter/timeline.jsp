@@ -29,13 +29,13 @@
 </ul>
 
 <div class="feed">
-<ul class="feedList">
+<ul class="imagedList">
 <c:forEach items="${timeline}" var="tweet">
-	<li class="post">
-		<div class="postImage">
+	<li class="imagedItem">
+		<div class="image">
 			<c:if test="${not empty tweet.profileImageUrl}"><img src="<c:out value="${tweet.profileImageUrl}"/>" align="left"/></c:if>
 		</div>
-		<div class="postContent">
+		<div class="content">
 		<strong><a href="http://twitter.com/<c:out value="${tweet.fromUser}" />"><c:out value="${tweet.fromUser}" /></a></strong><br/>
 		<c:out value="${tweet.text}" /><br/>
 		<span class="postTime"><c:out value="${tweet.createdAt}"/></span>

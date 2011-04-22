@@ -39,31 +39,31 @@ div.feed {
 	width: 600px;
 }
 
-ul.feedList li {
+ul.imagedList li {
 	padding-top:10px;
 	padding-bottom:10px;
 	list-style: none;
 	border-top: 1px dotted lightgrey;
 }
 
-ul.feedList li:first-child {
+ul.imagedlist li:first-child {
 	border-top: none;
 }
 
-li.post div.postImage {
+li.imagedItem div.image {
 	float: left;
 }
 
-li.post div.postContent {
+li.imagedItem div.content {
 	font-size: 11pt;
 	margin-left: 70px;
 }
 
-li.post div.postContent a {
+li.imagedItem div.content a {
 	text-decoration: none;
 }
 
-li.post div.postContent a:hover {
+li.imagedItem div.content a:hover {
 	text-decoration: underline;
 }
 
