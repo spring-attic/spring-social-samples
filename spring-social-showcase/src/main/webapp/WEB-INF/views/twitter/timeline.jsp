@@ -3,10 +3,44 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
 
-<h3>Your Twitter Timline</h3>
+<script src="http://platform.twitter.com/anywhere.js?id=7yWLgCOuQhIpPyffm0o2Vg&v=1" type="text/javascript"></script>
+<script type="text/javascript">
+  twttr.anywhere(function (T) {
+    T(".feed").linkifyUsers();
+  });    
+</script>
+      
+<h3>Your Twitter <c:out value="${timelineName}"/> Timeline</h3>
 
 <c:url var="tweetUrl" value="/twitter/tweet" />
 <form action="${tweetUrl}" method="post">
 	<textarea name="message" rows="5" cols="80"></textarea><br/>
 	<input type="submit" value="Post Tweet"/>
 </form>
+
+<c:url var="timelineBaseUrl" value="/twitter/timeline" />
+<ul class="timelineChoices">
+<li><a href="<c:out value="${timelineBaseUrl}"/>/Home">Home Timeline</a></li>
+<li><a href="<c:out value="${timelineBaseUrl}"/>/Friends">Friends Timeline</a></li>
+<li><a href="<c:out value="${timelineBaseUrl}"/>/User">User Timeline</a></li>
+<li><a href="<c:out value="${timelineBaseUrl}"/>/Public">Public Timeline</a></li>
+<li><a href="<c:out value="${timelineBaseUrl}"/>/Mentions">Mentions</a></li>
+<li><a href="<c:out value="${timelineBaseUrl}"/>/Favorites">Favorites</a></li>
+</ul>
+
+<div class="feed">
+<ul class="feedList">
+<c:forEach items="${timeline}" var="tweet">
+	<li class="post">
+		<div class="postImage">
+			<c:if test="${not empty tweet.profileImageUrl}"><img src="<c:out value="${tweet.profileImageUrl}"/>" align="left"/></c:if>
+		</div>
+		<div class="postContent">
+		<strong><a href="http://twitter.com/<c:out value="${tweet.fromUser}" />"><c:out value="${tweet.fromUser}" /></a></strong><br/>
+		<c:out value="${tweet.text}" /><br/>
+		<span class="postTime"><c:out value="${tweet.createdAt}"/></span>
+		</div>
+	</li>
+</c:forEach>
+</ul>
+</div>

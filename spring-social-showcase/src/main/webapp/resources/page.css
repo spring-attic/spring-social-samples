@@ -26,23 +26,72 @@ body {
 	margin-left: 170px;
 }
 
+a {
+	color: #006600;
+}
+
 ul.menu li {
 	list-style: none;
 	font-size: 10pt;
 }
 
-ul.feed li {
+div.feed {
+	width: 600px;
+}
+
+ul.feedList li {
 	padding-top:10px;
 	padding-bottom:10px;
 	list-style: none;
 	border-top: 1px dotted lightgrey;
 }
 
-ul.feed li:first-child {
+ul.feedList li:first-child {
 	border-top: none;
+}
+
+li.post div.postImage {
+	float: left;
+}
+
+li.post div.postContent {
+	font-size: 11pt;
+	margin-left: 70px;
+}
+
+li.post div.postContent a {
+	text-decoration: none;
+}
+
+li.post div.postContent a:hover {
+	text-decoration: underline;
+}
+
+span.postTime {
+	font-size: 8pt;
+	color: #999999;
 }
 
 ul.friends li {
 	padding-top:5px;
 	padding-bottom:5px;
 	list-style:none;
+}
+
+ul.timelineChoices {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul.timelineChoices li {
+	list-style:none;
+	display:inline;
+	font-size:10pt;
+	padding-left: 5px;
+	border-left: 1px solid #000;
+}
+
+ul.timelineChoices li:first-child {
+	padding-left: 0px;
+	border-left: none;
+}

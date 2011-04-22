@@ -19,6 +19,8 @@ import javax.inject.Inject;
 
 import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,7 +35,26 @@ public class TwitterTimelineController {
 	}
 	
 	@RequestMapping(value="/twitter/timeline", method=RequestMethod.GET)
-	public String postTweet() {
+	public String showTimeline(Model model) {
+		return showTimeline("Home", model);
+	}
+	
+	@RequestMapping(value="/twitter/timeline/{timelineType}", method=RequestMethod.GET)
+	public String showTimeline(@PathVariable("timelineType") String timelineType, Model model) {
+		if(timelineType.equals("Home")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getHomeTimeline());
+		} else if(timelineType.equals("Public")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getPublicTimeline());
+		} else if(timelineType.equals("Friends")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getFriendsTimeline());
+		} else if(timelineType.equals("User")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getUserTimeline());
+		} else if(timelineType.equals("Mentions")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getMentions());
+		} else if(timelineType.equals("Favorites")) {
+			model.addAttribute("timeline", twitterApi.timelineOperations().getFavorites());
+		}
+		model.addAttribute("timelineName", timelineType);
 		return "twitter/timeline";
 	}
 	

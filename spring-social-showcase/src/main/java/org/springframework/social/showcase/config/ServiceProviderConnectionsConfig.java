@@ -10,6 +10,7 @@ import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.facebook.api.FacebookApi;
 import org.springframework.social.tripit.TripItApi;
+import org.springframework.social.twitter.api.TwitterApi;
 
 @Configuration
 public class ServiceProviderConnectionsConfig {
@@ -28,4 +29,11 @@ public class ServiceProviderConnectionsConfig {
 	public ServiceProviderConnection<TripItApi> tripItConnection() {
 		return serviceProviderConnectionRepository.findConnectionByServiceApi(TripItApi.class);
 	}
+	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public ServiceProviderConnection<TwitterApi> twitterConnection() {
+		return serviceProviderConnectionRepository.findConnectionByServiceApi(TwitterApi.class);
+	}
+
 }
