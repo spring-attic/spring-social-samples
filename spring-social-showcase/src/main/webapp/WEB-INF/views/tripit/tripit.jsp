@@ -3,12 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
-<html>
-<head>
-	<title>Spring Social Showcase: TripIt</title>
-</head>
-<body>
-<h1>Spring Social Showcase: TripIt</h1>
+
+<h3>Your TripIt Profile</h3>
 
 <p>Hello <c:out value="${tripItUser.publicDisplayName}"/>!</p>
 <p>Your TripIt profile:</p>
@@ -18,7 +14,7 @@
 	<li>Company: <c:out value="${tripItUser.company}"/></li>
 </ul>
 
-<p>Your upcoming trips:</p>
+<h3>Your upcoming trips:</h3>
 <ul>
 <c:forEach items="${trips}" var="trip">
 	<li>"<c:out value="${trip.displayName}"/>" - Destination: <c:out value="${trip.primaryLocation}"/>; 

@@ -11,6 +11,11 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	<interceptors>
+		<beans:bean class="org.springframework.social.showcase.twitter.TwitterConnectionHandlerInterceptor" />
+		<beans:bean class="org.springframework.social.showcase.facebook.FacebookConnectionHandlerInterceptor" />
+	</interceptors>
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
