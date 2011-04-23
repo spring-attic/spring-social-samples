@@ -32,8 +32,6 @@
 
 	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionRepositoryConfig" />
 	
-	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionsConfig" />
-	
 	<bean class="org.springframework.social.showcase.config.ServiceApisConfig" />
 	
 </beans>
