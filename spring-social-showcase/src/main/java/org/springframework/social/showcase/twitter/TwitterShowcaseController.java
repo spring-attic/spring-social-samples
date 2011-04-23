@@ -42,11 +42,10 @@ public class TwitterShowcaseController {
 
 	@RequestMapping(value="/twitter", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		ServiceProviderConnection<TwitterApi> connection = connectionRepository.findConnectionByServiceApi(TwitterApi.class);
+		ServiceProviderConnection<TwitterApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TwitterApi.class);
 		if (connection == null) {
 			return "redirect:/connect/twitter";
 		}
-
 		model.addAttribute("profile", twitterApi.userOperations().getUserProfile());
 		return "twitter/profile";
 	}

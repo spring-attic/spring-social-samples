@@ -40,13 +40,11 @@ public class FacebookProfileController {
 
 	@RequestMapping(value="/facebook", method=RequestMethod.GET)
 	public String home(Model model) {
-		ServiceProviderConnection<FacebookApi> connection = connectionRepository.findConnectionByServiceApi(FacebookApi.class);
+		ServiceProviderConnection<FacebookApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(FacebookApi.class);
 		if (connection == null) {
 			return "redirect:/connect/facebook";
 		}
-		
 		model.addAttribute("profile", facebookApi.userOperations().getUserProfile());
-		
 		return "facebook/profile";
 	}
 

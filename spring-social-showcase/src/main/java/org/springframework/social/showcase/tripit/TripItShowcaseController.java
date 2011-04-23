@@ -42,11 +42,10 @@ public class TripItShowcaseController {
 
 	@RequestMapping(value="/tripit", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		ServiceProviderConnection<TripItApi> connection = connectionRepository.findConnectionByServiceApi(TripItApi.class);
+		ServiceProviderConnection<TripItApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TripItApi.class);
 		if (connection == null) {
 			return "redirect:/connect/tripit";
 		}
-
 		model.addAttribute("tripItUser", tripitApi.getUserProfile());
 		model.addAttribute("trips", tripitApi.getUpcomingTrips());
 		return "tripit/tripit";
