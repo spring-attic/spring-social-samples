@@ -19,4 +19,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/twitter/messages.jsp" />
 	</definition>
 
+	<definition name="twitter/currentTrends" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/currentTrends.jsp" />
+	</definition>
+
 </tiles-definitions>

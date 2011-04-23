@@ -46,6 +46,7 @@ public class TwitterShowcaseController {
 		if (connection == null) {
 			return "redirect:/connect/twitter";
 		}
+		
 		model.addAttribute("profile", twitterApi.userOperations().getUserProfile());
 		return "twitter/profile";
 	}
