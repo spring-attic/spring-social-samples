@@ -12,8 +12,7 @@
 	<annotation-driven />
 
 	<interceptors>
-		<beans:bean class="org.springframework.social.showcase.twitter.TwitterConnectionHandlerInterceptor" />
-		<beans:bean class="org.springframework.social.showcase.facebook.FacebookConnectionHandlerInterceptor" />
+		<beans:bean class="org.springframework.social.showcase.ConnectedToHandlerInterceptor" />
 	</interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
