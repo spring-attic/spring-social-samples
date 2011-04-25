@@ -13,38 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix;
+package org.springframework.social.movies.netflix.api;
 
-public class QueueItem {
-
+public class CatalogTitle {
 	private final String id;
-
 	private final String title;
-
 	private final String releaseYear;
 
-	private final String boxArtUrl;
-
-	public QueueItem(String id, String title, String releaseYear, String boxArtUrl) {
-		this.title = title;
-		this.releaseYear = releaseYear;
+	public CatalogTitle(String id, String title, String releaseYear) {
 		this.id = id;
-		this.boxArtUrl = boxArtUrl;
+		this.title = title;
+		this.releaseYear = releaseYear;		
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public String getReleaseYear() {
-		return releaseYear;
-	}
-
 	public String getTitle() {
 		return title;
 	}
 
-	public String getBoxArtUrl() {
-		return boxArtUrl;
+	public String getReleaseYear() {
+		return releaseYear;
 	}
+
 }

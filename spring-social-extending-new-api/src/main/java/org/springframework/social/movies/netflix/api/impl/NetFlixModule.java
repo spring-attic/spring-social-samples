@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.signin;
+package org.springframework.social.movies.netflix.api.impl;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.codehaus.jackson.Version;
+import org.codehaus.jackson.map.module.SimpleModule;
+import org.springframework.social.movies.netflix.api.NetFlixUserProfile;
 
-@Controller
-public class SigninController {
+public class NetFlixModule extends SimpleModule {
 
-	@RequestMapping(value="/signin", method=RequestMethod.GET)
-	public void signin() {
+	public NetFlixModule() {
+		super("NetFlixModule", new Version(1, 0, 0, null));
 	}
+
+	@Override
+	public void setupModule(SetupContext context) {
+		context.setMixInAnnotations(NetFlixUserProfile.class, NetFlixUserProfileMixin.class);
+	}
+	
 }

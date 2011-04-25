@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.config;
+package org.springframework.social.movies.config;
 
-import java.security.Principal;
-
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.social.connect.MultiUserServiceProviderConnectionRepository;
+import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
 
 @Configuration
-public class ServiceProviderConnectionRepositoryConfig {
-
-	@Inject
-	private MultiUserServiceProviderConnectionRepository usersConnectionRepository;
-
+public class ServiceApisConfig {
+	
 	@Bean
 	@Scope(value="request")
-	public ServiceProviderConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
-		if (principal == null) {
-			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");
-		}
-		return usersConnectionRepository.createConnectionRepository(principal.getName());
+	public NetFlixApi netflixApi(ServiceProviderConnectionRepository connectionRepository) {
+		ServiceProviderConnection<NetFlixApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(NetFlixApi.class);
+		return connection != null ? connection.getServiceApi() : null;
 	}
 	
 }

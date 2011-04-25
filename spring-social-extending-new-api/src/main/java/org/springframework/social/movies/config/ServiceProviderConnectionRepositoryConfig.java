@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.config;
+package org.springframework.social.movies.config;
 
 import java.security.Principal;
 
@@ -28,10 +28,10 @@ import org.springframework.social.connect.ServiceProviderConnectionRepository;
 
 @Configuration
 public class ServiceProviderConnectionRepositoryConfig {
-
+	
 	@Inject
 	private MultiUserServiceProviderConnectionRepository usersConnectionRepository;
-
+	
 	@Bean
 	@Scope(value="request")
 	public ServiceProviderConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {

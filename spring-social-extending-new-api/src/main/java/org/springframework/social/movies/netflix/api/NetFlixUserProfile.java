@@ -13,29 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix;
+package org.springframework.social.movies.netflix.api;
 
-public class CatalogTitle {
+public class NetFlixUserProfile {
+	
 	private final String id;
-	private final String title;
-	private final String releaseYear;
+	private final String firstName;
+	private final String lastName;
 
-	public CatalogTitle(String id, String title, String releaseYear) {
+	public NetFlixUserProfile(String id, String firstName, String lastName) {
 		this.id = id;
-		this.title = title;
-		this.releaseYear = releaseYear;		
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public String getReleaseYear() {
-		return releaseYear;
+	public String getLastName() {
+		return lastName;
 	}
-
+	
 }

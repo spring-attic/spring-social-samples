@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.signin;
+package org.springframework.social.movies.netflix.connect;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.social.connect.support.OAuth1ServiceProviderConnectionFactory;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
 
-@Controller
-public class SigninController {
+public class NetFlixServiceProviderConnectionFactory extends OAuth1ServiceProviderConnectionFactory<NetFlixApi>{
 
-	@RequestMapping(value="/signin", method=RequestMethod.GET)
-	public void signin() {
+	public NetFlixServiceProviderConnectionFactory(String consumerKey, String consumerSecret) {
+		super("netflix", new NetFlixServiceProvider(consumerKey, consumerSecret), new NetFlixServiceApiAdapter());
 	}
+
 }

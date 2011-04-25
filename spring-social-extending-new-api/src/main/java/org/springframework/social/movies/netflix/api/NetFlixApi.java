@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.signin;
+package org.springframework.social.movies.netflix.api;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.List;
 
-@Controller
-public class SigninController {
+public interface NetFlixApi {
 
-	@RequestMapping(value="/signin", method=RequestMethod.GET)
-	public void signin() {
-	}
+	NetFlixUserProfile getUserProfile();
+	
+	List<CatalogTitle> searchForTitles(String searchTerms);
+
+	List<QueueItem> getDiscQueue();
+	
 }

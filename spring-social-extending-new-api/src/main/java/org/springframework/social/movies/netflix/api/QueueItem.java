@@ -13,14 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix;
+package org.springframework.social.movies.netflix.api;
 
-import java.util.List;
+public class QueueItem {
 
-public interface NetFlixApi {
+	private final String id;
 
-	List<CatalogTitle> searchForTitles(String searchTerms);
+	private final String title;
 
-	List<QueueItem> getDiscQueue();
-	
+	private final String releaseYear;
+
+	private final String boxArtUrl;
+
+	public QueueItem(String id, String title, String releaseYear, String boxArtUrl) {
+		this.title = title;
+		this.releaseYear = releaseYear;
+		this.id = id;
+		this.boxArtUrl = boxArtUrl;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getReleaseYear() {
+		return releaseYear;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getBoxArtUrl() {
+		return boxArtUrl;
+	}
 }

@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix;
+package org.springframework.social.movies.netflix.connect;
 
+import org.springframework.social.movies.netflix.api.NetFlixApi;
+import org.springframework.social.movies.netflix.api.impl.NetFlixTemplate;
 import org.springframework.social.oauth1.AbstractOAuth1ServiceProvider;
-import org.springframework.social.oauth1.OAuth1Template;
-import org.springframework.social.oauth1.OAuth1Version;
 
 public final class NetFlixServiceProvider extends AbstractOAuth1ServiceProvider<NetFlixApi> {
 
 	public NetFlixServiceProvider(String consumerKey, String consumerSecret) {
 		super(consumerKey, consumerSecret, 
-			new OAuth1Template(consumerKey, consumerSecret, 
+			new NetFlixOAuth1Template(consumerKey, consumerSecret, 
 				"http://api.netflix.com/oauth/request_token",
-				"https://api-user.netflix.com/oauth/login", null,
-				"http://api.netflix.com/oauth/access_token", OAuth1Version.CORE_10));
+				"https://api-user.netflix.com/oauth/login",
+				"http://api.netflix.com/oauth/access_token"));
 	}
 
 	@Override

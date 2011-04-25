@@ -23,7 +23,7 @@
 	</bean>
 
 	<jdbc:embedded-database id="dataSource" type="H2">
-		<jdbc:script location="classpath:/org/springframework/social/connect/jdbc/JdbcServiceProviderConnectionRepositorySchema.sql" />
+		<jdbc:script location="classpath:/org/springframework/social/connect/jdbc/JdbcMultiUserServiceProviderConnectionRepository.sql" />
 		<jdbc:script location="classpath:/org/springframework/social/movies/db/Account.sql" />
 		<jdbc:script location="classpath:/org/springframework/social/movies/db/Review.sql" />		
 		<jdbc:script location="classpath:/org/springframework/social/movies/db/data.sql" />

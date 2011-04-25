@@ -14,6 +14,9 @@
 	<!-- Configures Shared Social Connection Configuration -->
  	<import resource="connect.xml" />
 
+	<!-- Configures Shared Social Connection Configuration -->
+ 	<import resource="connect.xml" />
+
 	<!-- Configures Shared Security Layer -->
 	<import resource="security.xml" />
 

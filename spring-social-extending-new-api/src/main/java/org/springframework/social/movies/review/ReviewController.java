@@ -18,9 +18,10 @@ package org.springframework.social.movies.review;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.validation.Valid;
 
-import org.springframework.social.movies.netflix.NetFlixApi;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +33,11 @@ public class ReviewController {
 	
 	private final ReviewRepository reviewRepository;
 
-	private final NetFlixApi netflixApi;
+	private final Provider<NetFlixApi> netflixApiProvider;
 
 	@Inject
-	public ReviewController(NetFlixApi netflixApi, ReviewRepository reviewRepository) {
-		this.netflixApi = netflixApi;
+	public ReviewController(Provider<NetFlixApi> netflixApiProvider, ReviewRepository reviewRepository) {
+		this.netflixApiProvider = netflixApiProvider;
 		this.reviewRepository = reviewRepository;
 	}
 
@@ -47,10 +48,10 @@ public class ReviewController {
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET, params="searchTerm")
 	public String selectMovie(Principal currentUser, String searchTerm, Model model) {
-		model.addAttribute("titles", netflixApi.searchForTitles(searchTerm));
+		model.addAttribute("titles", getNetFlixApi().searchForTitles(searchTerm));
 		return "review/movieSearch";
 	}
-	
+
 	@RequestMapping(value="/new", method=RequestMethod.GET, params="title")
 	public String reviewForm(String title, Model model) {
 		String[] split = title.split("\\|");
@@ -66,4 +67,9 @@ public class ReviewController {
 		reviewRepository.saveReview(reviewForm.newReview(currentUser.getName()));
 		return "redirect:/";
 	}
+	
+	private NetFlixApi getNetFlixApi() {
+		return netflixApiProvider.get();
+	}
+
 }

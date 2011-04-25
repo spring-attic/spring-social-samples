@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix;
+package org.springframework.social.movies.netflix.api.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.social.movies.netflix.api.CatalogTitle;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
+import org.springframework.social.movies.netflix.api.NetFlixUserProfile;
+import org.springframework.social.movies.netflix.api.QueueItem;
 import org.springframework.social.oauth1.ProtectedResourceClientFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +37,12 @@ public class NetFlixTemplate implements NetFlixApi {
 
 	public NetFlixTemplate(String apiKey, String apiSecret, String accessToken, String accessTokenSecret) {
 		this.restTemplate = ProtectedResourceClientFactory.create(apiKey, apiSecret, accessToken, accessTokenSecret);
+		registerNetflixModule(restTemplate);
 		this.userBaseUrl = getUserBaseUrl();
+	}
+	
+	public NetFlixUserProfile getUserProfile() {
+		return restTemplate.getForObject(userBaseUrl + "?output=json", NetFlixUserProfile.class);
 	}
 	
 	public List<CatalogTitle> searchForTitles(String searchTerm) {
@@ -75,6 +87,18 @@ public class NetFlixTemplate implements NetFlixApi {
 	private String getUserBaseUrl() {
 		Map<String, Map<String, Map<String, String>>> result = restTemplate.getForObject(CURRENT_USER_URL, Map.class);
 		return result.get("resource").get("link").get("href");
+	}
+	
+	private void registerNetflixModule(RestTemplate restTemplate) {
+		List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
+		for (HttpMessageConverter<?> converter : converters) {
+			if(converter instanceof MappingJacksonHttpMessageConverter) {
+				MappingJacksonHttpMessageConverter jsonConverter = (MappingJacksonHttpMessageConverter) converter;
+				ObjectMapper objectMapper = new ObjectMapper();				
+				objectMapper.registerModule(new NetFlixModule());
+				jsonConverter.setObjectMapper(objectMapper);
+			}
+		}
 	}
 
 	private static final String SEARCH_TITLES_URL = "http://api.netflix.com/catalog/titles?term={term}&max_results=5&output=json";

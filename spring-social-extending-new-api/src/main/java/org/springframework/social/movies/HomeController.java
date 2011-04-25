@@ -20,12 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
-import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.movies.account.AccountRepository;
-import org.springframework.social.movies.netflix.NetFlixApi;
-import org.springframework.social.movies.netflix.QueueItem;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
+import org.springframework.social.movies.netflix.api.QueueItem;
 import org.springframework.social.movies.review.Review;
 import org.springframework.social.movies.review.ReviewRepository;
 import org.springframework.stereotype.Controller;
@@ -39,26 +38,20 @@ public class HomeController {
 
 	private final ReviewRepository reviewRepository;
 
-	private final ServiceProviderConnectionRepository connectionRepository;
-
-	private final NetFlixApi netflixApi;
+	private final Provider<NetFlixApi> netflixApiProvider;
 
 
 	@Inject
-	public HomeController(ServiceProviderConnectionRepository connectionRepository,
-			NetFlixApi netflixApi, AccountRepository userRepository, ReviewRepository reviewRepository) {
-		this.connectionRepository = connectionRepository;
-		this.netflixApi = netflixApi;
+	public HomeController(Provider<NetFlixApi> netflixApiProvider, AccountRepository userRepository, ReviewRepository reviewRepository) {
+		this.netflixApiProvider = netflixApiProvider;
 		this.accountRepository = userRepository;
 		this.reviewRepository = reviewRepository;
 	}
 
 	@RequestMapping("/")
-	public String home(Principal currentUser, Model model) {
-		List<ServiceProviderConnection<?>> netflixConnections = connectionRepository.findConnectionsToProvider("netflix");
-		
-		if (!netflixConnections.isEmpty()) {
-			List<QueueItem> discQueue = netflixApi.getDiscQueue();
+	public String home(Principal currentUser, Model model) {		
+		if (getNetFlixApi() != null) {
+			List<QueueItem> discQueue = getNetFlixApi().getDiscQueue();
 			
 			List<String> queueItemIds = new ArrayList<String>();
 			for (QueueItem queueItem : discQueue) {
@@ -74,6 +67,10 @@ public class HomeController {
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		model.addAttribute("recentReviews", reviewRepository.getRecentReviews());
 		return "home";
+	}
+
+	private NetFlixApi getNetFlixApi() {
+		return netflixApiProvider.get();
 	}
 	
 }
