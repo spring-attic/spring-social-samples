@@ -1,7 +1,5 @@
 package org.springframework.social.showcase.config;
 
-import javax.inject.Inject;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -14,26 +12,23 @@ import org.springframework.social.twitter.api.TwitterApi;
 @Configuration
 public class ServiceApisConfig {
 	
-	@Inject
-	private ServiceProviderConnectionRepository connectionRepository;
-	
 	@Bean
 	@Scope(value="request")
-	public FacebookApi facebookApi() {
+	public FacebookApi facebookApi(ServiceProviderConnectionRepository connectionRepository) {
 		ServiceProviderConnection<FacebookApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(FacebookApi.class);
 		return connection != null ? connection.getServiceApi() : null;
 	}
 	
 	@Bean
 	@Scope(value="request")
-	public TripItApi tripitApi() {
+	public TripItApi tripitApi(ServiceProviderConnectionRepository connectionRepository) {
 		ServiceProviderConnection<TripItApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TripItApi.class);
 		return connection != null ? connection.getServiceApi() : null;
 	}
 
 	@Bean
 	@Scope(value="request")
-	public TwitterApi twitterApi() {
+	public TwitterApi twitterApi(ServiceProviderConnectionRepository connectionRepository) {
 		ServiceProviderConnection<TwitterApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TwitterApi.class);
 		return connection != null ? connection.getServiceApi() : null;
 	}

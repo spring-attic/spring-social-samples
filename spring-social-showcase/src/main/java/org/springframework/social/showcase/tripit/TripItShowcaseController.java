@@ -18,9 +18,8 @@ package org.springframework.social.showcase.tripit;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
-import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.tripit.api.TripItApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,25 +29,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TripItShowcaseController {
 	
-	private final ServiceProviderConnectionRepository connectionRepository;
-
-	private final TripItApi tripitApi;
+	private final Provider<TripItApi> tripItApiProvider;
 
 	@Inject
-	public TripItShowcaseController(ServiceProviderConnectionRepository connectionRepository, TripItApi tripitApi) {
-		this.connectionRepository = connectionRepository;
-		this.tripitApi = tripitApi;
+	public TripItShowcaseController(Provider<TripItApi> tripItApiProvider) {
+		this.tripItApiProvider = tripItApiProvider;
 	}
 
 	@RequestMapping(value="/tripit", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		ServiceProviderConnection<TripItApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TripItApi.class);
-		if (connection == null) {
+		if (getTripItApi() == null) {
 			return "redirect:/connect/tripit";
 		}
-		model.addAttribute("tripItUser", tripitApi.getUserProfile());
-		model.addAttribute("trips", tripitApi.getUpcomingTrips());
+		model.addAttribute("tripItUser", getTripItApi().getUserProfile());
+		model.addAttribute("trips", getTripItApi().getUpcomingTrips());
 		return "tripit/tripit";
+	}
+	
+	private TripItApi getTripItApi() {
+		return tripItApiProvider.get();
 	}
 
 }

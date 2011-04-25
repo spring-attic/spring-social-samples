@@ -18,6 +18,7 @@ package org.springframework.social.showcase;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.showcase.account.AccountRepository;
@@ -28,20 +29,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	private final ServiceProviderConnectionRepository connectionRepository;
+	private final Provider<ServiceProviderConnectionRepository> connectionRepositoryProvider;
 	
 	private final AccountRepository accountRepository;
 
 	@Inject
-	public HomeController(ServiceProviderConnectionRepository connectionRepository, AccountRepository accountRepository) {
-		this.connectionRepository = connectionRepository;
+	public HomeController(Provider<ServiceProviderConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository) {
+		this.connectionRepositoryProvider = connectionRepositoryProvider;
 		this.accountRepository = accountRepository;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		model.addAttribute("connectionsToProviders", connectionRepository.findConnections());
+		model.addAttribute("connectionsToProviders", getConnectionRepository().findConnections());
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		return "home";
+	}
+	
+	private ServiceProviderConnectionRepository getConnectionRepository() {
+		return connectionRepositoryProvider.get();
 	}
 }
