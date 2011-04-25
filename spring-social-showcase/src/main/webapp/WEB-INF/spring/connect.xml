@@ -26,6 +26,10 @@
 					<constructor-arg value="${tripit.consumerKey}" />
 					<constructor-arg value="${tripit.consumerSecret}" />				
 				</bean>
+				<bean class="org.springframework.social.linkedin.connect.LinkedInServiceProviderConnectionFactory">
+					<constructor-arg value="${linkedin.consumerKey}" />
+					<constructor-arg value="${linkedin.consumerSecret}" />
+				</bean>
 			</list>
 		</property>
 	</bean>

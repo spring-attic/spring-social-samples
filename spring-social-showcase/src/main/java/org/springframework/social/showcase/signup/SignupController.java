@@ -18,7 +18,7 @@ package org.springframework.social.showcase.signup;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.social.connect.signin.web.ProviderUserSignInUtils;
+import org.springframework.social.connect.signin.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
@@ -54,7 +54,7 @@ public class SignupController {
 		}
 		boolean accountCreated = createAccount(form, formBinding);
 		if (accountCreated) {
-			ProviderUserSignInUtils.handlePostSignUp(request);
+			ProviderSignInUtils.handlePostSignUp(request);
 			return "redirect:/";
 		}
 		return null;

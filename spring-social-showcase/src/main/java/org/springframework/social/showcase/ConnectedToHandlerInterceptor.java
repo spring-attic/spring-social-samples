@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.facebook.api.FacebookApi;
+import org.springframework.social.linkedin.api.LinkedInApi;
 import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -19,6 +20,7 @@ public class ConnectedToHandlerInterceptor extends HandlerInterceptorAdapter {
 		if (request.getUserPrincipal() != null) {
 			request.setAttribute("connectedToTwitter", connectionRepository.findPrimaryConnectionToServiceApi(TwitterApi.class) != null);
 			request.setAttribute("connectedToFacebook", connectionRepository.findPrimaryConnectionToServiceApi(FacebookApi.class) != null);
+			request.setAttribute("connectedToLinkedIn", connectionRepository.findPrimaryConnectionToServiceApi(LinkedInApi.class) != null);
 		}
 		return true;
 	}

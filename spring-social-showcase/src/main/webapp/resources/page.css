@@ -100,3 +100,9 @@ ul.choices li:first-child {
 	padding-left: 0px;
 	border-left: none;
 }
+
+.evenrow {background-color:white;}
+
+.oddrow {background-color:lightgrey;}
+
+img {color:red; font-size:small; font-style:italic;}

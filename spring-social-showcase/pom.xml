@@ -59,6 +59,11 @@
 		    <artifactId>spring-social-twitter</artifactId>
 	        <version>${org.springframework.social-version}</version>
 	    </dependency>
+	    <dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-linkedin</artifactId>
+	        <version>${org.springframework.social-version}</version>
+	    </dependency>
 		<dependency>
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-web</artifactId>
@@ -265,5 +270,6 @@
 				<version>1.0-beta-1</version>
 			</plugin>
 		</plugins>
+		<finalName>spring-social-showcase</finalName>
 	</build>
 </project>

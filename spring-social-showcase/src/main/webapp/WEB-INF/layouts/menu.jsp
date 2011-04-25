@@ -24,3 +24,11 @@
 </c:if>
 
 <h4><a href="<c:url value="/tripit"/>">TripIt</a></h4>
+
+<h4><a href="<c:url value="/linkedin"/>">LinkedIn</a></h4>
+<c:if test="${connectedToLinkedIn}">
+<ul class="menu">
+	<li><a href="<c:url value="/linkedin"/>">User Profile</a></li>
+	<li><a href="<c:url value="/linkedin/connections"/>">Connections</a></li>
+</ul>
+</c:if>

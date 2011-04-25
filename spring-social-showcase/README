@@ -1,6 +1,7 @@
 This sample app demonstrates many of the capabilities of the Spring Social project, including:
 - Connect to Facebook
 - Connect to Twitter
+- Connect to LinkedIn
 - Sign in using Facebook
 - Sign in using Twitter
 

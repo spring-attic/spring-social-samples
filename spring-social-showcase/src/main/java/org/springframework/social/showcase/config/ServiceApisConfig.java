@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.social.connect.ServiceProviderConnection;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.facebook.api.FacebookApi;
+import org.springframework.social.linkedin.api.LinkedInApi;
 import org.springframework.social.tripit.api.TripItApi;
 import org.springframework.social.twitter.api.TwitterApi;
 
@@ -36,6 +37,13 @@ public class ServiceApisConfig {
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public TwitterApi twitterApi() {
 		ServiceProviderConnection<TwitterApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TwitterApi.class);
+		return connection != null ? connection.getServiceApi() : null;
+	}
+	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public LinkedInApi linkedInApi() {
+		ServiceProviderConnection<LinkedInApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(LinkedInApi.class);
 		return connection != null ? connection.getServiceApi() : null;
 	}
 
