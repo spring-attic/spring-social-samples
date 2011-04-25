@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.twitter;
+package org.springframework.social.showcase.connect;
 
 import java.util.Properties;
 
-import org.springframework.social.connect.oauth1.AbstractOAuth1ServiceProvider;
-import org.springframework.social.connect.support.ConnectionRepository;
+import org.springframework.social.oauth1.AbstractOAuth1ServiceProvider;
 import org.springframework.social.oauth1.OAuth1Template;
 
 import twitter4j.Twitter;
@@ -33,18 +32,19 @@ import twitter4j.conf.PropertyConfiguration;
  */
 public final class Twitter4JServiceProvider extends AbstractOAuth1ServiceProvider<Twitter> {
 
-	public Twitter4JServiceProvider(String consumerKey, String consumerSecret, ConnectionRepository connectionRepository) {
-		super("twitter", connectionRepository, consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
-				"https://twitter.com/oauth/request_token",
-				"https://twitter.com/oauth/authorize?oauth_token={requestToken}",
-				"https://twitter.com/oauth/access_token"));
+	public Twitter4JServiceProvider(String consumerKey, String consumerSecret) {
+		super(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
+			"https://api.twitter.com/oauth/request_token",
+			"https://api.twitter.com/oauth/authorize",
+			"https://api.twitter.com/oauth/authenticate",			
+			"https://api.twitter.com/oauth/access_token"));
 	}
 
 	@Override
-	protected Twitter getApi(String consumerKey, String consumerSecret, String accessToken, String secret) {
+	public Twitter getServiceApi(String accessToken, String secret) {
 		Properties props = new Properties();
-		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_KEY, consumerKey);
-		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_SECRET, consumerSecret);
+		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_KEY, getConsumerKey());
+		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_SECRET, getConsumerSecret());
 		props.setProperty(PropertyConfiguration.OAUTH_ACCESS_TOKEN, accessToken);
 		props.setProperty(PropertyConfiguration.OAUTH_ACCESS_TOKEN_SECRET, secret);
 		Configuration conf = new PropertyConfiguration(props);

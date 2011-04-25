@@ -15,9 +15,9 @@
  */
 package org.springframework.social.showcase.twitter;
 
-import org.springframework.social.connect.ServiceProvider;
 import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.web.connect.ConnectInterceptor;
+import org.springframework.social.connect.ServiceProviderConnectionFactory;
+import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
@@ -26,14 +26,15 @@ import twitter4j.TwitterException;
 
 public class TweetAfterConnectInterceptor implements ConnectInterceptor<Twitter> {
 
-	public void preConnect(ServiceProvider<Twitter> provider, WebRequest request) {
+	@Override
+	public void preConnect(ServiceProviderConnectionFactory<Twitter> connectionFactory, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TWEET_PARAMETER))) {
 			request.setAttribute(POST_TWEET_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
 	}
 
-	public void postConnect(ServiceProvider<Twitter> provider, ServiceProviderConnection<Twitter> connection,
-			WebRequest request) {
+	@Override
+	public void postConnect(ServiceProviderConnection<Twitter> connection, WebRequest request) {
 		if (request.getAttribute(POST_TWEET_ATTRIBUTE, WebRequest.SCOPE_SESSION) != null) {
 			try {
 				connection.getServiceApi().updateStatus("I've connected with the Spring Social Showcase!");

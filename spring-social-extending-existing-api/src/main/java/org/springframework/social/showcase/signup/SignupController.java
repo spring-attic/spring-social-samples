@@ -18,10 +18,10 @@ package org.springframework.social.showcase.signup;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.social.connect.signin.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
-import org.springframework.social.web.signin.ProviderSignInUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +50,7 @@ public class SignupController {
 		}
 		boolean accountCreated = createAccount(form, formBinding);
 		if (accountCreated) {
-			ProviderSignInUtils.handleConnectPostSignUp(form.getUsername(), request);
+			ProviderSignInUtils.handlePostSignUp(request);
 			return "redirect:/";
 		}
 		return null;
