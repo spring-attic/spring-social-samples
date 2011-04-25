@@ -16,6 +16,7 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterTimelineController {
 
-	private final TwitterApi twitterApi;
-
+	private final Provider<TwitterApi> twitterApiProvider;
+	
 	@Inject
-	public TwitterTimelineController(TwitterApi twitterApi) {
-		this.twitterApi = twitterApi;
+	public TwitterTimelineController(Provider<TwitterApi> twitterApiProvider) {
+		this.twitterApiProvider = twitterApiProvider;
 	}
 	
 	@RequestMapping(value="/twitter/timeline", method=RequestMethod.GET)
@@ -41,7 +42,8 @@ public class TwitterTimelineController {
 	
 	@RequestMapping(value="/twitter/timeline/{timelineType}", method=RequestMethod.GET)
 	public String showTimeline(@PathVariable("timelineType") String timelineType, Model model) {
-		if(timelineType.equals("Home")) {
+		TwitterApi twitterApi = getTwitterApi();
+		if (timelineType.equals("Home")) {
 			model.addAttribute("timeline", twitterApi.timelineOperations().getHomeTimeline());
 		} else if(timelineType.equals("Public")) {
 			model.addAttribute("timeline", twitterApi.timelineOperations().getPublicTimeline());
@@ -61,8 +63,12 @@ public class TwitterTimelineController {
 
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
 	public String postTweet(String message) {
-		twitterApi.timelineOperations().updateStatus(message);
+		getTwitterApi().timelineOperations().updateStatus(message);
 		return "redirect:/twitter";
 	}
 
+	private TwitterApi getTwitterApi() {
+		return twitterApiProvider.get();
+	}
+	
 }

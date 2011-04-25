@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.social.connect.MultiUserServiceProviderConnectionRepository;
 import org.springframework.social.connect.ServiceProviderConnectionRepository;
 
@@ -19,7 +18,7 @@ public class ServiceProviderConnectionRepositoryConfig {
 	private MultiUserServiceProviderConnectionRepository usersConnectionRepository;
 
 	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Scope(value="request")
 	public ServiceProviderConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
 		if (principal == null) {
 			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");

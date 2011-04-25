@@ -16,6 +16,7 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.stereotype.Controller;
@@ -26,16 +27,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterMessageController {
 
-	private final TwitterApi twitterApi;
+	private final Provider<TwitterApi> twitterApiProvider;
 	
 	@Inject
-	public TwitterMessageController(TwitterApi twitterApi) {
-		this.twitterApi = twitterApi;
+	public TwitterMessageController(Provider<TwitterApi> twitterApiProvider) {
+		this.twitterApiProvider = twitterApiProvider;
 	}
 	
 	@RequestMapping(value="/twitter/messages", method=RequestMethod.GET)
 	public String inbox(Model model) {
-		model.addAttribute("directMessages", twitterApi.directMessageOperations().getDirectMessagesReceived());
+		model.addAttribute("directMessages", getTwitterApi().directMessageOperations().getDirectMessagesReceived());
 		model.addAttribute("dmListType", "Received");
 		model.addAttribute("messageForm", new MessageForm());
 		return "twitter/messages";
@@ -43,7 +44,7 @@ public class TwitterMessageController {
 
 	@RequestMapping(value="/twitter/messages/sent", method=RequestMethod.GET)
 	public String sent(Model model) {
-		model.addAttribute("directMessages", twitterApi.directMessageOperations().getDirectMessagesSent());
+		model.addAttribute("directMessages", getTwitterApi().directMessageOperations().getDirectMessagesSent());
 		model.addAttribute("dmListType", "Sent");
 		model.addAttribute("messageForm", new MessageForm());
 		return "twitter/messages";
@@ -51,7 +52,12 @@ public class TwitterMessageController {
 
 	@RequestMapping(value="/twitter/messages", method=RequestMethod.POST)
 	public String sent(MessageForm message) {
-		twitterApi.directMessageOperations().sendDirectMessage(message.getTo(), message.getText());
+		getTwitterApi().directMessageOperations().sendDirectMessage(message.getTo(), message.getText());
 		return "redirect:/twitter/messages";
 	}
+	
+	private TwitterApi getTwitterApi() {
+		return twitterApiProvider.get();
+	}
+
 }

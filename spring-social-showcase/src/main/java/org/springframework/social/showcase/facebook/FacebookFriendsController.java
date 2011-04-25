@@ -1,6 +1,7 @@
 package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.springframework.social.facebook.api.FacebookApi;
 import org.springframework.stereotype.Controller;
@@ -11,17 +12,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookFriendsController {
 
-	private final FacebookApi facebookApi;
+	private final Provider<FacebookApi> facebookApiProvider;
 
 	@Inject
-	public FacebookFriendsController(FacebookApi facebookApi) {
-		this.facebookApi = facebookApi;
+	public FacebookFriendsController(Provider<FacebookApi> facebookApiProvider) {
+		this.facebookApiProvider = facebookApiProvider;
 	}
 
 	@RequestMapping(value="/facebook/friends", method=RequestMethod.GET)
 	public String showFeed(Model model) {
-		model.addAttribute("friends", facebookApi.friendOperations().getFriendProfiles());
+		model.addAttribute("friends", getFacebookApi().friendOperations().getFriendProfiles());
 		return "facebook/friends";
+	}
+	
+	private FacebookApi getFacebookApi() {
+		return facebookApiProvider.get();
 	}
 	
 }

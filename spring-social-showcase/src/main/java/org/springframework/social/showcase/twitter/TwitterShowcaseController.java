@@ -18,9 +18,8 @@ package org.springframework.social.showcase.twitter;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
-import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
 import org.springframework.social.twitter.api.TwitterApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,24 +29,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterShowcaseController {
 
-	private final ServiceProviderConnectionRepository connectionRepository;
-
-	private final TwitterApi twitterApi;
-
+	private final Provider<TwitterApi> twitterApiProvider;
+	
 	@Inject
-	public TwitterShowcaseController(ServiceProviderConnectionRepository connectionRepository, TwitterApi twitterApi) {
-		this.connectionRepository = connectionRepository;
-		this.twitterApi = twitterApi;
+	public TwitterShowcaseController(Provider<TwitterApi> twitterApiProvider) {
+		this.twitterApiProvider = twitterApiProvider;
 	}
 
 	@RequestMapping(value="/twitter", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		ServiceProviderConnection<TwitterApi> connection = connectionRepository.findPrimaryConnectionToServiceApi(TwitterApi.class);
-		if (connection == null) {
+		if (getTwitterApi() == null) {
 			return "redirect:/connect/twitter";
 		}
-		
-		model.addAttribute("profile", twitterApi.userOperations().getUserProfile());
+		model.addAttribute("profile", getTwitterApi().userOperations().getUserProfile());
 		return "twitter/profile";
 	}
+	
+	private TwitterApi getTwitterApi() {
+		return twitterApiProvider.get();
+	}
+	
 }
