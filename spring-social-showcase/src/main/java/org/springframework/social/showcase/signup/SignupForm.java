@@ -18,6 +18,7 @@ package org.springframework.social.showcase.signup;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.social.connect.ServiceProviderUserProfile;
 
 public class SignupForm {
 
@@ -65,4 +66,11 @@ public class SignupForm {
 		this.lastName = lastName;
 	}
 
+	public static SignupForm fromProviderUser(ServiceProviderUserProfile providerUser) {
+		SignupForm form = new SignupForm();
+		form.setFirstName(providerUser.getFirstName());
+		form.setLastName(providerUser.getLastName());
+		form.setUsername(providerUser.getUsername());
+		return form;
+	}
 }
