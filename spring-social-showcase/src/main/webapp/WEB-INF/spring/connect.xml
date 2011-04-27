@@ -7,11 +7,11 @@
 
 	<bean id="usersServiceProviderConnectionRepository" class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
-		<constructor-arg ref="serviceProviderConnectionFactoryLocator" />
+		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
 	</bean>
 	
-	<bean id="serviceProviderConnectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+	<bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
 		<property name="connectionFactories">
 			<list>
 				<bean class="org.springframework.social.twitter.connect.TwitterConnectionFactory">

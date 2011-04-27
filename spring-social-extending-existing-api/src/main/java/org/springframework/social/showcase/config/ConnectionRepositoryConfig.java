@@ -34,9 +34,9 @@ public class ConnectionRepositoryConfig {
 
 	@Bean
 	@Scope(value="request")
-	public ConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
+	public ConnectionRepository connectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
 		if (principal == null) {
-			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");
+			throw new IllegalStateException("Unable to get a ConnectionRepository: no user logged in");
 		}
 		return usersConnectionRepository.createConnectionRepository(principal.getName());
 	}
