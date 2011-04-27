@@ -12,8 +12,9 @@ body {
 	background-color: #006600;
 }
 
-#header h1 {
+#header h1 a {
 	color: #ccff99;
+	text-decoration: none;
 }
 
 #leftNav {

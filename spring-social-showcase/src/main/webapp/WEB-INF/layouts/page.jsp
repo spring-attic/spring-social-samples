@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page session="false" %>
 <html>
@@ -10,7 +9,7 @@
 	</head>
 	<body>
 		<div id="header">
-			<h1>Spring Social Showcase</h1>
+			<h1><a href="<c:url value="/"/>">Spring Social Showcase</a></h1>
 		</div>
 		
 		<div id="leftNav">
