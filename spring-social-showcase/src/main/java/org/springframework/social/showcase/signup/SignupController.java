@@ -18,7 +18,7 @@ package org.springframework.social.showcase.signup;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.social.connect.ServiceProviderConnection;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.signin.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
@@ -45,7 +45,7 @@ public class SignupController {
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public SignupForm signupForm(WebRequest request) {
-		ServiceProviderConnection<?> connection = ProviderSignInUtils.getConnection(request);
+		Connection<?> connection = ProviderSignInUtils.getConnection(request);
 		if (connection != null) {
 			return SignupForm.fromProviderUser(connection.fetchUserProfile());
 		} else {

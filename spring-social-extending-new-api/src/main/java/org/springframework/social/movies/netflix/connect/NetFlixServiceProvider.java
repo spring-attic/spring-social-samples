@@ -30,7 +30,7 @@ public final class NetFlixServiceProvider extends AbstractOAuth1ServiceProvider<
 	}
 
 	@Override
-	public NetFlixApi getServiceApi(String accessToken, String secret) {
+	public NetFlixApi getApi(String accessToken, String secret) {
 		return new NetFlixTemplate(getConsumerKey(), getConsumerSecret(), accessToken, secret);
 	}
 	

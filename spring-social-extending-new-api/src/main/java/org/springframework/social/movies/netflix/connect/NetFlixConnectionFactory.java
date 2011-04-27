@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.connect;
+package org.springframework.social.movies.netflix.connect;
 
-import org.springframework.social.connect.support.OAuth1ServiceProviderConnectionFactory;
+import org.springframework.social.connect.support.OAuth1ConnectionFactory;
+import org.springframework.social.movies.netflix.api.NetFlixApi;
 
-import twitter4j.Twitter;
+public class NetFlixConnectionFactory extends OAuth1ConnectionFactory<NetFlixApi>{
 
-public class Twitter4JServiceProviderConnectionFactory extends OAuth1ServiceProviderConnectionFactory<Twitter> {
-
-	public Twitter4JServiceProviderConnectionFactory(String consumerKey, String consumerSecret) {
-		super("twitter", new Twitter4JServiceProvider(consumerKey, consumerSecret), new Twitter4JServiceApiAdapter());
+	public NetFlixConnectionFactory(String consumerKey, String consumerSecret) {
+		super("netflix", new NetFlixServiceProvider(consumerKey, consumerSecret), new NetFlixApiAdapter());
 	}
 
 }

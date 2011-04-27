@@ -13,24 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.config;
+package org.springframework.social.movies.config;
 
+import java.security.Principal;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.social.connect.ServiceProviderConnection;
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
-
-import twitter4j.Twitter;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
 
 @Configuration
-public class ServiceApisConfig {
+public class ConnectionRepositoryConfig {
+	
+	@Inject
+	private UsersConnectionRepository usersConnectionRepository;
 	
 	@Bean
 	@Scope(value="request")
-	public Twitter twitterApi(ServiceProviderConnectionRepository connectionRepository) {
-		ServiceProviderConnection<Twitter> connection = connectionRepository.findPrimaryConnectionToServiceApi(Twitter.class);
-		return connection != null ? connection.getServiceApi() : null;
+	public ConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
+		if (principal == null) {
+			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");
+		}
+		return usersConnectionRepository.createConnectionRepository(principal.getName());
 	}
-
+	
 }

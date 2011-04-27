@@ -15,16 +15,16 @@
  */
 package org.springframework.social.showcase.connect;
 
-import org.springframework.social.connect.ServiceApiAdapter;
-import org.springframework.social.connect.ServiceProviderConnectionValues;
-import org.springframework.social.connect.ServiceProviderUserProfile;
-import org.springframework.social.connect.ServiceProviderUserProfileBuilder;
+import org.springframework.social.connect.ApiAdapter;
+import org.springframework.social.connect.ConnectionValues;
+import org.springframework.social.connect.UserProfile;
+import org.springframework.social.connect.UserProfileBuilder;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
-public class Twitter4JServiceApiAdapter implements ServiceApiAdapter<Twitter> {
+public class Twitter4JApiAdapter implements ApiAdapter<Twitter> {
 
 	@Override
 	public boolean test(Twitter serviceApi) {
@@ -37,7 +37,7 @@ public class Twitter4JServiceApiAdapter implements ServiceApiAdapter<Twitter> {
 	}
 
 	@Override
-	public void setConnectionValues(Twitter serviceApi, ServiceProviderConnectionValues values) {
+	public void setConnectionValues(Twitter serviceApi, ConnectionValues values) {
 		try {
 			User user = serviceApi.verifyCredentials();
 			values.setProviderUserId(Long.toString(user.getId()));
@@ -49,10 +49,10 @@ public class Twitter4JServiceApiAdapter implements ServiceApiAdapter<Twitter> {
 	}
 
 	@Override
-	public ServiceProviderUserProfile fetchUserProfile(Twitter serviceApi) {
+	public UserProfile fetchUserProfile(Twitter serviceApi) {
 		try {
 			User user = serviceApi.verifyCredentials();
-			return new ServiceProviderUserProfileBuilder().setName(user.getName()).setUsername(user.getScreenName()).build();
+			return new UserProfileBuilder().setName(user.getName()).setUsername(user.getScreenName()).build();
 		} catch (TwitterException e) {
 			return null;
 		}		

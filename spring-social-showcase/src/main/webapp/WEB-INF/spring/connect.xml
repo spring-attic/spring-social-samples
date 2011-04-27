@@ -5,24 +5,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/spring-social http://www.springframework.org/schema/social/spring-social-1.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<bean id="usersServiceProviderConnectionRepository" class="org.springframework.social.connect.jdbc.JdbcMultiUserServiceProviderConnectionRepository">
+	<bean id="usersServiceProviderConnectionRepository" class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="serviceProviderConnectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
 	</bean>
 	
-	<bean id="serviceProviderConnectionFactoryLocator" class="org.springframework.social.connect.support.MapServiceProviderConnectionFactoryRegistry">
+	<bean id="serviceProviderConnectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
 		<property name="connectionFactories">
 			<list>
-				<bean class="org.springframework.social.twitter.connect.TwitterServiceProviderConnectionFactory">
+				<bean class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
 					<constructor-arg value="${twitter.consumerKey}" />
 					<constructor-arg value="${twitter.consumerSecret}" />				
 				</bean>
-				<bean class="org.springframework.social.facebook.connect.FacebookServiceProviderConnectionFactory">
+				<bean class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
 					<constructor-arg value="${facebook.appId}" />
 					<constructor-arg value="${facebook.appSecret}" />				
 				</bean>
-				<bean class="org.springframework.social.tripit.connect.TripItServiceProviderConnectionFactory">
+				<bean class="org.springframework.social.tripit.connect.TripItConnectionFactory">
 					<constructor-arg value="${tripit.consumerKey}" />
 					<constructor-arg value="${tripit.consumerSecret}" />				
 				</bean>
@@ -30,8 +30,8 @@
 		</property>
 	</bean>
 
-	<bean class="org.springframework.social.showcase.config.ServiceProviderConnectionRepositoryConfig" />
+	<bean class="org.springframework.social.showcase.config.ConnectionRepositoryConfig" />
 	
-	<bean class="org.springframework.social.showcase.config.ServiceApisConfig" />
+	<bean class="org.springframework.social.showcase.config.ApisConfig" />
 	
 </beans>

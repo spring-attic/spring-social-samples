@@ -20,7 +20,7 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	private final Provider<ServiceProviderConnectionRepository> connectionRepositoryProvider;
+	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 	
 	private final AccountRepository accountRepository;
 
 	@Inject
-	public HomeController(Provider<ServiceProviderConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository) {
+	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
 		this.accountRepository = accountRepository;
 	}
@@ -46,7 +46,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	private ServiceProviderConnectionRepository getConnectionRepository() {
+	private ConnectionRepository getConnectionRepository() {
 		return connectionRepositoryProvider.get();
 	}
 }

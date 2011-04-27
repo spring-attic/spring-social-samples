@@ -15,23 +15,23 @@
  */
 package org.springframework.social.movies.netflix.connect;
 
-import org.springframework.social.connect.ServiceApiAdapter;
-import org.springframework.social.connect.ServiceProviderConnectionValues;
-import org.springframework.social.connect.ServiceProviderUserProfile;
-import org.springframework.social.connect.ServiceProviderUserProfileBuilder;
+import org.springframework.social.connect.ApiAdapter;
+import org.springframework.social.connect.ConnectionValues;
+import org.springframework.social.connect.UserProfile;
+import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
 import org.springframework.social.movies.netflix.api.NetFlixUserProfile;
 import org.springframework.web.client.HttpClientErrorException;
 
-public class NetFlixServiceApiAdapter implements ServiceApiAdapter<NetFlixApi> {
+public class NetFlixApiAdapter implements ApiAdapter<NetFlixApi> {
 
 	@Override
-	public ServiceProviderUserProfile fetchUserProfile(NetFlixApi netflixApi) {
+	public UserProfile fetchUserProfile(NetFlixApi netflixApi) {
 		NetFlixUserProfile profile = netflixApi.getUserProfile();		
 		String firstName = profile.getFirstName();
 		String lastName = profile.getLastName();
 		String fullName = firstName + " " + lastName;
-		return new ServiceProviderUserProfileBuilder().setFirstName(firstName).setLastName(lastName).setName(fullName).build();
+		return new UserProfileBuilder().setFirstName(firstName).setLastName(lastName).setName(fullName).build();
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class NetFlixServiceApiAdapter implements ServiceApiAdapter<NetFlixApi> {
 	}
 
 	@Override
-	public void setConnectionValues(NetFlixApi netflixApi, ServiceProviderConnectionValues values) {
+	public void setConnectionValues(NetFlixApi netflixApi, ConnectionValues values) {
 		NetFlixUserProfile profile = netflixApi.getUserProfile();
 		values.setProviderUserId(profile.getId());
 		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());

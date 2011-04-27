@@ -41,7 +41,7 @@ public final class Twitter4JServiceProvider extends AbstractOAuth1ServiceProvide
 	}
 
 	@Override
-	public Twitter getServiceApi(String accessToken, String secret) {
+	public Twitter getApi(String accessToken, String secret) {
 		Properties props = new Properties();
 		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_KEY, getConsumerKey());
 		props.setProperty(PropertyConfiguration.OAUTH_CONSUMER_SECRET, getConsumerSecret());

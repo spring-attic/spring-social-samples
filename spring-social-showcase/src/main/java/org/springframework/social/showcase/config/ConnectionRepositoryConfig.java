@@ -23,18 +23,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.social.connect.MultiUserServiceProviderConnectionRepository;
-import org.springframework.social.connect.ServiceProviderConnectionRepository;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
 
 @Configuration
-public class ServiceProviderConnectionRepositoryConfig {
+public class ConnectionRepositoryConfig {
 
 	@Inject
-	private MultiUserServiceProviderConnectionRepository usersConnectionRepository;
+	private UsersConnectionRepository usersConnectionRepository;
 
 	@Bean
 	@Scope(value="request")
-	public ServiceProviderConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
+	public ConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
 		if (principal == null) {
 			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");
 		}

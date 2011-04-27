@@ -13,15 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.movies.netflix.connect;
+package org.springframework.social.movies.config;
 
-import org.springframework.social.connect.support.OAuth1ServiceProviderConnectionFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
 
-public class NetFlixServiceProviderConnectionFactory extends OAuth1ServiceProviderConnectionFactory<NetFlixApi>{
-
-	public NetFlixServiceProviderConnectionFactory(String consumerKey, String consumerSecret) {
-		super("netflix", new NetFlixServiceProvider(consumerKey, consumerSecret), new NetFlixServiceApiAdapter());
+@Configuration
+public class ApisConfig {
+	
+	@Bean
+	@Scope(value="request")
+	public NetFlixApi netflixApi(ConnectionRepository connectionRepository) {
+		Connection<NetFlixApi> connection = connectionRepository.findPrimaryConnectionToApi(NetFlixApi.class);
+		return connection != null ? connection.getApi() : null;
 	}
-
+	
 }
