@@ -10,7 +10,7 @@
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<context:component-scan base-package="org.springframework.social.showcase" />
 	
-	<bean class="org.springframework.social.connect.web.ConnectController">
+	<bean id="connectController" class="org.springframework.social.connect.web.ConnectController">
 		<constructor-arg value="${application.url}" />
 		<property name="interceptors">
 			<list>
@@ -20,10 +20,10 @@
 		</property>
 	</bean>
 	
-	<bean class="org.springframework.social.connect.signin.web.ProviderSignInController">
+	<bean id="providerSignInController" class="org.springframework.social.connect.signin.web.ProviderSignInController">
 		<constructor-arg value="${application.url}" />	
 	</bean>
 	
-	<bean id="signinService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
+	<bean id="signInService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
 	
 </beans>
