@@ -50,6 +50,12 @@
 	        <version>${org.springframework.social-version}</version>
 	    </dependency>
 	    
+	    <!-- Commons Codec, needed by OAuth1Template for the Authorization dance -->
+	    <dependency>
+	        <groupId>commons-codec</groupId>
+	        <artifactId>commons-codec</artifactId>
+	        <version>1.5</version>
+        </dependency>	    
 	    <!-- Twitter4J -->
 	    <dependency>
 	        <groupId>org.twitter4j</groupId>
