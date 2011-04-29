@@ -6,10 +6,10 @@
 	<artifactId>spring-social-showcase</artifactId>
 	<name>Spring Social Showcase</name>
 	<packaging>war</packaging>
-	<version>1.0.0.M2</version>
+	<version>1.0.0</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework.social-version>1.0.0.BUILD-SNAPSHOT</org.springframework.social-version>
+		<org.springframework.social-version>1.0.0.M3</org.springframework.social-version>
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.springframework.security-version>3.1.0.RC1</org.springframework.security-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
@@ -65,7 +65,20 @@
 	        <version>${org.springframework.social-version}</version>
 	    </dependency>
 	    
-
+	    <!-- Apache Http Client -->
+	    <dependency>
+	    	<groupId>org.apache.httpcomponents</groupId>
+	    	<artifactId>httpclient</artifactId>
+	    	<version>4.1.1</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>	    	
+	    </dependency>
+	    
 		<!-- JSR 303 with Hibernate Validator -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -78,12 +91,6 @@
 			<version>4.1.0.Final</version>
 		</dependency>
 	    
-	    <dependency>
-	    	<groupId>commons-codec</groupId>
-	    	<artifactId>commons-codec</artifactId>
-	    	<version>1.4</version>
-	    </dependency>
-
 		<!-- Security -->	    
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -155,7 +162,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.3.151</version>
+			<version>1.3.154</version>
 	    </dependency>
 	    
 		<dependency>
@@ -216,7 +223,6 @@
 			<version>1.2</version>
 		</dependency>
 
-        
 	</dependencies>
 	<repositories>
 		<repository>
