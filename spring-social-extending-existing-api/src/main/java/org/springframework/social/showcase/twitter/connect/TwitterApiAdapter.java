@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.connect;
+package org.springframework.social.showcase.twitter.connect;
 
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
@@ -24,7 +24,11 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
-public class Twitter4JApiAdapter implements ApiAdapter<Twitter> {
+/**
+ * Twitter Api Adapter that uses the Twitter 4j API binding.
+ * @author Craig Walls
+ */
+public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 
 	@Override
 	public boolean test(Twitter serviceApi) {

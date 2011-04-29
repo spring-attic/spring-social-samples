@@ -9,11 +9,11 @@
 <body>
 <h1>Spring Social Showcase: Send a Tweet</h1>
 
-<p>Your Spring Social Showcase account is connected to the following Twitter profiles:</p>
-<c:forEach items="${connectedProfiles}" var="profile">
+<p>Your Spring Social Showcase account is connected to the following Twitter users:</p>
+<c:forEach items="${connections}" var="connection">
 	<div>
-		<p><a href="http://twitter.com/${profile.screenName}" target="_blank"><img src="${profile.profileImageURL}" border="0"/></a></p>
-		<p><c:out value="${profile.name}"/> (<c:out value="${profile.screenName}"/>)</p>
+		<p><a href="${connection.profileUrl}" target="_blank"><img src="${connection.imageUrl}" border="0"/></a></p>
+		<p><c:out value="${connection.displayName}"/></p>
 	</div>
 </c:forEach>
 

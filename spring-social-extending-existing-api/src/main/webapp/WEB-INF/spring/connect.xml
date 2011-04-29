@@ -14,7 +14,7 @@
 	<bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
 		<property name="connectionFactories">
 			<list>
-				<bean class="org.springframework.social.showcase.connect.Twitter4JConnectionFactory">
+				<bean class="org.springframework.social.showcase.twitter.connect.TwitterConnectionFactory">
 					<constructor-arg value="${twitter.consumerKey}" />
 					<constructor-arg value="${twitter.consumerSecret}" />				
 				</bean>
@@ -22,8 +22,8 @@
 		</property>
 	</bean>
 
-	<bean class="org.springframework.social.showcase.config.ConnectionRepositoryConfig" />
-	
-	<bean class="org.springframework.social.showcase.config.ApisConfig" />
+	<bean id="connectionRepository" factory-method="createConnectionRepository" factory-bean="usersConnectionRepository" scope="request">
+    	<constructor-arg value="#{request.userPrincipal.name}" />
+	</bean>
 	
 </beans>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.connect;
+package org.springframework.social.showcase.twitter.connect;
 
 import java.util.Properties;
 
@@ -26,13 +26,12 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.PropertyConfiguration;
 
 /**
- * Twitter4J ServiceProvider implementation.
- * 
+ * Twitter ServiceProvider implementation that exposes the Twitter 4j API binding.
  * @author Craig Walls
  */
-public final class Twitter4JServiceProvider extends AbstractOAuth1ServiceProvider<Twitter> {
+public final class TwitterServiceProvider extends AbstractOAuth1ServiceProvider<Twitter> {
 
-	public Twitter4JServiceProvider(String consumerKey, String consumerSecret) {
+	public TwitterServiceProvider(String consumerKey, String consumerSecret) {
 		super(consumerKey, consumerSecret, new OAuth1Template(consumerKey, consumerSecret,
 			"https://api.twitter.com/oauth/request_token",
 			"https://api.twitter.com/oauth/authorize",

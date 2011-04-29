@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.showcase.connect;
+package org.springframework.social.showcase.twitter.connect;
 
 import org.springframework.social.connect.support.OAuth1ConnectionFactory;
 
 import twitter4j.Twitter;
 
-public class Twitter4JConnectionFactory extends OAuth1ConnectionFactory<Twitter> {
+/**
+ * TwitterConnectionFactory that creates connections that expose the Twitter 4j API binding.
+ * @author Craig Walls
+ */
+public class TwitterConnectionFactory extends OAuth1ConnectionFactory<Twitter> {
 
-	public Twitter4JConnectionFactory(String consumerKey, String consumerSecret) {
-		super("twitter", new Twitter4JServiceProvider(consumerKey, consumerSecret), new Twitter4JApiAdapter());
+	public TwitterConnectionFactory(String consumerKey, String consumerSecret) {
+		super("twitter", new TwitterServiceProvider(consumerKey, consumerSecret), new TwitterApiAdapter());
 	}
 
 }

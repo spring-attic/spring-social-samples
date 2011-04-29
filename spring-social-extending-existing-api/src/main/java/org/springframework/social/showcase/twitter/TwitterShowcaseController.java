@@ -16,48 +16,47 @@
 package org.springframework.social.showcase.twitter;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 @Controller
 public class TwitterShowcaseController {
 
-	private final Provider<Twitter> twitterApiProvider;
+	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 
 	@Inject
-	public TwitterShowcaseController(Provider<Twitter> twitterApiProvider) {
-		this.twitterApiProvider = twitterApiProvider;
+	public TwitterShowcaseController(Provider<ConnectionRepository> connectionRepositoryProvider) {
+		this.connectionRepositoryProvider = connectionRepositoryProvider;
 	}
 
 	@RequestMapping(value="/twitter", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		Twitter twitter = getTwitter();
-		if (twitter != null) {
+		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnectionsToApi(Twitter.class); 
+		if (connections.size() > 0) {
+			model.addAttribute("connections", connections);
 			model.addAttribute(new TweetForm());
 			return "twitter/twitter";
+		} else {
+			return "redirect:/connect/twitter";
 		}
-		return "redirect:/connect/twitter";
-	}
-
-	private Twitter getTwitter() {
-		return twitterApiProvider.get();
 	}
 
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
 	public String postTweet(Principal currentUser, TweetForm tweetForm) {
-		try {
-			getTwitter().updateStatus(tweetForm.getMessage());
-		} catch (TwitterException e) {
-			// TODO: Decide how to handle this
+		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnectionsToApi(Twitter.class); 
+		for (Connection<Twitter> connection : connections) {
+			connection.updateStatus(tweetForm.getMessage());				
 		}
 		return "redirect:/twitter";
 	}

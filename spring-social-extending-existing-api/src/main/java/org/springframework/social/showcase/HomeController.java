@@ -20,30 +20,28 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import twitter4j.Twitter;
 
 @Controller
 public class HomeController {
 		
 	private final AccountRepository accountRepository;
 
-	private final Provider<Twitter> twitterApiProvider;
+	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 
 	@Inject
-	public HomeController(Provider<Twitter> twitterApiProvider, AccountRepository userRepository) {
-		this.twitterApiProvider = twitterApiProvider;
-		this.accountRepository = userRepository;
+	public HomeController(AccountRepository accountRepository, Provider<ConnectionRepository> connectionRepositoryProvider) {
+		this.accountRepository = accountRepository;
+		this.connectionRepositoryProvider = connectionRepositoryProvider;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		Twitter twitter = twitterApiProvider.get();
-		model.addAttribute("twitter_status", twitter != null ? "Yes" : "No");
+		model.addAttribute("twitter_status", connectionRepositoryProvider.get().findConnectionsToProvider("twitter").size() > 0 ? "Yes" : "No");
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		return "home";
 	}
