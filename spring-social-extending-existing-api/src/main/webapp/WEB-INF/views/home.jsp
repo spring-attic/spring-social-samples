@@ -14,7 +14,7 @@
 <a href="<c:url value="/signout" />">Sign Out</a>
 
 <ul>
-	<li><a href="twitter">Twitter</a> (Connected? <c:out value="${twitter_status}"/>)</li>
+	<li><a href="connect/twitter">Twitter</a> (Connected? <c:out value="${twitter_status}"/>)</li>
 </ul>
 
 </body>

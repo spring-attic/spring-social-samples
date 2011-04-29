@@ -24,41 +24,29 @@ import javax.inject.Provider;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import twitter4j.Twitter;
 
 @Controller
-public class TwitterShowcaseController {
+public class TweetController {
 
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 
 	@Inject
-	public TwitterShowcaseController(Provider<ConnectionRepository> connectionRepositoryProvider) {
+	public TweetController(Provider<ConnectionRepository> connectionRepositoryProvider) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
 	}
 
-	@RequestMapping(value="/twitter", method=RequestMethod.GET)
-	public String home(Principal currentUser, Model model) {
-		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnectionsToApi(Twitter.class); 
-		if (connections.size() > 0) {
-			model.addAttribute("connections", connections);
-			model.addAttribute(new TweetForm());
-			return "twitter/twitter";
-		} else {
-			return "redirect:/connect/twitter";
-		}
-	}
-
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
-	public String postTweet(Principal currentUser, TweetForm tweetForm) {
+	public String postTweet(Principal currentUser, @RequestParam("message") String message) {
 		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnectionsToApi(Twitter.class); 
 		for (Connection<Twitter> connection : connections) {
-			connection.updateStatus(tweetForm.getMessage());				
+			connection.updateStatus(message);				
 		}
-		return "redirect:/twitter";
+		return "redirect:/connect/twitter";
 	}
 
 }

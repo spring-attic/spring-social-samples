@@ -31,9 +31,9 @@ import twitter4j.User;
 public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 
 	@Override
-	public boolean test(Twitter serviceApi) {
+	public boolean test(Twitter api) {
 		try {
-			serviceApi.verifyCredentials();
+			api.verifyCredentials();
 			return true;
 		} catch (TwitterException e) {
 			return false;
@@ -41,9 +41,9 @@ public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 	}
 
 	@Override
-	public void setConnectionValues(Twitter serviceApi, ConnectionValues values) {
+	public void setConnectionValues(Twitter api, ConnectionValues values) {
 		try {
-			User user = serviceApi.verifyCredentials();
+			User user = api.verifyCredentials();
 			values.setProviderUserId(Long.toString(user.getId()));
 			values.setDisplayName("@" + user.getScreenName());
 			values.setProfileUrl("http://twitter.com/" + user.getScreenName());
@@ -53,9 +53,9 @@ public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 	}
 
 	@Override
-	public UserProfile fetchUserProfile(Twitter serviceApi) {
+	public UserProfile fetchUserProfile(Twitter api) {
 		try {
-			User user = serviceApi.verifyCredentials();
+			User user = api.verifyCredentials();
 			return new UserProfileBuilder().setName(user.getName()).setUsername(user.getScreenName()).build();
 		} catch (TwitterException e) {
 			return null;
@@ -63,9 +63,9 @@ public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 	}
 
 	@Override
-	public void updateStatus(Twitter serviceApi, String message) {
+	public void updateStatus(Twitter api, String message) {
 		try {
-			serviceApi.updateStatus(message);
+			api.updateStatus(message);
 		} catch (TwitterException e) {
 		}
 	}
