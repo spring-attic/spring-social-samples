@@ -26,27 +26,25 @@ import org.springframework.social.movies.netflix.api.CatalogTitle;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
 import org.springframework.social.movies.netflix.api.NetFlixUserProfile;
 import org.springframework.social.movies.netflix.api.QueueItem;
-import org.springframework.social.oauth1.ProtectedResourceClientFactory;
+import org.springframework.social.oauth1.AbstractOAuth1ApiTemplate;
 import org.springframework.web.client.RestTemplate;
 
-public class NetFlixTemplate implements NetFlixApi {
-	
-	private final RestTemplate restTemplate;
+public class NetFlixTemplate extends AbstractOAuth1ApiTemplate implements NetFlixApi {
 
 	private final String userBaseUrl;
 
-	public NetFlixTemplate(String apiKey, String apiSecret, String accessToken, String accessTokenSecret) {
-		this.restTemplate = ProtectedResourceClientFactory.create(apiKey, apiSecret, accessToken, accessTokenSecret);
-		registerNetflixModule(restTemplate);
+	public NetFlixTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
+		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+		registerNetflixModule(getRestTemplate());
 		this.userBaseUrl = getUserBaseUrl();
 	}
 	
 	public NetFlixUserProfile getUserProfile() {
-		return restTemplate.getForObject(userBaseUrl + "?output=json", NetFlixUserProfile.class);
+		return getRestTemplate().getForObject(userBaseUrl + "?output=json", NetFlixUserProfile.class);
 	}
 	
 	public List<CatalogTitle> searchForTitles(String searchTerm) {
-		Map<String, Object> resultMap = restTemplate.getForObject(SEARCH_TITLES_URL, Map.class, searchTerm);
+		Map<String, Object> resultMap = getRestTemplate().getForObject(SEARCH_TITLES_URL, Map.class, searchTerm);
 		Map<String, Object> titlesMap = (Map<String, Object>) resultMap.get("catalog_titles");
 		List<Map<String, Object>> titlesList = (List<Map<String, Object>>) titlesMap.get("catalog_title");
 		List<CatalogTitle> titles = new ArrayList<CatalogTitle>();
@@ -60,7 +58,7 @@ public class NetFlixTemplate implements NetFlixApi {
 	}
 
 	public List<QueueItem> getDiscQueue() {
-		Map<String, Object> resultMap = restTemplate.getForObject(userBaseUrl + QUEUE_PATH, Map.class);
+		Map<String, Object> resultMap = getRestTemplate().getForObject(userBaseUrl + QUEUE_PATH, Map.class);
 		Map<String, Object> queueMap = (Map<String, Object>) resultMap.get("queue");
 		List<Map<String, Object>> queueItemMaps = (List<Map<String, Object>>) queueMap.get("queue_item");
 		List<QueueItem> queueItems = new ArrayList<QueueItem>();
@@ -85,7 +83,7 @@ public class NetFlixTemplate implements NetFlixApi {
 	}
 	
 	private String getUserBaseUrl() {
-		Map<String, Map<String, Map<String, String>>> result = restTemplate.getForObject(CURRENT_USER_URL, Map.class);
+		Map<String, Map<String, Map<String, String>>> result = getRestTemplate().getForObject(CURRENT_USER_URL, Map.class);
 		return result.get("resource").get("link").get("href");
 	}
 	
