@@ -20,17 +20,17 @@ import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.social.facebook.api.FacebookApi;
-import org.springframework.social.twitter.api.TwitterApi;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class ConnectedToHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	@Inject
-	private Provider<TwitterApi> twitterApiProvider;
+	private Provider<Twitter> twitterApiProvider;
 	
 	@Inject
-	private Provider<FacebookApi> facebookApiProvider;
+	private Provider<Facebook> facebookApiProvider;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

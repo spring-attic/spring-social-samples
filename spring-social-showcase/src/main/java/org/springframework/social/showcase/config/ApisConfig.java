@@ -20,31 +20,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.FacebookApi;
-import org.springframework.social.tripit.api.TripItApi;
-import org.springframework.social.twitter.api.TwitterApi;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.tripit.api.TripIt;
+import org.springframework.social.twitter.api.Twitter;
 
 @Configuration
 public class ApisConfig {
 	
 	@Bean
 	@Scope(value="request")
-	public FacebookApi facebookApi(ConnectionRepository connectionRepository) {
-		Connection<FacebookApi> connection = connectionRepository.findPrimaryConnectionToApi(FacebookApi.class);
+	public Facebook facebookApi(ConnectionRepository connectionRepository) {
+		Connection<Facebook> connection = connectionRepository.findPrimaryConnectionToApi(Facebook.class);
 		return connection != null ? connection.getApi() : null;
 	}
 	
 	@Bean
 	@Scope(value="request")
-	public TripItApi tripitApi(ConnectionRepository connectionRepository) {
-		Connection<TripItApi> connection = connectionRepository.findPrimaryConnectionToApi(TripItApi.class);
+	public TripIt tripitApi(ConnectionRepository connectionRepository) {
+		Connection<TripIt> connection = connectionRepository.findPrimaryConnectionToApi(TripIt.class);
 		return connection != null ? connection.getApi() : null;
 	}
 
 	@Bean
 	@Scope(value="request")
-	public TwitterApi twitterApi(ConnectionRepository connectionRepository) {
-		Connection<TwitterApi> connection = connectionRepository.findPrimaryConnectionToApi(TwitterApi.class);
+	public Twitter twitterApi(ConnectionRepository connectionRepository) {
+		Connection<Twitter> connection = connectionRepository.findPrimaryConnectionToApi(Twitter.class);
 		return connection != null ? connection.getApi() : null;
 	}
 

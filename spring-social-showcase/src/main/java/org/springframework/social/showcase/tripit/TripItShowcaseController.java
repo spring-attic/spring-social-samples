@@ -20,7 +20,7 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.springframework.social.tripit.api.TripItApi;
+import org.springframework.social.tripit.api.TripIt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,24 +29,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TripItShowcaseController {
 	
-	private final Provider<TripItApi> tripItApiProvider;
+	private final Provider<TripIt> tripItApiProvider;
 
 	@Inject
-	public TripItShowcaseController(Provider<TripItApi> tripItApiProvider) {
+	public TripItShowcaseController(Provider<TripIt> tripItApiProvider) {
 		this.tripItApiProvider = tripItApiProvider;
 	}
 
 	@RequestMapping(value="/tripit", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		if (getTripItApi() == null) {
+		if (getTripIt() == null) {
 			return "redirect:/connect/tripit";
 		}
-		model.addAttribute("tripItUser", getTripItApi().getUserProfile());
-		model.addAttribute("trips", getTripItApi().getUpcomingTrips());
+		model.addAttribute("tripItUser", getTripIt().getUserProfile());
+		model.addAttribute("trips", getTripIt().getUpcomingTrips());
 		return "tripit/tripit";
 	}
 	
-	private TripItApi getTripItApi() {
+	private TripIt getTripIt() {
 		return tripItApiProvider.get();
 	}
 

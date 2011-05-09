@@ -18,7 +18,7 @@ package org.springframework.social.showcase.facebook;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.springframework.social.facebook.api.FacebookApi;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,23 +27,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookProfileController {
 	
-	private final Provider<FacebookApi> facebookApiProvider;
+	private final Provider<Facebook> facebookApiProvider;
 
 	@Inject
-	public FacebookProfileController(Provider<FacebookApi> facebookApiProvider) {
+	public FacebookProfileController(Provider<Facebook> facebookApiProvider) {
 		this.facebookApiProvider = facebookApiProvider;
 	}
 
 	@RequestMapping(value="/facebook", method=RequestMethod.GET)
 	public String home(Model model) {
-		if (getFacebookApi() == null) {
+		if (getFacebook() == null) {
 			return "redirect:/connect/facebook";
 		}
-		model.addAttribute("profile", getFacebookApi().userOperations().getUserProfile());
+		model.addAttribute("profile", getFacebook().userOperations().getUserProfile());
 		return "facebook/profile";
 	}
 	
-	private FacebookApi getFacebookApi() {
+	private Facebook getFacebook() {
 		return facebookApiProvider.get();
 	}	
 

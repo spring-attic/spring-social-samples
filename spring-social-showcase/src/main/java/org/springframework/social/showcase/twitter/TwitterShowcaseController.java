@@ -20,7 +20,7 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.springframework.social.twitter.api.TwitterApi;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,23 +29,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterShowcaseController {
 
-	private final Provider<TwitterApi> twitterApiProvider;
+	private final Provider<Twitter> twitterApiProvider;
 	
 	@Inject
-	public TwitterShowcaseController(Provider<TwitterApi> twitterApiProvider) {
+	public TwitterShowcaseController(Provider<Twitter> twitterApiProvider) {
 		this.twitterApiProvider = twitterApiProvider;
 	}
 
 	@RequestMapping(value="/twitter", method=RequestMethod.GET)
 	public String home(Principal currentUser, Model model) {
-		if (getTwitterApi() == null) {
+		if (getTwitter() == null) {
 			return "redirect:/connect/twitter";
 		}
-		model.addAttribute("profile", getTwitterApi().userOperations().getUserProfile());
+		model.addAttribute("profile", getTwitter().userOperations().getUserProfile());
 		return "twitter/profile";
 	}
 	
-	private TwitterApi getTwitterApi() {
+	private Twitter getTwitter() {
 		return twitterApiProvider.get();
 	}
 	
