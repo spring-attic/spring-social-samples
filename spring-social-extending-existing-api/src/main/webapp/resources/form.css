@@ -2,6 +2,6 @@ form input, form select {
 	display: block;
 }
 
-span.error {
+.error {
 	color: #D8000C;
 }

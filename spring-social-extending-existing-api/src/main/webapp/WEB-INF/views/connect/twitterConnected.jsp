@@ -4,9 +4,15 @@
 <html>
 <head>
 	<title>Spring Social Showcase: Send a Tweet</title>
+	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
 </head>
 <body>
 <h1>Spring Social Showcase: Send a Tweet</h1>
+
+<c:if test="${_duplicateConnectionException}">
+   <p class="error">That connection already exists.</p>
+</c:if>
+
 
 <p>Your Spring Social Showcase account is connected to the following Twitter users:</p>
 
@@ -31,7 +37,7 @@
 	<p>You may connect multiple Twitter users to a single Spring Social Showcase account. To connect to another Twitter user, click the button.</p>
 	<button type="submit">Connect to another Twitter user</button> <label for="postTweet"><input id="postTweet" type="checkbox" name="postTweet" /> Post a tweet about connecting with Spring Social Showcase</label>
 	<p>(Note: If you are still logged into Twitter as any one of the profiles that are already connected, you'll need to
-	click the "Sign Out" link when Twitter prompts you to allow access to Spring Social Showcase and then login as a
+	first sign out when Twitter prompts you to allow access to Spring Social Showcase and then login as a
 	different Twitter user.)</p>
 </form>
 
