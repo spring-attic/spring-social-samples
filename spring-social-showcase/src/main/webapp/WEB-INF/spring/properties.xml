@@ -14,8 +14,6 @@
 		<prop key="facebook.appSecret">fa8a9825f555a7a8949ec48fb93bda58</prop>
 		<prop key="twitter.consumerKey">YR571S2JiVBOFyJS5MEg</prop>
 		<prop key="twitter.consumerSecret">Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4</prop>
-		<prop key="tripit.consumerKey">ee68437fbf8f42315a1b1ebe5a2a3009bd3f5cf9</prop>
-		<prop key="tripit.consumerSecret">6b3cf4d183cc02076d068eea91080ca0bf666336</prop>
 	</util:properties>
 	
 </beans>

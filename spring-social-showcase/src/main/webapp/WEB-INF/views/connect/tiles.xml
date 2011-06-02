@@ -19,12 +19,4 @@
 		<put-attribute name="content" value="/WEB-INF/views/connect/twitterConnected.jsp" />
 	</definition>
 
-	<definition name="connect/tripitConnect" extends="page">
-		<put-attribute name="content" value="/WEB-INF/views/connect/tripitConnect.jsp" />
-	</definition>
-
-	<definition name="connect/tripitConnected" extends="page">
-		<put-attribute name="content" value="/WEB-INF/views/connect/tripitConnected.jsp" />
-	</definition>
-
 </tiles-definitions>

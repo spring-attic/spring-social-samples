@@ -22,10 +22,6 @@
 					<constructor-arg value="${facebook.appId}" />
 					<constructor-arg value="${facebook.appSecret}" />				
 				</bean>
-				<bean class="org.springframework.social.tripit.connect.TripItConnectionFactory">
-					<constructor-arg value="${tripit.consumerKey}" />
-					<constructor-arg value="${tripit.consumerSecret}" />				
-				</bean>
 			</list>
 		</property>
 	</bean>

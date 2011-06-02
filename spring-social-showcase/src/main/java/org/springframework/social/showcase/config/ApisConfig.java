@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.tripit.api.TripIt;
 import org.springframework.social.twitter.api.Twitter;
 
 @Configuration
@@ -34,13 +33,6 @@ public class ApisConfig {
 		return connection != null ? connection.getApi() : null;
 	}
 	
-	@Bean
-	@Scope(value="request")
-	public TripIt tripitApi(ConnectionRepository connectionRepository) {
-		Connection<TripIt> connection = connectionRepository.findPrimaryConnectionToApi(TripIt.class);
-		return connection != null ? connection.getApi() : null;
-	}
-
 	@Bean
 	@Scope(value="request")
 	public Twitter twitterApi(ConnectionRepository connectionRepository) {

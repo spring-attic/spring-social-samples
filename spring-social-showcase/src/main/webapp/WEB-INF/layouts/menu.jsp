@@ -22,5 +22,3 @@
 	<li><a href="<c:url value="/facebook/albums"/>">Albums</a></li>
 </ul>
 </c:if>
-
-<h4><a href="<c:url value="/tripit"/>">TripIt</a></h4>
