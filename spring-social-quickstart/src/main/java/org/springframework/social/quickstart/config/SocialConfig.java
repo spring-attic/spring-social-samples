@@ -104,7 +104,6 @@ public class SocialConfig {
 
 	private static class SimpleSignInAdapter implements SignInAdapter {
 
-		@Override
 		public void signIn(String userId) {
 			SecurityContext.setCurrentUser(new User(userId));
 		}
