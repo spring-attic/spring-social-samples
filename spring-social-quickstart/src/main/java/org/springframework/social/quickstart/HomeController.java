@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.quickstart.home;
+package org.springframework.social.quickstart;
 
 import java.util.List;
 
