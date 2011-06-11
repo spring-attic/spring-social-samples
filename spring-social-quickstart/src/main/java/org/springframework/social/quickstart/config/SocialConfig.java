@@ -46,63 +46,62 @@ public class SocialConfig {
 
 	@Inject
 	private DataSource dataSource;
-		
+
 	/**
-	* When a new provider is added to the app, register its {@link ConnectionFactory} here.
-	*/
+	 * When a new provider is added to the app, register its {@link ConnectionFactory} here.
+	 */
 	@Bean
-	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)
+	@Scope(value = "singleton", proxyMode = ScopedProxyMode.INTERFACES)
 	public ConnectionFactoryLocator connectionFactoryLocator() {
-	    ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-	    registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"), environment.getProperty("facebook.clientSecret")));
-	    return registry;
+		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
+		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"), environment.getProperty("facebook.clientSecret")));
+		return registry;
 	}
-	
+
 	/**
 	 * The data store for connections across all users.
 	 */
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-	    return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
 	}
 
 	/**
 	 * A request-scoped bean that provides access to the current user's connections.
 	 */
 	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public ConnectionRepository connectionRepository() {
 		User user = SecurityContext.getCurrentUser();
-	    return usersConnectionRepository().createConnectionRepository(user.getId());
+		return usersConnectionRepository().createConnectionRepository(user.getId());
 	}
-	
+
 	/**
 	 * A proxy to a request-scoped bean representing the current user's primary Facebook account.
 	 */
 	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public Facebook facebook() {
-	    return connectionRepository().findPrimaryConnection(Facebook.class).getApi();
+		return connectionRepository().findPrimaryConnection(Facebook.class).getApi();
 	}
-	
+
 	/**
 	 * The Spring MVC Controller that establishes connections to providers on behalf of users.
 	 */
 	@Bean
 	public ConnectController connectController() {
-	    return new ConnectController(environment.getProperty("application.secureUrl"),
-	        connectionFactoryLocator(), connectionRepository());
+		return new ConnectController(environment.getProperty("application.secureUrl"), connectionFactoryLocator(), connectionRepository());
 	}
-	
+
 	/**
 	 * The Spring MVC Controller that allows users to sign-in with their provider accounts.
 	 */
 	@Bean
 	public ProviderSignInController providerSignInController() {
-	    return new ProviderSignInController(environment.getProperty("application.secureUrl"),
-	        connectionFactoryLocator(), usersConnectionRepository(), connectionRepository(), new SimpleSignInAdapter());
+		return new ProviderSignInController(environment.getProperty("application.secureUrl"), connectionFactoryLocator(), usersConnectionRepository(),
+				connectionRepository(), new SimpleSignInAdapter());
 	}
-	
+
 	private static class SimpleSignInAdapter implements SignInAdapter {
 
 		@Override
@@ -111,5 +110,5 @@ public class SocialConfig {
 		}
 
 	}
-	
+
 }

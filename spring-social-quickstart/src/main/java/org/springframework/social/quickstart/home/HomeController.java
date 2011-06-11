@@ -30,21 +30,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-    private final Facebook facebook;
+	private final Facebook facebook;
 
-    @Inject
-    public HomeController(Facebook facebook) {
-        this.facebook = facebook;
-    }
-	
-    @RequestMapping(value="/", method=RequestMethod.GET)
-    public String home(Model model) {
-    	if (SecurityContext.getCurrentUser() == null) {
-    		return "signin";
-    	}
-        List<Reference> friends = facebook.friendOperations().getFriends();
-        model.addAttribute("friends", friends);
-        return "home";    		
-    }
-	
+	@Inject
+	public HomeController(Facebook facebook) {
+		this.facebook = facebook;
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		if (SecurityContext.getCurrentUser() == null) {
+			return "signin";
+		}
+		List<Reference> friends = facebook.friendOperations().getFriends();
+		model.addAttribute("friends", friends);
+		return "home";
+	}
+
 }
