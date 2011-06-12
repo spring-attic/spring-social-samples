@@ -34,7 +34,6 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.signin.web.ProviderSignInController;
 import org.springframework.social.connect.signin.web.SignInAdapter;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.quickstart.user.SecurityContext;
@@ -87,14 +86,6 @@ public class SocialConfig {
 	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public Facebook facebook() {
 		return connectionRepository().findPrimaryConnection(Facebook.class).getApi();
-	}
-
-	/**
-	 * The Spring MVC Controller that establishes connections to providers on behalf of users.
-	 */
-	@Bean
-	public ConnectController connectController() {
-		return new ConnectController(environment.getProperty("application.secureUrl"), connectionFactoryLocator(), connectionRepository());
 	}
 
 	/**
