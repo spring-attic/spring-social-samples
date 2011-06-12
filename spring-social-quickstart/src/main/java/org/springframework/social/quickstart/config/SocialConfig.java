@@ -24,9 +24,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.signin.web.ProviderSignInController;
@@ -63,7 +65,9 @@ public class SocialConfig {
 	 */
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository repo = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		repo.setConnectionSignUp(new SimpleConnectionSignUp());
+		return repo;
 	}
 
 	/**
@@ -102,6 +106,16 @@ public class SocialConfig {
 				connectionRepository(), new SimpleSignInAdapter());
 	}
 
+	// internal helpers
+	
+	private static class SimpleConnectionSignUp implements ConnectionSignUp {
+
+		public String execute(Connection<?> connection) {
+			return "kdonald";
+		}
+		
+	}
+	
 	private static class SimpleSignInAdapter implements SignInAdapter {
 
 		public void signIn(String userId) {

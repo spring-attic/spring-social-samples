@@ -20,11 +20,18 @@ public class SecurityContext {
 	private static User currentUser;
 
 	public static User getCurrentUser() {
+		if (currentUser == null) {
+			throw new IllegalStateException("No user is currently signed in");
+		}
 		return currentUser;
 	}
 
 	public static void setCurrentUser(User user) {
 		currentUser = user;
+	}
+
+	public static boolean userSignedIn() {
+		return currentUser != null;
 	}
 
 }

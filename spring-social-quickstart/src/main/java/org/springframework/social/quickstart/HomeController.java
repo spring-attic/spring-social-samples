@@ -39,7 +39,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		if (SecurityContext.getCurrentUser() == null) {
+		if (!SecurityContext.userSignedIn()) {
 			return "signin";
 		}
 		List<Reference> friends = facebook.friendOperations().getFriends();
