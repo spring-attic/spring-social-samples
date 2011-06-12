@@ -99,15 +99,16 @@ public class SocialConfig {
 
 	// internal helpers
 	
-	private static class SimpleConnectionSignUp implements ConnectionSignUp {
+	private static final class SimpleConnectionSignUp implements ConnectionSignUp {
 
 		public String execute(Connection<?> connection) {
+			// DEMO only: hard-codes sign-up of new user "kdonald".
 			return "kdonald";
 		}
 		
 	}
 	
-	private static class SimpleSignInAdapter implements SignInAdapter {
+	private static final class SimpleSignInAdapter implements SignInAdapter {
 
 		public void signIn(String userId) {
 			SecurityContext.setCurrentUser(new User(userId));

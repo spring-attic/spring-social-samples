@@ -15,6 +15,7 @@
  */
 package org.springframework.social.quickstart.user;
 
+// for DEMO purposes only: not ThreadSafe.
 public class SecurityContext {
 
 	private static User currentUser;
