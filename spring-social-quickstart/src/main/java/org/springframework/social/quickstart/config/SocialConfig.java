@@ -24,19 +24,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.connect.signin.web.ProviderSignInController;
-import org.springframework.social.connect.signin.web.SignInAdapter;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.quickstart.user.SecurityContext;
+import org.springframework.social.quickstart.user.SimpleSignInAdapter;
 import org.springframework.social.quickstart.user.User;
 
 @Configuration
@@ -52,10 +50,11 @@ public class SocialConfig {
 	 * When a new provider is added to the app, register its {@link ConnectionFactory} here.
 	 */
 	@Bean
-	@Scope(value = "singleton", proxyMode = ScopedProxyMode.INTERFACES)
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"), environment.getProperty("facebook.clientSecret")));
+		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
+				environment.getProperty("facebook.clientSecret")));
 		return registry;
 	}
 
@@ -63,57 +62,36 @@ public class SocialConfig {
 	 * The data store for connections across all users.
 	 */
 	@Bean
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
 	public UsersConnectionRepository usersConnectionRepository() {
-		JdbcUsersConnectionRepository repo = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
-		repo.setConnectionSignUp(new SimpleConnectionSignUp());
-		return repo;
+		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
 	}
 
 	/**
 	 * A request-scoped bean that provides access to the current user's connections.
 	 */
 	@Bean
-	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public ConnectionRepository connectionRepository() {
-		User user = SecurityContext.getCurrentUser();
-		return usersConnectionRepository().createConnectionRepository(user.getId());
+	    User user = SecurityContext.getCurrentUser();
+	    return usersConnectionRepository().createConnectionRepository(user.getId());
 	}
 
 	/**
-	 * A proxy to a request-scoped bean representing the current user's primary Facebook account.
-	 */
+	* A proxy to a request-scoped bean representing the current user's primary Facebook account.
+	*/
 	@Bean
-	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
 	public Facebook facebook() {
-		return connectionRepository().findPrimaryConnection(Facebook.class).getApi();
+	    return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
-
+	
 	/**
 	 * The Spring MVC Controller that allows users to sign-in with their provider accounts.
 	 */
 	@Bean
 	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(environment.getProperty("application.secureUrl"), connectionFactoryLocator(), usersConnectionRepository(),
-				connectionRepository(), new SimpleSignInAdapter());
-	}
-
-	// internal helpers
-	
-	private static final class SimpleConnectionSignUp implements ConnectionSignUp {
-
-		public String execute(Connection<?> connection) {
-			// DEMO only: hard-codes sign-up of new user "kdonald".
-			return "kdonald";
-		}
-		
-	}
-	
-	private static final class SimpleSignInAdapter implements SignInAdapter {
-
-		public void signIn(String userId) {
-			SecurityContext.setCurrentUser(new User(userId));
-		}
-
+		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
 	}
 
 }

@@ -15,24 +15,32 @@
  */
 package org.springframework.social.quickstart.user;
 
-// for DEMO purposes only: not ThreadSafe.
+/**
+ * Simple SecurityContext that stores the currently signed-in connection in a thread local.
+ * @author Keith Donald
+ */
 public class SecurityContext {
 
-	private static User currentUser;
+	private static final ThreadLocal<User> currentUser = new ThreadLocal<User>();
 
 	public static User getCurrentUser() {
-		if (currentUser == null) {
+		User user = currentUser.get();
+		if (user == null) {
 			throw new IllegalStateException("No user is currently signed in");
 		}
-		return currentUser;
+		return user;
 	}
 
 	public static void setCurrentUser(User user) {
-		currentUser = user;
+		currentUser.set(user);
 	}
 
 	public static boolean userSignedIn() {
-		return currentUser != null;
+		return currentUser.get() != null;
+	}
+
+	public static void remove() {
+		currentUser.remove();
 	}
 
 }

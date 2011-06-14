@@ -17,8 +17,6 @@ package org.springframework.social.quickstart;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
@@ -29,15 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-	private final Facebook facebook;
-
-	@Inject
-	public HomeController(Facebook facebook) {
-		this.facebook = facebook;
-	}
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Facebook facebook, Model model) {
 		List<Reference> friends = facebook.friendOperations().getFriends();
 		model.addAttribute("friends", friends);
 		return "home";
