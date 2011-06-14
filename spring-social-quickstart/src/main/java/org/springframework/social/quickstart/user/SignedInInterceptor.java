@@ -38,12 +38,12 @@ public final class SignedInInterceptor extends HandlerInterceptorAdapter {
 		}
 	}
 	
-	// internal helpers
-	
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 		SecurityContext.remove();
 	}
 
+	// internal helpers
+	
 	private boolean signedIn(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {

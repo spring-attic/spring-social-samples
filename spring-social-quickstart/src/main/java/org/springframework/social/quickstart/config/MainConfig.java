@@ -29,6 +29,11 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 
+/**
+ * Main configuration class for the application.
+ * Turns on @Component scanning, loads externalized application.properties, and sets up the database.
+ * @author Keith Donald
+ */
 @Configuration
 @ComponentScan(basePackages = "org.springframework.social.quickstart", excludeFilters = { @Filter(Configuration.class) })
 @PropertySource("classpath:org/springframework/social/quickstart/config/application.properties")

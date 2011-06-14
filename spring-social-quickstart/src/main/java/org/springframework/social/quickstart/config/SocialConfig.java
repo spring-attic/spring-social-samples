@@ -37,6 +37,10 @@ import org.springframework.social.quickstart.user.SecurityContext;
 import org.springframework.social.quickstart.user.SimpleSignInAdapter;
 import org.springframework.social.quickstart.user.User;
 
+/**
+ * Spring Social Configuration.
+ * @author Keith Donald
+ */
 @Configuration
 public class SocialConfig {
 
@@ -48,6 +52,7 @@ public class SocialConfig {
 
 	/**
 	 * When a new provider is added to the app, register its {@link ConnectionFactory} here.
+	 * @see FacebookConnectionFactory
 	 */
 	@Bean
 	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
@@ -59,7 +64,7 @@ public class SocialConfig {
 	}
 
 	/**
-	 * The data store for connections across all users.
+	 * Singleton data access object providing access to connections across all users.
 	 */
 	@Bean
 	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
@@ -68,7 +73,7 @@ public class SocialConfig {
 	}
 
 	/**
-	 * A request-scoped bean that provides access to the current user's connections.
+	 * Request-scoped data access object providing access to the current user's connections.
 	 */
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
@@ -78,7 +83,7 @@ public class SocialConfig {
 	}
 
 	/**
-	* A proxy to a request-scoped bean representing the current user's primary Facebook account.
+	* A proxy to a request-scoped object representing the current user's primary Facebook account.
 	*/
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	

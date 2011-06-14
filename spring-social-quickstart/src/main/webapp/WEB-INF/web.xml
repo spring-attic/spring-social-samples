@@ -3,11 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<!-- Java-based Spring container definition -->
 	<context-param>
     	<param-name>contextClass</param-name>
     	<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 	</context-param>
 
+	<!-- Location of Java @Configuration classes that configure the components that makeup this application -->
 	<context-param>
     	<param-name>contextConfigLocation</param-name>
     	<param-value>org.springframework.social.quickstart.config</param-value>

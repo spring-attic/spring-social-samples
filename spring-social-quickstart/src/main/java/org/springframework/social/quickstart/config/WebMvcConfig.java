@@ -25,6 +25,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerConfigure
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * Spring MVC Configuration.
+ * @author Keith Donald
+ */
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
