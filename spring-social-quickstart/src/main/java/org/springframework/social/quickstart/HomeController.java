@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-	private Facebook facebook;
+	private final Facebook facebook;
 	
 	@Inject
 	public HomeController(Facebook facebook) {
