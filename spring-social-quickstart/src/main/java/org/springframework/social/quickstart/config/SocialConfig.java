@@ -34,6 +34,7 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.quickstart.user.SecurityContext;
+import org.springframework.social.quickstart.user.SimpleConnectionSignUp;
 import org.springframework.social.quickstart.user.SimpleSignInAdapter;
 import org.springframework.social.quickstart.user.User;
 
@@ -55,7 +56,6 @@ public class SocialConfig {
 	 * @see FacebookConnectionFactory
 	 */
 	@Bean
-	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
@@ -67,9 +67,10 @@ public class SocialConfig {
 	 * Singleton data access object providing access to connections across all users.
 	 */
 	@Bean
-	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)	
 	public UsersConnectionRepository usersConnectionRepository() {
-		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		repository.setConnectionSignUp(new SimpleConnectionSignUp());
+		return repository;
 	}
 
 	/**

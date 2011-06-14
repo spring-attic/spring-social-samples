@@ -15,12 +15,12 @@
  */
 package org.springframework.social.quickstart.user;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.web.util.CookieGenerator;
 
 /**
  * Signs the user in by setting the currentUser property on the {@link SecurityContext}.
@@ -31,9 +31,15 @@ import org.springframework.social.connect.web.SignInAdapter;
  */
 public final class SimpleSignInAdapter implements SignInAdapter {
 
+	private final CookieGenerator cookieGenerator = new CookieGenerator();
+	
+	public SimpleSignInAdapter() {
+		cookieGenerator.setCookieName("quickstart_user");		
+	}
+	
 	public void signIn(String userId, Connection<?> connection, HttpServletRequest request, HttpServletResponse response) {
 		SecurityContext.setCurrentUser(new User(userId));
-		response.addCookie(new Cookie("quickstart_user", userId));
+		cookieGenerator.addCookie(response, userId);
 	}
 
 }
