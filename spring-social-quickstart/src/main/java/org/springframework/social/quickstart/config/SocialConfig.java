@@ -68,7 +68,8 @@ public class SocialConfig {
 	 */
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,
+				connectionFactoryLocator(), Encryptors.noOpText());
 		repository.setConnectionSignUp(new SimpleConnectionSignUp());
 		return repository;
 	}
