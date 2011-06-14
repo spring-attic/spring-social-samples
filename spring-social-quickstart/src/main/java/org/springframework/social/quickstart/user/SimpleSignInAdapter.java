@@ -24,7 +24,7 @@ import org.springframework.social.connect.web.SignInAdapter;
 
 /**
  * Signs the user in by setting the currentUser property on the {@link SecurityContext}.
- * Remembers the sign-in by storing the user's id in a cookie.
+ * Remembers the sign-in after the current request completes by storing the user's id in a cookie.
  * This is cookie is read in {@link SignedInInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)} on subsequent requests.
  * @author Keith Donald
  * @see SignedInInterceptor
