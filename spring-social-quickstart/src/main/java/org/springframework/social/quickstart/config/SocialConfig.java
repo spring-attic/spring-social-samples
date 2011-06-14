@@ -91,7 +91,8 @@ public class SocialConfig {
 	 */
 	@Bean
 	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
+		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(),
+				new SimpleSignInAdapter());
 	}
 
 }
