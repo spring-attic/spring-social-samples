@@ -10,8 +10,6 @@
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<context:component-scan base-package="org.springframework.social.movies" />
 	
-	<bean class="org.springframework.social.connect.web.ConnectController">
-		<constructor-arg value="${application.url}" />
-	</bean>
+	<bean class="org.springframework.social.connect.web.ConnectController" />
 	
 </beans>

@@ -18,7 +18,6 @@ package org.springframework.social.movies.review;
 import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.validation.Valid;
 
 import org.springframework.social.movies.netflix.api.NetFlixApi;
@@ -33,11 +32,11 @@ public class ReviewController {
 	
 	private final ReviewRepository reviewRepository;
 
-	private final Provider<NetFlixApi> netflixApiProvider;
+	private final NetFlixApi netflix;
 
 	@Inject
-	public ReviewController(Provider<NetFlixApi> netflixApiProvider, ReviewRepository reviewRepository) {
-		this.netflixApiProvider = netflixApiProvider;
+	public ReviewController(NetFlixApi netflix, ReviewRepository reviewRepository) {
+		this.netflix = netflix;
 		this.reviewRepository = reviewRepository;
 	}
 
@@ -48,7 +47,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET, params="searchTerm")
 	public String selectMovie(Principal currentUser, String searchTerm, Model model) {
-		model.addAttribute("titles", getNetFlixApi().searchForTitles(searchTerm));
+		model.addAttribute("titles", netflix.searchForTitles(searchTerm));
 		return "review/movieSearch";
 	}
 
@@ -68,8 +67,4 @@ public class ReviewController {
 		return "redirect:/";
 	}
 	
-	private NetFlixApi getNetFlixApi() {
-		return netflixApiProvider.get();
-	}
-
 }

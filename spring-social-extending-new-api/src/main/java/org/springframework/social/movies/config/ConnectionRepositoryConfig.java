@@ -15,14 +15,14 @@
  */
 package org.springframework.social.movies.config;
 
-import java.security.Principal;
-
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 
@@ -31,14 +31,15 @@ public class ConnectionRepositoryConfig {
 	
 	@Inject
 	private UsersConnectionRepository usersConnectionRepository;
-	
+
 	@Bean
-	@Scope(value="request")
-	public ConnectionRepository serviceProviderConnectionRepository(@Value("#{request.userPrincipal}") Principal principal) {
-		if (principal == null) {
-			throw new IllegalStateException("Unable to get a ServiceProviderConnectionRepository: no user logged in");
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public ConnectionRepository connectionRepository() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null) {
+			throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
 		}
-		return usersConnectionRepository.createConnectionRepository(principal.getName());
+		return usersConnectionRepository.createConnectionRepository(authentication.getName());
 	}
 	
 }

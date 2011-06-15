@@ -26,10 +26,10 @@ import org.springframework.social.movies.netflix.api.CatalogTitle;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
 import org.springframework.social.movies.netflix.api.NetFlixUserProfile;
 import org.springframework.social.movies.netflix.api.QueueItem;
-import org.springframework.social.oauth1.AbstractOAuth1ApiTemplate;
+import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.web.client.RestTemplate;
 
-public class NetFlixTemplate extends AbstractOAuth1ApiTemplate implements NetFlixApi {
+public class NetFlixTemplate extends AbstractOAuth1ApiBinding implements NetFlixApi {
 
 	private final String userBaseUrl;
 

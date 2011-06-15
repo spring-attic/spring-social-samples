@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.movies.account.AccountRepository;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
 import org.springframework.social.movies.netflix.api.QueueItem;
@@ -38,12 +39,12 @@ public class HomeController {
 
 	private final ReviewRepository reviewRepository;
 
-	private final Provider<NetFlixApi> netflixApiProvider;
+	private final ConnectionRepository connectionRepository;
 
 
 	@Inject
-	public HomeController(Provider<NetFlixApi> netflixApiProvider, AccountRepository userRepository, ReviewRepository reviewRepository) {
-		this.netflixApiProvider = netflixApiProvider;
+	public HomeController(ConnectionRepository connectionRepository, AccountRepository userRepository, ReviewRepository reviewRepository) {
+		this.connectionRepository = connectionRepository;
 		this.accountRepository = userRepository;
 		this.reviewRepository = reviewRepository;
 	}
@@ -70,7 +71,8 @@ public class HomeController {
 	}
 
 	private NetFlixApi getNetFlixApi() {
-		return netflixApiProvider.get();
+		Connection<NetFlixApi> connection = connectionRepository.findPrimaryConnection(NetFlixApi.class);
+		return connection != null ? connection.getApi() : null;
 	}
 	
 }

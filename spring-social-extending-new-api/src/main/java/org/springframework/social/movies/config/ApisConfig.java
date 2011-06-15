@@ -15,9 +15,12 @@
  */
 package org.springframework.social.movies.config;
 
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.movies.netflix.api.NetFlixApi;
@@ -25,11 +28,14 @@ import org.springframework.social.movies.netflix.api.NetFlixApi;
 @Configuration
 public class ApisConfig {
 	
+	@Inject
+	private ConnectionRepository connectionRepository;
+		
 	@Bean
-	@Scope(value="request")
-	public NetFlixApi netflixApi(ConnectionRepository connectionRepository) {
-		Connection<NetFlixApi> connection = connectionRepository.findPrimaryConnectionToApi(NetFlixApi.class);
-		return connection != null ? connection.getApi() : null;
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public NetFlixApi twitter() {
+		Connection<NetFlixApi> twitter = connectionRepository.findPrimaryConnection(NetFlixApi.class);
+		return twitter != null ? twitter.getApi() : null;
 	}
-	
+
 }
