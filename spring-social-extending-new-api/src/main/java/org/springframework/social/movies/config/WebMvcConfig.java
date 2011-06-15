@@ -41,16 +41,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-    public TilesConfigurer tilesConfigurer() {
-        TilesConfigurer configurer = new TilesConfigurer();
-        configurer.setDefinitions(new String[] {
-                "/WEB-INF/layouts/tiles.xml",
-                "/WEB-INF/views/**/tiles.xml"                           
-        });
-        configurer.setCheckRefresh(true);
-        return configurer;
-    }
-    
+	public TilesConfigurer tilesConfigurer() {
+		TilesConfigurer configurer = new TilesConfigurer();
+		configurer.setDefinitions(new String[] {
+				"/WEB-INF/layouts/tiles.xml",
+				"/WEB-INF/views/**/tiles.xml"                           
+		});
+		configurer.setCheckRefresh(true);
+		return configurer;
+	}
+
 	public void configureResourceHandling(ResourceConfigurer resourceConfigurer) {
 		resourceConfigurer.addPathMapping("/resources/**");
 		resourceConfigurer.addResourceLocation("/resources/");

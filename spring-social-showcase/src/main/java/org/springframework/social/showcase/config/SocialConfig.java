@@ -38,7 +38,7 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor;
-import org.springframework.social.showcase.signin.SpringSecuritySigninAdapter;
+import org.springframework.social.showcase.signin.SimpleSignInAdapter;
 import org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
@@ -58,7 +58,7 @@ public class SocialConfig {
 	private DataSource dataSource;
 
 	@Bean
-    @Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 		registry.addConnectionFactory(new TwitterConnectionFactory(environment.getProperty("twitter.consumerKey"),
@@ -69,7 +69,7 @@ public class SocialConfig {
 	}
 
 	@Bean
-    @Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public UsersConnectionRepository usersConnectionRepository() {
 		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
 	}
@@ -108,11 +108,7 @@ public class SocialConfig {
 
 	@Bean
 	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), signinAdapter());
+		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
 	}
 
-	@Bean
-	public SpringSecuritySigninAdapter signinAdapter() {
-		return new SpringSecuritySigninAdapter();
-	}
 }
