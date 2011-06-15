@@ -31,14 +31,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ImportResource("classpath:org/springframework/social/movies/config/security.xml")
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-            return NoOpPasswordEncoder.getInstance();
-    }
-    
-    @Bean
-    public TextEncryptor textEncryptor() {
-            return Encryptors.noOpText();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Bean
+	public TextEncryptor textEncryptor() {
+		return Encryptors.noOpText();
+	}
 
 }

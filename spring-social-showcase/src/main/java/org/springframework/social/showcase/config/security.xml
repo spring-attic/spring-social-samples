@@ -17,12 +17,12 @@
 	</http>
 
 	<authentication-manager alias="authenticationManager">
-        <authentication-provider>
+		<authentication-provider>
 			<password-encoder ref="passwordEncoder" />
-        	<jdbc-user-service data-source-ref="dataSource" 
-        					   users-by-username-query="select username, password, true from Account where username = ?"
-        					   authorities-by-username-query="select username, 'ROLE_USER' from Account where username = ?"/>
-        </authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource" 
+							users-by-username-query="select username, password, true from Account where username = ?"
+							authorities-by-username-query="select username, 'ROLE_USER' from Account where username = ?"/>
+		</authentication-provider>
 	</authentication-manager>
 	
 </beans:beans>

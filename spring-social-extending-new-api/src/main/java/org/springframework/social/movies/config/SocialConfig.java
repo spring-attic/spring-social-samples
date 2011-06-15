@@ -50,7 +50,7 @@ public class SocialConfig {
 	private DataSource dataSource;
 
 	@Bean
-    @Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 		registry.addConnectionFactory(new NetFlixConnectionFactory(environment.getProperty("netflix.consumerKey"),
@@ -59,7 +59,7 @@ public class SocialConfig {
 	}
 
 	@Bean
-    @Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
+	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public UsersConnectionRepository usersConnectionRepository() {
 		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
 	}
@@ -81,7 +81,7 @@ public class SocialConfig {
 		return twitter != null ? twitter.getApi() : null;
 	}
 
-	
+
 	@Bean
 	public ConnectController connectController() {
 		return new ConnectController(connectionFactoryLocator(), connectionRepository());

@@ -56,10 +56,10 @@ public class MainConfig {
 		return factory.getDatabase();
 	}
 	
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-            return new DataSourceTransactionManager(dataSource());
-    }
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(dataSource());
+	}
 	
 	@Bean
 	public JdbcTemplate jdbcTemplate() {

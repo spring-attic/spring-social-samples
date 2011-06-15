@@ -23,7 +23,7 @@ import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
-import org.springframework.social.showcase.signin.SpringSecuritySigninAdapter;
+import org.springframework.social.showcase.signin.SignInUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +35,9 @@ public class SignupController {
 
 	private final AccountRepository accountRepository;
 
-	private final SpringSecuritySigninAdapter signinAdapter;
-
 	@Inject
-	public SignupController(AccountRepository accountRepository, SpringSecuritySigninAdapter signinAdapter) {
+	public SignupController(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
-		this.signinAdapter = signinAdapter;
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -60,6 +57,7 @@ public class SignupController {
 		}
 		Account account = createAccount(form, formBinding);
 		if (account != null) {
+			SignInUtils.signin(account.getUsername());
 			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
 			return "redirect:/";
 		}
@@ -72,7 +70,6 @@ public class SignupController {
 		try {
 			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
 			accountRepository.createAccount(account);
-			signinAdapter.signIn(account.getUsername(), null, null, null);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
