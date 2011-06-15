@@ -15,7 +15,6 @@
  */
 package org.springframework.social.showcase;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,8 +23,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class ConnectedToHandlerInterceptor extends HandlerInterceptorAdapter {
 	
-	@Inject
 	private ConnectionRepository connectionRepository;
+	
+	public ConnectedToHandlerInterceptor(ConnectionRepository connectionRepository) {
+		this.connectionRepository = connectionRepository;
+	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -15,27 +15,30 @@
  */
 package org.springframework.social.movies.config;
 
-import javax.inject.Inject;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.movies.netflix.api.NetFlixApi;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Security Configuration.
+ * @author Craig Walls
+ */
 @Configuration
-public class ApisConfig {
-	
-	@Inject
-	private ConnectionRepository connectionRepository;
-		
-	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
-	public NetFlixApi twitter() {
-		Connection<NetFlixApi> twitter = connectionRepository.findPrimaryConnection(NetFlixApi.class);
-		return twitter != null ? twitter.getApi() : null;
-	}
+@ImportResource("classpath:org/springframework/social/movies/config/security.xml")
+public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+            return NoOpPasswordEncoder.getInstance();
+    }
+    
+    @Bean
+    public TextEncryptor textEncryptor() {
+            return Encryptors.noOpText();
+    }
 
 }

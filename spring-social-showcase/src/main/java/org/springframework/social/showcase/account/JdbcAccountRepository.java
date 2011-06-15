@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +45,7 @@ public class JdbcAccountRepository implements AccountRepository {
 			jdbcTemplate.update(
 					"insert into Account (firstName, lastName, username, password) values (?, ?, ?, ?)",
 					user.getFirstName(), user.getLastName(), user.getUsername(),
-					passwordEncoder.encodePassword(user.getPassword(), null));
+					passwordEncoder.encode(user.getPassword()));
 		} catch (DuplicateKeyException e) {
 			throw new UsernameAlreadyInUseException(user.getUsername());
 		}

@@ -3,22 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<html>
-<head>
-	<title>Spring Social NetFlix Sample: Sign Up</title>
-	<link rel="stylesheet" href="<c:url value="/resources/form.css" />" type="text/css" media="screen" />
-</head>
-<body>
-	<h1>Spring Social NetFlix Sample: Sign Up</h1>
-	
-	<c:if test="${not empty message}">
-	<div class="${message.type.cssClass}">${message.text}</div>
-	</c:if>
-	
-	<c:url value="/signup" var="signupUrl" />
 	<form:form id="signup" action="${signupUrl}" method="post" modelAttribute="signupForm">
 		<div class="formInfo">
-			<h2>Sign Up With Spring Social Showcase</h2>
+			<h2>Sign Up With Spring Social Movies</h2>
 			<s:bind path="*">
 				<c:choose>
 					<c:when test="${status.error}">
@@ -40,5 +27,3 @@
 		</fieldset>
 		<p><button type="submit">Sign Up</button></p>
 	</form:form>
-</body>
-</html>
