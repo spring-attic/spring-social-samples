@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
@@ -26,22 +25,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TwitterTrendsController {
-
-	private final Provider<Twitter> twitterApiProvider;
 	
+	private final Twitter twitter;
+
 	@Inject
-	public TwitterTrendsController(Provider<Twitter> twitterApiProvider) {
-		this.twitterApiProvider = twitterApiProvider;
+	public TwitterTrendsController(Twitter twitter) {
+		this.twitter = twitter;
 	}
 
 	@RequestMapping(value="/twitter/trends/current", method=RequestMethod.GET)
 	public String showTrends(Model model) {
-		model.addAttribute("trends", getTwitter().searchOperations().getCurrentTrends());
+		model.addAttribute("trends", twitter.searchOperations().getCurrentTrends());
 		return "twitter/currentTrends";
-	}
-	
-	private Twitter getTwitter() {
-		return twitterApiProvider.get();
 	}
 	
 }

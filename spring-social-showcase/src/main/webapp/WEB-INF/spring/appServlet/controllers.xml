@@ -11,7 +11,6 @@
 	<context:component-scan base-package="org.springframework.social.showcase" />
 	
 	<bean id="connectController" class="org.springframework.social.connect.web.ConnectController">
-		<constructor-arg value="${application.url}" />
 		<property name="interceptors">
 			<list>
 				<bean class="org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor" />
@@ -20,10 +19,8 @@
 		</property>
 	</bean>
 	
-	<bean id="providerSignInController" class="org.springframework.social.connect.signin.web.ProviderSignInController">
-		<constructor-arg value="${application.url}" />	
-	</bean>
+	<bean id="providerSignInController" class="org.springframework.social.connect.web.ProviderSignInController" />
 	
-	<bean id="signInService" class="org.springframework.social.showcase.signin.SpringSecuritySigninService" />
+	<bean id="signInService" class="org.springframework.social.showcase.signin.SpringSecuritySigninAdapter" />
 	
 </beans>

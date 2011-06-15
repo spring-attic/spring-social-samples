@@ -15,4 +15,4 @@
 	<input type="hidden" name="_method" value="delete" />
 </form>
 
-<a href="<c:url value="/facebook"/>">View your Facebook data</a>
+<a href="<c:url value="/facebook"/>">View your Facebook profile</a>

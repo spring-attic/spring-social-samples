@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
@@ -28,28 +27,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookPhotosController {
 
-	private final Provider<Facebook> facebookApiProvider;
+	private final Facebook facebook;
 
 	@Inject
-	public FacebookPhotosController(Provider<Facebook> facebookApiProvider) {
-		this.facebookApiProvider = facebookApiProvider;
+	public FacebookPhotosController(Facebook facebook) {
+		this.facebook = facebook;
 	}
 
 	@RequestMapping(value="/facebook/albums", method=RequestMethod.GET)
 	public String showAlbums(Model model) {
-		model.addAttribute("albums", getFacebook().mediaOperations().getAlbums());
+		model.addAttribute("albums", facebook.mediaOperations().getAlbums());
 		return "facebook/albums";
 	}
 	
 	@RequestMapping(value="/facebook/album/{albumId}", method=RequestMethod.GET)
 	public String showAlbum(@PathVariable("albumId") String albumId, Model model) {
-		model.addAttribute("album", getFacebook().mediaOperations().getAlbum(albumId));
-		model.addAttribute("photos", getFacebook().mediaOperations().getPhotos(albumId));
+		model.addAttribute("album", facebook.mediaOperations().getAlbum(albumId));
+		model.addAttribute("photos", facebook.mediaOperations().getPhotos(albumId));
 		return "facebook/album";
-	}
-	
-	private Facebook getFacebook() {
-		return facebookApiProvider.get();
 	}
 	
 }

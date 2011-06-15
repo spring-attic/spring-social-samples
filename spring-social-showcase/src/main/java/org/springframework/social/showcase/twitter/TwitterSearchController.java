@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
@@ -28,21 +27,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TwitterSearchController {
 
-	private final Provider<Twitter> twitterApiProvider;
+	private final Twitter twitter;
 	
 	@Inject
-	public TwitterSearchController(Provider<Twitter> twitterApiProvider) {
-		this.twitterApiProvider = twitterApiProvider;
+	public TwitterSearchController(Twitter twitter) {
+		this.twitter = twitter;
 	}
 
 	@RequestMapping(value="/twitter/search", method=RequestMethod.GET)
 	public String showTrends(@RequestParam("query") String query, Model model) {
-		model.addAttribute("timeline", getTwitter().searchOperations().search(query).getTweets());
+		model.addAttribute("timeline", twitter.searchOperations().search(query).getTweets());
 		return "twitter/timeline";
-	}
-	
-	private Twitter getTwitter() {
-		return twitterApiProvider.get();
 	}
 	
 }

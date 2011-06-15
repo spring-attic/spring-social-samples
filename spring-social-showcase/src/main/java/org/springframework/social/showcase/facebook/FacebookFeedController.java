@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
@@ -27,27 +26,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookFeedController {
 
-	private final Provider<Facebook> facebookApiProvider;
+	private final Facebook facebook;
 
 	@Inject
-	public FacebookFeedController(Provider<Facebook> facebookApiProvider) {
-		this.facebookApiProvider = facebookApiProvider;
+	public FacebookFeedController(Facebook facebook) {
+		this.facebook = facebook;
 	}
 
 	@RequestMapping(value="/facebook/feed", method=RequestMethod.GET)
 	public String showFeed(Model model) {
-		model.addAttribute("feed", getFacebook().feedOperations().getFeed());
+		model.addAttribute("feed", facebook.feedOperations().getFeed());
 		return "facebook/feed";
 	}
 	
 	@RequestMapping(value="/facebook/feed", method=RequestMethod.POST)
 	public String postUpdate(String message) {
-		getFacebook().feedOperations().updateStatus(message);
+		facebook.feedOperations().updateStatus(message);
 		return "redirect:/facebook/feed";
-	}
-	
-	private Facebook getFacebook() {
-		return facebookApiProvider.get();
 	}
 	
 }

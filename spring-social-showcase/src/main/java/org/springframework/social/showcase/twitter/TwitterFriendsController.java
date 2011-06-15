@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
@@ -27,27 +26,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterFriendsController {
 
-	private final Provider<Twitter> twitterApiProvider;
+	private final Twitter twitter;
 	
 	@Inject
-	public TwitterFriendsController(Provider<Twitter> twitterApiProvider) {
-		this.twitterApiProvider = twitterApiProvider;
+	public TwitterFriendsController(Twitter twitter) {
+		this.twitter = twitter;
 	}
 	
 	@RequestMapping(value="/twitter/friends", method=RequestMethod.GET)
 	public String friends(Model model) {
-		model.addAttribute("profiles", getTwitter().friendOperations().getFriends());
+		model.addAttribute("profiles", twitter.friendOperations().getFriends());
 		return "twitter/friends";
 	}
 
 	@RequestMapping(value="/twitter/followers", method=RequestMethod.GET)
 	public String followers(Model model) {
-		model.addAttribute("profiles", getTwitter().friendOperations().getFollowers());
+		model.addAttribute("profiles", twitter.friendOperations().getFollowers());
 		return "twitter/friends";
 	}
 
-	private Twitter getTwitter() {
-		return twitterApiProvider.get();
-	}
-	
 }

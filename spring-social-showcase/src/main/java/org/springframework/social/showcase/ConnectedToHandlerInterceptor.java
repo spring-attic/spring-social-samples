@@ -16,30 +16,24 @@
 package org.springframework.social.showcase;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class ConnectedToHandlerInterceptor extends HandlerInterceptorAdapter {
-
-	@Inject
-	private Provider<Twitter> twitterApiProvider;
 	
 	@Inject
-	private Provider<Facebook> facebookApiProvider;
+	private ConnectionRepository connectionRepository;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if (request.getUserPrincipal() != null) {
-			request.setAttribute("connectedToTwitter", twitterApiProvider.get() != null);
-			request.setAttribute("connectedToFacebook", facebookApiProvider.get() != null);
+			request.setAttribute("connectedToTwitter", connectionRepository.findConnections("twitter").size() > 0);
+			request.setAttribute("connectedToFacebook", connectionRepository.findConnections("facebook").size() > 0);
 		}
 		return true;
 	}
-
 
 }

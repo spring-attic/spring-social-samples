@@ -19,11 +19,11 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.signin.web.ProviderSignInUtils;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
-import org.springframework.social.showcase.signin.SpringSecuritySigninService;
+import org.springframework.social.showcase.signin.SpringSecuritySigninAdapter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +35,12 @@ public class SignupController {
 
 	private final AccountRepository accountRepository;
 
-	private final SpringSecuritySigninService signinService;
+	private final SpringSecuritySigninAdapter signinAdapter;
 
 	@Inject
-	public SignupController(AccountRepository accountRepository, SpringSecuritySigninService signinService) {
+	public SignupController(AccountRepository accountRepository, SpringSecuritySigninAdapter signinAdapter) {
 		this.accountRepository = accountRepository;
-		this.signinService = signinService;
+		this.signinAdapter = signinAdapter;
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -58,9 +58,9 @@ public class SignupController {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		boolean accountCreated = createAccount(form, formBinding);
-		if (accountCreated) {
-			ProviderSignInUtils.handlePostSignUp(request);
+		Account account = createAccount(form, formBinding);
+		if (account != null) {
+			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
 			return "redirect:/";
 		}
 		return null;
@@ -68,15 +68,15 @@ public class SignupController {
 
 	// internal helpers
 	
-	private boolean createAccount(SignupForm form, BindingResult formBinding) {
+	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
 			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
 			accountRepository.createAccount(account);
-			signinService.signIn(account.getUsername());
-			return true;
+			signinAdapter.signIn(account.getUsername(), null, null, null);
+			return account;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
-			return false;
+			return null;
 		}
 	}
 

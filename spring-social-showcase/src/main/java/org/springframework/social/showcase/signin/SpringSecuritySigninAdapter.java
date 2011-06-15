@@ -15,13 +15,18 @@
  */
 package org.springframework.social.showcase.signin;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.connect.signin.web.SignInService;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.SignInAdapter;
 
-public class SpringSecuritySigninService implements SignInService {
+public class SpringSecuritySigninAdapter implements SignInAdapter {
 
-	public void signIn(String localUserId) {
+	@Override
+	public void signIn(String localUserId, Connection<?> connection, HttpServletRequest request, HttpServletResponse response) {
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(localUserId, null, null));
 	}
 

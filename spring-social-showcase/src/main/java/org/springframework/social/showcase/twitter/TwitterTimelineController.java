@@ -16,7 +16,6 @@
 package org.springframework.social.showcase.twitter;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
@@ -28,11 +27,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterTimelineController {
 
-	private final Provider<Twitter> twitterApiProvider;
+	private final Twitter twitter;
 	
 	@Inject
-	public TwitterTimelineController(Provider<Twitter> twitterApiProvider) {
-		this.twitterApiProvider = twitterApiProvider;
+	public TwitterTimelineController(Twitter twitter) {
+		this.twitter = twitter;
 	}
 	
 	@RequestMapping(value="/twitter/timeline", method=RequestMethod.GET)
@@ -42,19 +41,18 @@ public class TwitterTimelineController {
 	
 	@RequestMapping(value="/twitter/timeline/{timelineType}", method=RequestMethod.GET)
 	public String showTimeline(@PathVariable("timelineType") String timelineType, Model model) {
-		Twitter twitterApi = getTwitter();
 		if (timelineType.equals("Home")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getHomeTimeline());
+			model.addAttribute("timeline", twitter.timelineOperations().getHomeTimeline());
 		} else if(timelineType.equals("Public")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getPublicTimeline());
+			model.addAttribute("timeline", twitter.timelineOperations().getPublicTimeline());
 		} else if(timelineType.equals("Friends")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getFriendsTimeline());
+			model.addAttribute("timeline", twitter.timelineOperations().getFriendsTimeline());
 		} else if(timelineType.equals("User")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getUserTimeline());
+			model.addAttribute("timeline", twitter.timelineOperations().getUserTimeline());
 		} else if(timelineType.equals("Mentions")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getMentions());
+			model.addAttribute("timeline", twitter.timelineOperations().getMentions());
 		} else if(timelineType.equals("Favorites")) {
-			model.addAttribute("timeline", twitterApi.timelineOperations().getFavorites());
+			model.addAttribute("timeline", twitter.timelineOperations().getFavorites());
 		}
 		model.addAttribute("timelineName", timelineType);
 		return "twitter/timeline";
@@ -63,12 +61,8 @@ public class TwitterTimelineController {
 
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
 	public String postTweet(String message) {
-		getTwitter().timelineOperations().updateStatus(message);
+		twitter.timelineOperations().updateStatus(message);
 		return "redirect:/twitter";
 	}
 
-	private Twitter getTwitter() {
-		return twitterApiProvider.get();
-	}
-	
 }
