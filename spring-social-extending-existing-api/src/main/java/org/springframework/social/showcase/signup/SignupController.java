@@ -18,7 +18,7 @@ package org.springframework.social.showcase.signup;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.social.connect.signin.web.ProviderSignInUtils;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
 import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
@@ -48,9 +48,9 @@ public class SignupController {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		boolean accountCreated = createAccount(form, formBinding);
-		if (accountCreated) {
-			ProviderSignInUtils.handlePostSignUp(request);
+		Account account = createAccount(form, formBinding);
+		if (account != null) {
+			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
 			return "redirect:/";
 		}
 		return null;
@@ -58,14 +58,15 @@ public class SignupController {
 
 	// internal helpers
 	
-	private boolean createAccount(SignupForm form, BindingResult formBinding) {
+	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
 			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
 			accountRepository.createAccount(account);
-			return true;
+			return account;
+			
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
-			return false;
+			return null;
 		}
 	}
 

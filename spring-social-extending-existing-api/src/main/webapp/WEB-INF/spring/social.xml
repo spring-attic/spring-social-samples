@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:social="http://www.springframework.org/schema/spring-social"
-	xsi:schemaLocation="http://www.springframework.org/schema/spring-social http://www.springframework.org/schema/social/spring-social-1.0.xsd
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/spring-social http://www.springframework.org/schema/social/spring-social-1.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 	<bean id="usersConnectionRepository" class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
+		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	
 	<bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
@@ -20,10 +23,12 @@
 				</bean>
 			</list>
 		</property>
+		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 
 	<bean id="connectionRepository" factory-method="createConnectionRepository" factory-bean="usersConnectionRepository" scope="request">
-    	<constructor-arg value="#{request.userPrincipal.name}" />
+		<constructor-arg value="#{request.userPrincipal.name}" />
+		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	
 </beans>

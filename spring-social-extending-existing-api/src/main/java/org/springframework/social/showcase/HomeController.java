@@ -18,7 +18,6 @@ package org.springframework.social.showcase;
 import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.showcase.account.AccountRepository;
@@ -31,17 +30,17 @@ public class HomeController {
 		
 	private final AccountRepository accountRepository;
 
-	private final Provider<ConnectionRepository> connectionRepositoryProvider;
+	private final ConnectionRepository connectionRepository;
 
 	@Inject
-	public HomeController(AccountRepository accountRepository, Provider<ConnectionRepository> connectionRepositoryProvider) {
+	public HomeController(AccountRepository accountRepository, ConnectionRepository connectionRepository) {
 		this.accountRepository = accountRepository;
-		this.connectionRepositoryProvider = connectionRepositoryProvider;
+		this.connectionRepository = connectionRepository;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		model.addAttribute("twitter_status", connectionRepositoryProvider.get().findConnectionsToProvider("twitter").size() > 0 ? "Yes" : "No");
+		model.addAttribute("twitter_status", connectionRepository.findConnections("twitter").size() > 0 ? "Yes" : "No");
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
 		return "home";
 	}

@@ -42,7 +42,7 @@ public class TweetController {
 
 	@RequestMapping(value="/twitter/tweet", method=RequestMethod.POST)
 	public String postTweet(Principal currentUser, @RequestParam("message") String message) {
-		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnectionsToApi(Twitter.class); 
+		List<Connection<Twitter>> connections = connectionRepositoryProvider.get().findConnections(Twitter.class); 
 		for (Connection<Twitter> connection : connections) {
 			connection.updateStatus(message);				
 		}
