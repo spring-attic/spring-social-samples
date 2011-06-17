@@ -23,7 +23,7 @@ import org.springframework.social.connect.ConnectionSignUp;
  * Doesn't bother storing a user record in any local database, since this quickstart just stores the user id in a cookie.
  * @author Keith Donald
  */
-public class SimpleConnectionSignUp implements ConnectionSignUp {
+public final class SimpleConnectionSignUp implements ConnectionSignUp {
 
 	public String execute(Connection<?> connection) {
 		return connection.fetchUserProfile().getUsername();
