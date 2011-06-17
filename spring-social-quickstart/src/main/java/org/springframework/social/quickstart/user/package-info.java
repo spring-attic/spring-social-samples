@@ -1,4 +1,4 @@
 /**
- * A simple user model that supports the quickstart application.
+ * A simple user authentication model supporting the quickstart application.
  */
 package org.springframework.social.quickstart.user;

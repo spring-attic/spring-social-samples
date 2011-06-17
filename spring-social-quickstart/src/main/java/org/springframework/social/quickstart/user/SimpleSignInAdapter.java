@@ -25,22 +25,17 @@ import org.springframework.web.context.request.NativeWebRequest;
 /**
  * Signs the user in by setting the currentUser property on the {@link SecurityContext}.
  * Remembers the sign-in after the current request completes by storing the user's id in a cookie.
- * This is cookie is read in {@link SignedInInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)} on subsequent requests.
+ * This is cookie is read in {@link UserInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)} on subsequent requests.
  * @author Keith Donald
- * @see SignedInInterceptor
+ * @see UserInterceptor
  */
 public final class SimpleSignInAdapter implements SignInAdapter {
 
-	private final UserCookieGenerator userCookieGenerator;
-	
-	public SimpleSignInAdapter() {
-		this.userCookieGenerator = new UserCookieGenerator();
-	}
+	private final UserCookieGenerator userCookieGenerator = new UserCookieGenerator();
 	
 	public void signIn(String userId, Connection<?> connection, NativeWebRequest request) {
-		User user = new User(userId);
-		SecurityContext.setCurrentUser(user);		
-		userCookieGenerator.addCookie(user, request.getNativeResponse(HttpServletResponse.class));
+		SecurityContext.setCurrentUser(new User(userId));
+		userCookieGenerator.addCookie(userId, request.getNativeResponse(HttpServletResponse.class));
 	}
 
 }

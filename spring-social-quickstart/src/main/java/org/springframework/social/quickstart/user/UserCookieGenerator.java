@@ -25,7 +25,7 @@ import org.springframework.web.util.CookieGenerator;
  * Utility class for managing the quick_start user cookie that remembers the signed-in user.
  * @author Keith Donald
  */
-public final class UserCookieGenerator {
+final class UserCookieGenerator {
 
 	private final CookieGenerator userCookieGenerator = new CookieGenerator();
 
@@ -33,22 +33,22 @@ public final class UserCookieGenerator {
 		userCookieGenerator.setCookieName("quickstart_user");
 	}
 
-	public void addCookie(User user, HttpServletResponse response) {
-		userCookieGenerator.addCookie(response, user.getId());		
+	public void addCookie(String userId, HttpServletResponse response) {
+		userCookieGenerator.addCookie(response, userId);
 	}
 	
 	public void removeCookie(HttpServletResponse response) {
 		userCookieGenerator.addCookie(response, "");
 	}
 	
-	public User readCookieValue(HttpServletRequest request) {
+	public String readCookieValue(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {
 			return null;
 		}
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals(userCookieGenerator.getCookieName())) {
-				return new User(cookie.getValue());
+				return cookie.getValue();
 			}
 		}
 		return null;

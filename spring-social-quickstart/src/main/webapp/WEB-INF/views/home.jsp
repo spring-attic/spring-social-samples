@@ -5,6 +5,9 @@
 		<title>Home</title>
 	</head>
 	<body>
+	<ul>
+		<li><a href="<c:url value="/signout" />">Sign Out</a></li>
+	</ul>
 	<h3>Your Facebook Friends</h3>
 	<ul>
 	<c:forEach items="${friends}" var="friend">

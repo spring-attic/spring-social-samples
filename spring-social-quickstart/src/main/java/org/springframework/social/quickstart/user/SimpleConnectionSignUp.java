@@ -20,7 +20,7 @@ import org.springframework.social.connect.ConnectionSignUp;
 
 /**
  * Simple little {@link ConnectionSignUp} command that assigns new userIds from provider profile usernames.
- * Doesn't bother storing a user record in any database, since this quickstart just stores the user id in a cookie.
+ * Doesn't bother storing a user record in any local database, since this quickstart just stores the user id in a cookie.
  * @author Keith Donald
  */
 public class SimpleConnectionSignUp implements ConnectionSignUp {
