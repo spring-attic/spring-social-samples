@@ -15,16 +15,14 @@
  */
 package org.springframework.social.showcase.signin;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.web.context.request.NativeWebRequest;
 
 public class SimpleSignInAdapter implements SignInAdapter {
 
 	@Override
-	public void signIn(String localUserId, Connection<?> connection, HttpServletRequest request, HttpServletResponse response) {
+	public void signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
 		SignInUtils.signin(localUserId);
 	}
 
