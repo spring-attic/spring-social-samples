@@ -27,6 +27,7 @@ import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.NotConnectedException;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
@@ -85,8 +86,9 @@ public class SocialConfig {
 	}
 
 	/**
-	* A proxy to a request-scoped object representing the current user's primary Facebook account.
-	*/
+	 * A proxy to a request-scoped object representing the current user's primary Facebook account.
+	 * @throws NotConnectedException if the user is not connected to facebook.
+	 */
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
 	public Facebook facebook() {

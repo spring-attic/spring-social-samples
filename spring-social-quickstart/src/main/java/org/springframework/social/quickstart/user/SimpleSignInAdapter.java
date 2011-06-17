@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.util.CookieGenerator;
 
 /**
  * Signs the user in by setting the currentUser property on the {@link SecurityContext}.
@@ -32,16 +31,16 @@ import org.springframework.web.util.CookieGenerator;
  */
 public final class SimpleSignInAdapter implements SignInAdapter {
 
-	private final CookieGenerator cookieGenerator = new CookieGenerator();
+	private final UserCookieGenerator userCookieGenerator;
 	
 	public SimpleSignInAdapter() {
-		cookieGenerator.setCookieName("quickstart_user");		
+		this.userCookieGenerator = new UserCookieGenerator();
 	}
 	
 	public void signIn(String userId, Connection<?> connection, NativeWebRequest request) {
-		SecurityContext.setCurrentUser(new User(userId));
-		HttpServletResponse response = request.getNativeResponse(HttpServletResponse.class);
-		cookieGenerator.addCookie(response, userId);
+		User user = new User(userId);
+		SecurityContext.setCurrentUser(user);		
+		userCookieGenerator.addCookie(user, request.getNativeResponse(HttpServletResponse.class));
 	}
 
 }

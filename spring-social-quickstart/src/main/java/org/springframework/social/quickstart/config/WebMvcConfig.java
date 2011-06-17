@@ -20,8 +20,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.social.quickstart.user.SignedInInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewControllerConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -33,12 +33,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-	public void configureInterceptors(InterceptorConfigurer configurer) {
-		configurer.addInterceptor(new SignedInInterceptor());
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new SignedInInterceptor());
 	}
 
-	public void configureViewControllers(ViewControllerConfigurer configurer) {
-		configurer.mapViewNameByConvention("/signin");
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/signin");
 	}
 
 	@Bean

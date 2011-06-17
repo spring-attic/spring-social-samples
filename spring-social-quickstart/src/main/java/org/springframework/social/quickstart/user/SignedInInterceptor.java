@@ -15,56 +15,61 @@
  */
 package org.springframework.social.quickstart.user;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.social.connect.NotConnectedException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * Before a request is handled:
  * 1. sets the current User in the {@link SecurityContext} from a cookie, if present.
- * 2. requests that the user sign-in if he or she hasn't already.
+ * 2. requires that the user sign-in if he or she hasn't already.
  * @author Keith Donald
  */
 public final class SignedInInterceptor extends HandlerInterceptorAdapter {
 
+	private final UserCookieGenerator userCookieGenerator;
+
+	public SignedInInterceptor() {
+		userCookieGenerator = new UserCookieGenerator();
+	}
+	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		if (signedIn(request) || toSignIn(request)) {
+		if (signedIn(request) || requestForSignIn(request)) {
 			return true;
 		} else {
-			return requestSignIn(request, response);
+			return requireSignIn(request, response);
 		}
 	}
 	
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 		SecurityContext.remove();
+		if (ex.getCause().getCause() instanceof NotConnectedException) { // SPR-8466
+			userCookieGenerator.removeCookie(response);
+			requireSignIn(request, response);
+		}
 	}
 
 	// internal helpers
-	
+
 	private boolean signedIn(HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies == null) {
+		User user = userCookieGenerator.readCookieValue(request);
+		if (user == null) {
 			return false;
 		}
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("quickstart_user")) {
-				SecurityContext.setCurrentUser(new User(cookie.getValue()));
-				return true;				
-			}
-		}
-		return false;
+		SecurityContext.setCurrentUser(user);
+		return true;
 	}
 	
-	private boolean toSignIn(HttpServletRequest request) {
+	private boolean requestForSignIn(HttpServletRequest request) {
 		return request.getServletPath().startsWith("/signin");
 	}
 	
-	private boolean requestSignIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private boolean requireSignIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new RedirectView("/signin", true).render(null, request, response);
 		return false;
 	}
-	
+
 }
