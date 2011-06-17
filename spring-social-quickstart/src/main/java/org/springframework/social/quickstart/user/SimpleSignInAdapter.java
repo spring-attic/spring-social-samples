@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.util.CookieGenerator;
 
 /**
@@ -37,8 +38,9 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		cookieGenerator.setCookieName("quickstart_user");		
 	}
 	
-	public void signIn(String userId, Connection<?> connection, HttpServletRequest request, HttpServletResponse response) {
+	public void signIn(String userId, Connection<?> connection, NativeWebRequest request) {
 		SecurityContext.setCurrentUser(new User(userId));
+		HttpServletResponse response = request.getNativeResponse(HttpServletResponse.class);
 		cookieGenerator.addCookie(response, userId);
 	}
 
