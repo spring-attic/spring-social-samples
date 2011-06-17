@@ -22,7 +22,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.config.AdviceMode;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -44,7 +43,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = "org.springframework.social.movies", excludeFilters = { @Filter(Configuration.class) })
 @PropertySource("classpath:org/springframework/social/movies/config/application.properties")
-@EnableTransactionManagement(mode=AdviceMode.ASPECTJ)
+@EnableTransactionManagement
 public class MainConfig {
 
 	@Bean(destroyMethod = "shutdown")

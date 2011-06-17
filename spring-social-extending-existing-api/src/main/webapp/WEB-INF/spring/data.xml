@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!-- Configures transaction management around @Transactional components -->
-	<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 		
 	<!-- Local, JDBC-based TransactionManager -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
