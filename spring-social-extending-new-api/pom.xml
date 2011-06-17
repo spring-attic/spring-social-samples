@@ -12,6 +12,7 @@
 		<org.springframework.social-version>1.0.0.BUILD-SNAPSHOT</org.springframework.social-version>
 		<org.springframework-version>3.1.0.M2</org.springframework-version>
 		<org.springframework.security-version>3.1.0.CI-SNAPSHOT</org.springframework.security-version>
+		<org.springframework.security.crypto-version>3.1.0.RC2.crypto</org.springframework.security.crypto-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 	</properties>
 	<dependencies>
@@ -146,7 +147,7 @@
 	    <dependency>
 	    	<groupId>org.springframework.security</groupId>
 	    	<artifactId>spring-security-crypto</artifactId>
-			<version>${org.springframework.security-version}</version>
+			<version>${org.springframework.security.crypto-version}</version>
 	    </dependency>
 	    
 		<!-- Logging -->
