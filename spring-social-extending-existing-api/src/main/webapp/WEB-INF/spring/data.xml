@@ -24,8 +24,8 @@
 
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:/org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql" />
-		<jdbc:script location="classpath:/org/springframework/social/showcase/db/Account.sql" />
-		<jdbc:script location="classpath:/org/springframework/social/showcase/db/data.sql" />
+		<jdbc:script location="classpath:/org/springframework/social/showcase/account/Account.sql" />
+		<jdbc:script location="classpath:/org/springframework/social/showcase/account/data.sql" />
 	</jdbc:embedded-database>	
 	
 </beans>

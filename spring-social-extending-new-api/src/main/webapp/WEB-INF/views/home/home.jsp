@@ -3,7 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 
 <p>Welcome, <c:out value="${account.firstName}"/>! (<a href="<c:url value="/signout" />">Sign Out</a>)</p>
-			<% System.out.println("DDDDDDD"); %>
 
 <div id="discQueue">
 	<h3>In your Netflix queue</h3>
