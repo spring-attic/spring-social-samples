@@ -4,6 +4,6 @@ To run, simply import the project into your IDE and deploy to a Servlet 2.5 or >
 You can also deploy from the command line with:
 $ mvn tomcat:run
 
-Access the project at http://localhost:8080/spring-social-quickstart-3-0-x
+Access the project at http://localhost:8080/spring-social-quickstart-30x
 
 Discuss at forum.springsource.org and collaborate with the development team at jira.springframework.org/browse/SOCIAL.
