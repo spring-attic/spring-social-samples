@@ -22,6 +22,7 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 
+	<!-- Embedded database for storing connections -->
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:/org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql" />
 	</jdbc:embedded-database>	

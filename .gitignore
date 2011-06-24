@@ -4,3 +4,4 @@
 **/.settings
 **/.springBeans
 **/bin
+.DS_Store
