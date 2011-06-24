@@ -1,7 +1,7 @@
 This repository contains sample projects illustrating usage of the Spring Social project.
 
 Samples include:
-- spring-social-quickstart, designed to get you up and running quickly in Spring Framework 3.1 or > environments.
+- spring-social-quickstart, designed to get you up and running quickly in a Spring Framework 3.1 or > environment.
 - spring-social-quickstart-3.0.x, a version of the quickstart that is Spring Framework 3.0.x compatible.
 - spring-social-showcase, illustrating most of the features.
 - spring-social-extending-new-api, showing how to extend the framework to implement a new ServiceProvider + API binding.
