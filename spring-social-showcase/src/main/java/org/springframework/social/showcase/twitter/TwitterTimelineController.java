@@ -45,8 +45,6 @@ public class TwitterTimelineController {
 			model.addAttribute("timeline", twitter.timelineOperations().getHomeTimeline());
 		} else if(timelineType.equals("Public")) {
 			model.addAttribute("timeline", twitter.timelineOperations().getPublicTimeline());
-		} else if(timelineType.equals("Friends")) {
-			model.addAttribute("timeline", twitter.timelineOperations().getFriendsTimeline());
 		} else if(timelineType.equals("User")) {
 			model.addAttribute("timeline", twitter.timelineOperations().getUserTimeline());
 		} else if(timelineType.equals("Mentions")) {
