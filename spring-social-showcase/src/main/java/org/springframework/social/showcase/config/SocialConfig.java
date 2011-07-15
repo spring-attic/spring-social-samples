@@ -26,6 +26,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
@@ -107,8 +108,8 @@ public class SocialConfig {
 	}
 
 	@Bean
-	public ProviderSignInController providerSignInController() {
-		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
+	public ProviderSignInController providerSignInController(RequestCache requestCache) {
+		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache));
 	}
 
 }

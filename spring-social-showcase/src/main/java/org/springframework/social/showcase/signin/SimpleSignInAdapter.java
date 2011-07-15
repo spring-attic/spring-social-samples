@@ -15,15 +15,34 @@
  */
 package org.springframework.social.showcase.signin;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
 
 public class SimpleSignInAdapter implements SignInAdapter {
 
+	private final RequestCache requestCache;
+
+	@Inject
+	public SimpleSignInAdapter(RequestCache requestCache) {
+		this.requestCache = requestCache;
+	}
+	
 	@Override
-	public void signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
+	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
 		SignInUtils.signin(localUserId);
+	    HttpServletRequest httpServletRequest = (HttpServletRequest) request.getNativeRequest();
+		SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, null); 
+		requestCache.removeRequest(httpServletRequest, null);
+	    if (savedRequest != null) { 
+	        return savedRequest.getRedirectUrl(); 
+	    }	    
+	    return null; 
 	}
 
 }
