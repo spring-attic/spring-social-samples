@@ -7,10 +7,16 @@
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
 	<div class="formInfo">
-  		<c:if test="${signinError}">
+  		<c:if test="${param.error eq 'bad_credentials'}">
   		<div class="error">
   			Your sign in information was incorrect.
   			Please try again or <a href="<c:url value="/signup" />">sign up</a>.
+  		</div>
+ 	 	</c:if>
+  		<c:if test="${param.error eq 'multiple_users'}">
+  		<div class="error">
+  			Multiple local accounts are connected to the provider account.
+  			Try again with a different provider or with your username and password.
   		</div>
  	 	</c:if>
 	</div>
@@ -38,6 +44,12 @@
 	</form>
 
 	<!-- FACEBOOK SIGNIN -->
-	<form id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
+	<form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
 		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
+	
+	<div id="fb-root"></div>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script type='text/javascript'>
+  FB.init({appId: '0b754d95f9c9899b0d6c4454b6f2dde7', status: true, cookie: true, xfbml: true, oauth: false});
+</script>
