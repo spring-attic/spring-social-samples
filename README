@@ -4,7 +4,7 @@ Samples include:
 - spring-social-quickstart, designed to get you up and running quickly in a Spring Framework 3.1 or > environment.
 - spring-social-quickstart-3.0.x, a version of the quickstart that is Spring Framework 3.0.x compatible.
 - spring-social-showcase, illustrating most of the features.
-- spring-social-extending-new-api, showing how to extend the framework to implement a new ServiceProvider + API binding.
-- spring-social-extending-existing-api, showing how to extend the framework and re-use an existing API binding (also shows XML-centric configuration and is Spring Framework 3.0.x compatible).
+- spring-social-movies, showing how to extend the framework to implement a new ServiceProvider + API binding.
+- spring-social-twitter4j, showing how to extend the framework and re-use an existing API binding (also shows XML config, multiple connections per provider, and is Spring 3.0.x compatible).
  
 See the README in each sub directory for information on the sample and instructions on how to run it.
