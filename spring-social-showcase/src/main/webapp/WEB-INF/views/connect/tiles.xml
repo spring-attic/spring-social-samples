@@ -3,6 +3,10 @@
 
 <tiles-definitions>
 
+	<definition name="connect/status" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/status.jsp" />
+	</definition>
+
 	<definition name="connect/facebookConnect" extends="page">
 		<put-attribute name="content" value="/WEB-INF/views/connect/facebookConnect.jsp" />
 	</definition>

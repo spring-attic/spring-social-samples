@@ -17,8 +17,10 @@ package org.springframework.social.showcase.config;
 
 import javax.inject.Inject;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.showcase.ConnectedToHandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
@@ -67,4 +69,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		resourceConfigurer.addPathMapping("/resources/**");
 		resourceConfigurer.addResourceLocation("/resources/");
 	}
+	
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("/WEB-INF/messages/messages");
+        return messageSource;
+    }
 }

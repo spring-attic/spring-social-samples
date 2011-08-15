@@ -101,3 +101,19 @@ ul.choices li:first-child {
 	padding-left: 0px;
 	border-left: none;
 }
+
+div.accountConnection {
+	margin: 10px;
+	width: 600px;
+	background-color: #ffffff;
+	border: 1px solid #006600;
+}
+
+div.accountConnection h4 {
+	margin-top: 0;
+	background-color: #efefef;
+}
+
+div.accountConnection h4 img {
+	vertical-align: middle;
+}
