@@ -7,4 +7,20 @@
 		<put-attribute name="content" value="/WEB-INF/views/connect/status.jsp" />
 	</definition>
 
+	<definition name="connect/facebookConnect" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/facebookConnect.jsp" />
+	</definition>
+
+	<definition name="connect/facebookConnected" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/facebookConnected.jsp" />
+	</definition>
+
+	<definition name="connect/twitterConnect" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/twitterConnect.jsp" />
+	</definition>
+
+	<definition name="connect/twitterConnected" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/twitterConnected.jsp" />
+	</definition>
+
 </tiles-definitions>

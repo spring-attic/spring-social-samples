@@ -13,7 +13,5 @@
 	<input type="hidden" name="_method" value="delete" />
 </form>
 
-<div id="closer">
-	<a href="javascript:window.close()">Close Window</a>
-</div>
+<p><a href="<c:url value="/twitter" />">View your Twitter profile</a></p>
 

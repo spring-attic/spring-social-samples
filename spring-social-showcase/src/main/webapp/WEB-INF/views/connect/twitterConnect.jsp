@@ -15,7 +15,3 @@
 	<p><button type="submit"><img src="<c:url value="/resources/social/twitter/connect-with-twitter.png" />"/></button></p>
 	<label for="postTweet"><input id="postTweet" type="checkbox" name="postTweet" /> Post a tweet about connecting with Spring Social Showcase</label>
 </form>
-
-<div id="closer">
-	<a href="javascript:window.close()">Close Window</a>
-</div>

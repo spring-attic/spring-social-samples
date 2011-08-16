@@ -15,6 +15,4 @@
 	<input type="hidden" name="_method" value="delete" />
 </form>
 
-<div id="closer">
-	<a href="javascript:window.close()">Close Window</a>
-</div>
+<a href="<c:url value="/facebook"/>">View your Facebook profile</a>
