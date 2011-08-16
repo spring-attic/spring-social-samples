@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page session="false" %>
 
 <script>
@@ -16,8 +17,6 @@ if(window.opener) {
 <c:forEach var="providerId" items="${providerIds}">
 	<c:set var="connections" value="${connectionMap[providerId]}" />
 	<s:message code="${providerId}.displayName" var="providerDisplayName" />
-		
-	
 	
 	<div class="accountConnection">
 		<s:message code="${providerId}.icon" var="iconUrl"/>
@@ -30,7 +29,8 @@ if(window.opener) {
 			<div class="formInfo">
 				You are not yet connected to ${providerDisplayName}.
 			</div>
-			<button type="submit"><img src="<c:url value="${buttonUrl}" />"/></button>
+			<button class="connectButton" type="submit"><img src="<c:url value="${buttonUrl}" />"/></button>
+			<tiles:insertTemplate template="${providerId}Options.jsp" />
 		</form>
 		</c:if>
 		
@@ -47,10 +47,10 @@ if(window.opener) {
 
 <script>
 $(document).ready(function() {
-	$(".connectForm").click(function(event){
+	$(".connectButton").click(function(event){
 		event.preventDefault();
 		window.open("", "connectWindow", "width=600,height=400");
-		var cTP = $(event.currentTarget);		
+		var cTP = $(event.currentTarget).parent();		
 		cTP[0].setAttribute("target", "connectWindow");
 		cTP[0].submit();
 	});

@@ -122,3 +122,7 @@ div.accountConnection h4 {
 div.accountConnection h4 img {
 	vertical-align: middle;
 }
+
+.connectionOptions {
+	font-size: 10pt;
+}
