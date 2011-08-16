@@ -74,6 +74,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("/WEB-INF/messages/messages");
+        messageSource.setCacheSeconds(15);
         return messageSource;
     }
 }
