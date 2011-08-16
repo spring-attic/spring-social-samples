@@ -18,6 +18,7 @@ package org.springframework.social.showcase.twitter;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.web.ConnectInterceptor;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
@@ -27,10 +28,11 @@ import twitter4j.TwitterException;
 public class TweetAfterConnectInterceptor implements ConnectInterceptor<Twitter> {
 
 	@Override
-	public void preConnect(ConnectionFactory<Twitter> connectionFactory, WebRequest request) {
+	public MultiValueMap<String, String> preConnect(ConnectionFactory<Twitter> connectionFactory, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TWEET_PARAMETER))) {
 			request.setAttribute(POST_TWEET_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
+		return null;
 	}
 
 	@Override

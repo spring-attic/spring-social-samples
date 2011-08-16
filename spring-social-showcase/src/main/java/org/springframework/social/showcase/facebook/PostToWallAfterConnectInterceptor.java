@@ -20,15 +20,17 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
 public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<Facebook> {
 
-	public void preConnect(ConnectionFactory<Facebook> provider, WebRequest request) {
+	public MultiValueMap<String, String> preConnect(ConnectionFactory<Facebook> provider, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TO_WALL_PARAMETER))) {
 			request.setAttribute(POST_TO_WALL_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
+		return null;
 	}
 
 	public void postConnect(Connection<Facebook> connection, WebRequest request) {

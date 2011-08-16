@@ -15,35 +15,30 @@
  */
 package org.springframework.social.showcase.facebook;
 
-import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
-public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<Facebook> {
+/**
+ * Adds a "display=popup" parameter so that the Facebook authorization is displayed with minimal decoration.
+ * @author Craig Walls
+ */
+public class PopupDialogConnectInterceptor implements ConnectInterceptor<Facebook> {
 
-	public MultiValueMap<String, String> preConnect(ConnectionFactory<Facebook> provider, WebRequest request) {
-		if (StringUtils.hasText(request.getParameter(POST_TO_WALL_PARAMETER))) {
-			request.setAttribute(POST_TO_WALL_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
-		}
-		return null;
+	@Override
+	public MultiValueMap<String, String> preConnect(ConnectionFactory<Facebook> connectionFactory, WebRequest request) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("display", "popup");
+		return parameters;
 	}
 
+	@Override
 	public void postConnect(Connection<Facebook> connection, WebRequest request) {
-		if (request.getAttribute(POST_TO_WALL_ATTRIBUTE, WebRequest.SCOPE_SESSION) != null) {
-			try {
-				connection.updateStatus("I've connected with the Spring Social Showcase!");
-			} catch (DuplicateStatusException e) {
-			}
-			request.removeAttribute(POST_TO_WALL_ATTRIBUTE, WebRequest.SCOPE_SESSION);
-		}
+		// Nothing to do
 	}
 
-	private static final String POST_TO_WALL_PARAMETER = "postToWall";
-
-	private static final String POST_TO_WALL_ATTRIBUTE = "facebookConnect." + POST_TO_WALL_PARAMETER;
 }

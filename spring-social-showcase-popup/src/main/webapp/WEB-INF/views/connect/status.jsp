@@ -29,10 +29,8 @@
 $(document).ready(function() {
 	$(".connectLink").click(function(event){
 		event.preventDefault();
-		// TODO: Determine the best width or resize after load to fit content
-		// TODO: HootSuite loads up an initial "Please wait" page while the provider auth page loads
 		var cTP = $(event.currentTarget)[0];		
-		window.open(cTP.href, "connectWindow", "width=1000,height=575");
+		window.open(cTP.href, "connectWindow", "width=600,height=400");
 	});
 });
 </script>
