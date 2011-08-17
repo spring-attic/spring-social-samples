@@ -5,5 +5,7 @@
 
 <p>Welcome, <c:out value="${account.firstName}"/>!</p>
 
+<p>Manage your connections by clicking on the "Connections" link to the left.</p>
+
 <a href="<c:url value="/signout" />">Sign Out</a>
 
