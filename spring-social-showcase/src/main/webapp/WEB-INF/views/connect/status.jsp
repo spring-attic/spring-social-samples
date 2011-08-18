@@ -20,7 +20,7 @@
 		<c:if test="${empty connections}">
 			You are not yet connected to ${providerDisplayName}.
 		</c:if>
-		Click <a href="<c:url value="/connect/twitter" />">here</a> to manage your ${providerDisplayName} connection.
+		Click <a href="<c:url value="/connect/${providerId}" />">here</a> to manage your ${providerDisplayName} connection.
 		</p>
 	</div>
 </c:forEach>
