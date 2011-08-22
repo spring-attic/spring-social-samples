@@ -45,11 +45,6 @@
 
 	<!-- FACEBOOK SIGNIN -->
 	<form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
+        <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
 		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
-	
-	<div id="fb-root"></div>
-<script src='http://connect.facebook.net/en_US/all.js'></script>
-<script type='text/javascript'>
-  FB.init({appId: '0b754d95f9c9899b0d6c4454b6f2dde7', status: true, cookie: true, xfbml: true, oauth: false});
-</script>
