@@ -15,7 +15,7 @@
  */
 package org.springframework.social.showcase.facebook;
 
-import org.springframework.social.DuplicateStatusException;
+import org.springframework.social.ApiException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.web.ConnectInterceptor;
@@ -37,7 +37,8 @@ public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<Fac
 		if (request.getAttribute(POST_TO_WALL_ATTRIBUTE, WebRequest.SCOPE_SESSION) != null) {
 			try {
 				connection.updateStatus("I've connected with the Spring Social Showcase!");
-			} catch (DuplicateStatusException e) {
+			} catch (ApiException e) {
+				// Do nothing: No need to break down if the post-connect post can't be made.
 			}
 			request.removeAttribute(POST_TO_WALL_ATTRIBUTE, WebRequest.SCOPE_SESSION);
 		}
