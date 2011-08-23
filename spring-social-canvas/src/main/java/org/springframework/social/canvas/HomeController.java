@@ -51,7 +51,6 @@ public class HomeController {
 
 	@ExceptionHandler(RevokedAuthorizationException.class)
 	public String handleException() {
-		System.out.println("REVOKED!");
 		return "signin";
 	}
 	
