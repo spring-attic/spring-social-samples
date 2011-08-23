@@ -15,43 +15,44 @@
  */
 package org.springframework.social.canvas;
 
-import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
-import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.RevokedAuthorizationException;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Simple little @Controller that invokes Facebook and renders the result.
+ * The injected {@link Facebook} reference is configured with the required authorization credentials for the current user behind the scenes.
+ * @author Keith Donald
+ */
 @Controller
 public class HomeController {
-	
-	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 
+	private final Facebook facebook;
+	
 	@Inject
-	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider) {
-		this.connectionRepositoryProvider = connectionRepositoryProvider;
+	public HomeController(Facebook facebook) {
+		this.facebook = facebook;
 	}
 
-	@RequestMapping("/")
-	public String home(Principal currentUser, Model model) {
-		if (!isConnectedToFacebook()) {
-			return "connectRedirect";
-		}
-		
-		Facebook facebook = getConnectionRepository().getPrimaryConnection(Facebook.class).getApi();
-		model.addAttribute("userName", facebook.userOperations().getUserProfile().getName());
-		return "home";			
+	@RequestMapping(value = "/" /*, method = RequestMethod.GET*/) // FB wants the canvas page to take POST requests (?)
+	public String home(Model model) {
+		List<Reference> friends = facebook.friendOperations().getFriends();
+		model.addAttribute("friends", friends);
+		return "home";
 	}
 
-	private boolean isConnectedToFacebook() {
-		return getConnectionRepository().findConnections("facebook").size() > 0;
+	@ExceptionHandler(RevokedAuthorizationException.class)
+	public String handleException() {
+		System.out.println("REVOKED!");
+		return "signin";
 	}
 	
-	private ConnectionRepository getConnectionRepository() {
-		return connectionRepositoryProvider.get();
-	}
 }

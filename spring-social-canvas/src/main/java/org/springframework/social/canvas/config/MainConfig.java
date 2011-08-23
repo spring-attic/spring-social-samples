@@ -23,26 +23,20 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.social.canvas.account.JdbcAccountRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Main configuration class for the application.
  * Turns on @Component scanning, loads externalized application.properties, and sets up the database.
- * @author Craig Walls
+ * @author Keith Donald
  */
 @Configuration
 @ComponentScan(basePackages = "org.springframework.social.canvas", excludeFilters = { @Filter(Configuration.class) })
 @PropertySource("classpath:org/springframework/social/canvas/config/application.properties")
-@EnableTransactionManagement
 public class MainConfig {
 
 	@Bean(destroyMethod = "shutdown")
@@ -53,24 +47,12 @@ public class MainConfig {
 		factory.setDatabasePopulator(databasePopulator());
 		return factory.getDatabase();
 	}
-	
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
-	}
-	
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
 
 	// internal helpers
 
 	private DatabasePopulator databasePopulator() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
-		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
-		populator.addScript(new ClassPathResource("data.sql", JdbcAccountRepository.class));
 		return populator;
 	}
 }

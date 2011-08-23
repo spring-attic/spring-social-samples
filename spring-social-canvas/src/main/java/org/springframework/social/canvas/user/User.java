@@ -13,18 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.canvas.signin;
+package org.springframework.social.canvas.user;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-public class SignInUtils {
+/**
+ * Simple little User model. 
+ * Just stores the user's id for simplicity.
+ * @author Keith Donald
+ */
+public final class User {
 	
-	/**
-	 * Programmatically signs in the user with the given the user ID.
-	 */
-	public static void signin(String userId) {
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));	
+	private final String id;
+	
+	public User(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 }

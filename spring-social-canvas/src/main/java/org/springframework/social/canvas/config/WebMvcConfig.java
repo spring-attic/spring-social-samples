@@ -17,64 +17,42 @@ package org.springframework.social.canvas.config;
 
 import javax.inject.Inject;
 
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.social.canvas.ConnectedToHandlerInterceptor;
-import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.canvas.user.UserInterceptor;
+import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles2.TilesView;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Spring MVC Configuration.
- * @author Craig Walls
+ * @author Keith Donald
  */
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-	@Inject
-	private ConnectionRepository connectionRepository;
-	
-	public void configureInterceptors(InterceptorConfigurer configurer) {
-		configurer.addInterceptor(new ConnectedToHandlerInterceptor(connectionRepository));
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new UserInterceptor(usersConnectionRepository));
+	}
+
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/signin");
+		registry.addViewController("/signout");
 	}
 
 	@Bean
 	public ViewResolver viewResolver() {
-		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
-		viewResolver.setViewClass(TilesView.class);
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("/WEB-INF/views/");
+		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
 
-	@Bean
-	public TilesConfigurer tilesConfigurer() {
-		TilesConfigurer configurer = new TilesConfigurer();
-		configurer.setDefinitions(new String[] {
-				"/WEB-INF/layouts/tiles.xml",
-				"/WEB-INF/views/**/tiles.xml"                           
-		});
-		configurer.setCheckRefresh(true);
-		return configurer;
-	}
+	private @Inject UsersConnectionRepository usersConnectionRepository;
 
-	public void configureResourceHandling(ResourceConfigurer resourceConfigurer) {
-		resourceConfigurer.addPathMapping("/resources/**");
-		resourceConfigurer.addResourceLocation("/resources/");
-	}
-	
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/messages/messages");
-        messageSource.setCacheSeconds(15);
-        return messageSource;
-    }
 }
