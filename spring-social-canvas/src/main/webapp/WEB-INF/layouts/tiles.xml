@@ -5,5 +5,8 @@
         
 	<definition name="page" templateExpression="/WEB-INF/layouts/page.jsp">
 	</definition>
+
+	<definition name="simple" templateExpression="/WEB-INF/layouts/simple.jsp">
+	</definition>
         
 </tiles-definitions>

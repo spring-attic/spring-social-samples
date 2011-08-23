@@ -15,4 +15,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/connect/facebookConnected.jsp" />
 	</definition>
 
+	<definition name="connectRedirect" extends="simple">
+		<put-attribute name="content" value="/WEB-INF/views/connect/connectRedirect.jsp" />
+	</definition>
+
 </tiles-definitions>

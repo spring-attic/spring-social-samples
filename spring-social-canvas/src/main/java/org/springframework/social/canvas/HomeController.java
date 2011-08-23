@@ -20,8 +20,8 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.springframework.social.canvas.account.AccountRepository;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,20 +30,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
-	
-	private final AccountRepository accountRepository;
 
 	@Inject
-	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository) {
+	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
-		this.accountRepository = accountRepository;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
-		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
-		return "home";
+		if (!isConnectedToFacebook()) {
+			return "connectRedirect";
+		}
+		
+		Facebook facebook = getConnectionRepository().getPrimaryConnection(Facebook.class).getApi();
+		model.addAttribute("userName", facebook.userOperations().getUserProfile().getName());
+		return "home";			
+	}
+
+	private boolean isConnectedToFacebook() {
+		return getConnectionRepository().findConnections("facebook").size() > 0;
 	}
 	
 	private ConnectionRepository getConnectionRepository() {

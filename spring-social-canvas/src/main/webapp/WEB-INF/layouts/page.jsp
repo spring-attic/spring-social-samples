@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<h2>Spring Social Canvas</h2>
-	
+
 		<div id="content">
 			<tiles:insertAttribute name="content" />
 		</div>		
