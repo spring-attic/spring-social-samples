@@ -100,7 +100,7 @@ public class SocialConfig {
 	 */
 	@Bean
 	public CanvasSignInController providerSignInController() {
-		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
+		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(), "http://apps.facebook.com/springsocialcanvas/");
 	}
 
 }

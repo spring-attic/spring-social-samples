@@ -42,7 +42,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/signin");
-		registry.addViewController("/signout");
 	}
 
 	@Bean
