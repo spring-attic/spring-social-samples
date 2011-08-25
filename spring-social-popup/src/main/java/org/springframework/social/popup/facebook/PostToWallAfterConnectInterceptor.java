@@ -26,7 +26,7 @@ import org.springframework.web.context.request.WebRequest;
 
 public class PostToWallAfterConnectInterceptor implements ConnectInterceptor<Facebook> {
 
-	public void preConnect(ConnectionFactory<Facebook> provider, WebRequest request, MultiValueMap<String, String> parameters) {
+	public void preConnect(ConnectionFactory<Facebook> provider, MultiValueMap<String, String> parameters, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TO_WALL_PARAMETER))) {
 			request.setAttribute(POST_TO_WALL_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}

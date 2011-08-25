@@ -29,7 +29,7 @@ import org.springframework.web.context.request.WebRequest;
 public class PopupDialogConnectInterceptor implements ConnectInterceptor<Facebook> {
 
 	@Override
-	public void preConnect(ConnectionFactory<Facebook> connectionFactory, WebRequest request, MultiValueMap<String, String> parameters) {
+	public void preConnect(ConnectionFactory<Facebook> connectionFactory, MultiValueMap<String, String> parameters, WebRequest request) {
 		parameters.set("display", "popup");
 	}
 

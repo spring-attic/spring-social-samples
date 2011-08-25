@@ -28,7 +28,7 @@ import twitter4j.TwitterException;
 public class TweetAfterConnectInterceptor implements ConnectInterceptor<Twitter> {
 
 	@Override
-	public void preConnect(ConnectionFactory<Twitter> connectionFactory, WebRequest request, MultiValueMap<String, String> parameters) {
+	public void preConnect(ConnectionFactory<Twitter> connectionFactory, MultiValueMap<String, String> parameters, WebRequest request) {
 		if (StringUtils.hasText(request.getParameter(POST_TWEET_PARAMETER))) {
 			request.setAttribute(POST_TWEET_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
