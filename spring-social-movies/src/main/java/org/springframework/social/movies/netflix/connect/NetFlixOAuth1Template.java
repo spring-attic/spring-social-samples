@@ -17,7 +17,6 @@ package org.springframework.social.movies.netflix.connect;
 
 import org.springframework.social.oauth1.OAuth1Template;
 import org.springframework.social.oauth1.OAuth1Version;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 public class NetFlixOAuth1Template extends OAuth1Template {
@@ -27,9 +26,8 @@ public class NetFlixOAuth1Template extends OAuth1Template {
 	}
 	
 	@Override
-	protected MultiValueMap<String, String> getCustomAuthorizationParameters() {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+	protected void addCustomAuthorizationParameters(MultiValueMap<String, String> parameters) {
 		parameters.add("oauth_consumer_key", getConsumerKey());
-		return parameters;
 	}
+	
 }
