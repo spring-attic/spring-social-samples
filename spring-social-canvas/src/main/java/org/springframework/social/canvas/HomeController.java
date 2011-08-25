@@ -48,7 +48,7 @@ public class HomeController {
 		model.addAttribute("friends", friends);
 		return "home";
 	}
-
+	
 	@ExceptionHandler(RevokedAuthorizationException.class)
 	public String handleException() {
 		return "signin";
