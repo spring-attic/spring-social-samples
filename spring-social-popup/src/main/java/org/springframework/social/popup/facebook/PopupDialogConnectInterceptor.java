@@ -19,7 +19,6 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.request.WebRequest;
 
@@ -30,10 +29,8 @@ import org.springframework.web.context.request.WebRequest;
 public class PopupDialogConnectInterceptor implements ConnectInterceptor<Facebook> {
 
 	@Override
-	public MultiValueMap<String, String> preConnect(ConnectionFactory<Facebook> connectionFactory, WebRequest request) {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+	public void preConnect(ConnectionFactory<Facebook> connectionFactory, WebRequest request, MultiValueMap<String, String> parameters) {
 		parameters.set("display", "popup");
-		return parameters;
 	}
 
 	@Override

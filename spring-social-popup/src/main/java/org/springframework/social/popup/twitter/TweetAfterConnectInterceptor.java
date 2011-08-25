@@ -26,11 +26,10 @@ import org.springframework.web.context.request.WebRequest;
 
 public class TweetAfterConnectInterceptor implements ConnectInterceptor<Twitter> {
 
-	public MultiValueMap<String, String> preConnect(ConnectionFactory<Twitter> provider, WebRequest request) {
+	public void preConnect(ConnectionFactory<Twitter> provider, WebRequest request, MultiValueMap<String, String> parameters) {
 		if (StringUtils.hasText(request.getParameter(POST_TWEET_PARAMETER))) {
 			request.setAttribute(POST_TWEET_ATTRIBUTE, Boolean.TRUE, WebRequest.SCOPE_SESSION);
 		}
-		return null;
 	}
 
 	public void postConnect(Connection<Twitter> connection, WebRequest request) {
