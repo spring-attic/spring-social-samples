@@ -9,7 +9,8 @@
 	<version>1.0.0</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework.social-version>1.0.0.RELEASE</org.springframework.social-version>
+		<org.springframework.social-version>1.0.1.BUILD-SNAPSHOT</org.springframework.social-version>
+		<org.springframework.social.facebook-version>1.0.0.RELEASE</org.springframework.social.facebook-version>
 		<org.springframework-version>3.1.0.BUILD-SNAPSHOT</org.springframework-version>
 		<org.springframework.security.crypto-version>3.1.0.RC2.crypto</org.springframework.security.crypto-version>
 	</properties>
@@ -37,7 +38,7 @@
 		<dependency>
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-facebook</artifactId>
-	        <version>${org.springframework.social-version}</version>
+	        <version>${org.springframework.social.facebook-version}</version>
 	    </dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
