@@ -233,7 +233,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<warName>spring-social-showcase</warName>
+					<warName>spring-social-popup</warName>
 				</configuration>
 			</plugin>
 			<plugin>
