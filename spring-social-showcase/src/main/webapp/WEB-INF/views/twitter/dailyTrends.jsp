@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ page session="false" %>
       
-<h3>Current Twitter Trends</h3>
+<h3>Daily Twitter Trends</h3>
 
 <c:forEach items="${trends.trends}" var="trend">
 	<s:url value="/twitter/search" var="searchUrl">

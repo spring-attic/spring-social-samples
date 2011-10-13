@@ -33,10 +33,10 @@ public class TwitterTrendsController {
 		this.twitter = twitter;
 	}
 
-	@RequestMapping(value="/twitter/trends/current", method=RequestMethod.GET)
+	@RequestMapping(value="/twitter/trends/daily", method=RequestMethod.GET)
 	public String showTrends(Model model) {
-		model.addAttribute("trends", twitter.searchOperations().getCurrentTrends());
-		return "twitter/currentTrends";
+		model.addAttribute("trends", twitter.searchOperations().getDailyTrends().get(0));
+		return "twitter/dailyTrends";
 	}
 	
 }
