@@ -12,7 +12,7 @@
 		<org.springframework.social-version>1.0.1.BUILD-SNAPSHOT</org.springframework.social-version>
 		<org.springframework.social.facebook-version>1.0.1.BUILD-SNAPSHOT</org.springframework.social.facebook-version>
 		<org.springframework.social.twitter-version>1.0.1.BUILD-SNAPSHOT</org.springframework.social.twitter-version>
-		<org.springframework-version>3.1.0.BUILD-SNAPSHOT</org.springframework-version>
+		<org.springframework-version>3.1.0.RELEASE</org.springframework-version>
 		<org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 	</properties>
@@ -82,19 +82,19 @@
 	    </dependency>
 	    
 	    <!-- Apache Http Client -->
-	    <dependency>
+<!-- 	    <dependency>
 	    	<groupId>org.apache.httpcomponents</groupId>
 	    	<artifactId>httpclient</artifactId>
 	    	<version>4.1.2</version>
 			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
+				Exclude Commons Logging in favor of SLF4j
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>	    	
 	    </dependency>
-	    
+ -->	    
 		<!-- JSR 303 with Hibernate Validator -->
 		<dependency>
 			<groupId>javax.validation</groupId>
