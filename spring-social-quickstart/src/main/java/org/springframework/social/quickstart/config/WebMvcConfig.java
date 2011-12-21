@@ -36,10 +36,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new UserInterceptor(usersConnectionRepository));
 	}
 
+	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/signin");
 		registry.addViewController("/signout");
