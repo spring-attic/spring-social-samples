@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
@@ -43,10 +44,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Inject
 	private ConnectionRepository connectionRepository;
 
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new ConnectedToHandlerInterceptor(connectionRepository));		
 	}
 	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/signin");
+	}
+
 	@Bean
 	public ViewResolver viewResolver() {
 		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
@@ -65,6 +72,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return configurer;
 	}
 
+	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
