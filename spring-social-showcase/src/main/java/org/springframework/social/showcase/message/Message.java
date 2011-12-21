@@ -48,6 +48,7 @@ public final class Message {
 		return text;
 	}
 	
+	@Override
 	public String toString() {
 		return type + ": " + text;
 	}
