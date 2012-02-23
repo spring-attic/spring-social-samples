@@ -9,10 +9,11 @@
 	<version>1.0.0</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework.social-version>1.0.2.BUILD-SNAPSHOT</org.springframework.social-version>
-		<org.springframework.social.facebook-version>1.0.2.BUILD-SNAPSHOT</org.springframework.social.facebook-version>
-		<org.springframework.social.twitter-version>1.0.2.BUILD-SNAPSHOT</org.springframework.social.twitter-version>
-		<org.springframework-version>3.1.0.RELEASE</org.springframework-version>
+		<org.springframework.social-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social-version>
+		<org.springframework.social.facebook-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social.facebook-version>
+		<org.springframework.social.twitter-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social.twitter-version>
+		<org.springframework.social.linkedin-version>1.0.0.RC1</org.springframework.social.linkedin-version>
+		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
 		<org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 	</properties>
@@ -74,6 +75,11 @@
 		    <groupId>org.springframework.social</groupId>
 		    <artifactId>spring-social-twitter</artifactId>
 	        <version>${org.springframework.social.twitter-version}</version>
+	    </dependency>
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-linkedin</artifactId>
+	        <version>${org.springframework.social.linkedin-version}</version>
 	    </dependency>
 		<dependency>
 		    <groupId>org.springframework.social</groupId>

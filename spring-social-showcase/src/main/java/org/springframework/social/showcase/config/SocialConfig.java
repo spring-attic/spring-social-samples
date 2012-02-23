@@ -38,6 +38,8 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor;
 import org.springframework.social.showcase.signin.SimpleSignInAdapter;
 import org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor;
@@ -66,6 +68,8 @@ public class SocialConfig {
 				environment.getProperty("twitter.consumerSecret")));
 		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
 				environment.getProperty("facebook.clientSecret")));
+		registry.addConnectionFactory(new LinkedInConnectionFactory(environment.getProperty("linkedin.consumerKey"),
+				environment.getProperty("linkedin.consumerSecret")));
 		return registry;
 	}
 
@@ -98,7 +102,14 @@ public class SocialConfig {
 		Connection<Twitter> twitter = connectionRepository().findPrimaryConnection(Twitter.class);
 		return twitter != null ? twitter.getApi() : new TwitterTemplate();
 	}
-	
+
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public LinkedIn linkedin() {
+		Connection<LinkedIn> linkedin = connectionRepository().findPrimaryConnection(LinkedIn.class);
+		return linkedin != null ? linkedin.getApi() : null;
+	}
+
 	@Bean
 	public ConnectController connectController() {
 		ConnectController connectController = new ConnectController(connectionFactoryLocator(), connectionRepository());
