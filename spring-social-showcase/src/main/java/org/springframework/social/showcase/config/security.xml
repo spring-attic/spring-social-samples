@@ -15,6 +15,7 @@
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
+		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()"  />
 	</http>
 

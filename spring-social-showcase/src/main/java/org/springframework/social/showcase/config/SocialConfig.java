@@ -38,6 +38,7 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.facebook.web.DisconnectController;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor;
@@ -121,6 +122,11 @@ public class SocialConfig {
 	@Bean
 	public ProviderSignInController providerSignInController(RequestCache requestCache) {
 		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache));
+	}
+	
+	@Bean
+	public DisconnectController disconnectController() {
+		return new DisconnectController(usersConnectionRepository(), environment.getProperty("facebook.clientSecret"));
 	}
 
 }
