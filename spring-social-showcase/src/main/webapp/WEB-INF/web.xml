@@ -97,4 +97,13 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 		
+	<filter>
+		<filter-name>apiExceptionHandler</filter-name>
+		<filter-class>org.springframework.social.showcase.ApiExceptionHandlingFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>apiExceptionHandler</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>		
 </web-app>

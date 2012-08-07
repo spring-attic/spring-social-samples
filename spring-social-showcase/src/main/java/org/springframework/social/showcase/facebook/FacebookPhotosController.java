@@ -17,6 +17,7 @@ package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
 
+import org.springframework.social.InsufficientPermissionException;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,9 @@ public class FacebookPhotosController {
 
 	@RequestMapping(value="/facebook/albums", method=RequestMethod.GET)
 	public String showAlbums(Model model) {
-		model.addAttribute("albums", facebook.mediaOperations().getAlbums());
-		return "facebook/albums";
+		throw new InsufficientPermissionException("facebook", "user_photos");
+//		model.addAttribute("albums", facebook.mediaOperations().getAlbums());
+//		return "facebook/albums";
 	}
 	
 	@RequestMapping(value="/facebook/album/{albumId}", method=RequestMethod.GET)
