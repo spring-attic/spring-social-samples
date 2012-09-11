@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="twitter/profile" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/profile.jsp" />
+	</definition>
+
+	<definition name="twitter/timeline" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/timeline.jsp" />
+	</definition>
+
+	<definition name="twitter/friends" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/friends.jsp" />
+	</definition>
+
+	<definition name="twitter/messages" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/messages.jsp" />
+	</definition>
+
+	<definition name="twitter/dailyTrends" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/dailyTrends.jsp" />
+	</definition>
+
+</tiles-definitions>
