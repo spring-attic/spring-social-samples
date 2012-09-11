@@ -17,7 +17,7 @@
 
 	<context:property-placeholder location="classpath:/org/springframework/social/showcase/config/application.properties" />
 
-	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}"/>
+	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
 	<twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>
 	<linkedin:config app-id="${linkedin.consumerKey}" app-secret="${linkedin.consumerSecret}"/>
 
