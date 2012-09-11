@@ -68,7 +68,7 @@ public class SocialConfig {
 		registry.addConnectionFactory(new TwitterConnectionFactory(environment.getProperty("twitter.consumerKey"),
 				environment.getProperty("twitter.consumerSecret")));
 		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
-				environment.getProperty("facebook.clientSecret")));
+				environment.getProperty("facebook.clientSecret"), environment.getProperty("facebook.appNamespace")));
 		registry.addConnectionFactory(new LinkedInConnectionFactory(environment.getProperty("linkedin.consumerKey"),
 				environment.getProperty("linkedin.consumerSecret")));
 		return registry;
