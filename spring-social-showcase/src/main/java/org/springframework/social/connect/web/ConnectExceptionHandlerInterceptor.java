@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.springframework.social.showcase;
+package org.springframework.social.connect.web;
 
 import static org.springframework.util.StringUtils.*;
 

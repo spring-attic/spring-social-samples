@@ -1,4 +1,4 @@
-package org.springframework.social.showcase;
+package org.springframework.social.connect.web;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,14 +14,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequiresConnection {
 	
-    /**
-     * @return the ID of the provider for which a connection is required.
-     */
-    String value();
+	/**
+	 * @return the ID of the provider for which a connection is required.
+	 */
+	String value();
 
-    /**
-     * @return the connection scope that is required.
-     */
-    String[] scope() default {};
+	/**
+	 * @return the connection scope that is required.
+	 */
+	String[] scope() default {};
 
 }

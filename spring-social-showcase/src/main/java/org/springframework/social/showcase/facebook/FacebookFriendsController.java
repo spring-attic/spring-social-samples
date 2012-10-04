@@ -17,8 +17,8 @@ package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
 
+import org.springframework.social.connect.web.RequiresConnection;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.showcase.RequiresConnection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
