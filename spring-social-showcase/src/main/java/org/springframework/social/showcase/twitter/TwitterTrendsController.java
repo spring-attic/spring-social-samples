@@ -26,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterTrendsController {
 	
+	// Yahoo Where On Earth ID representing the entire world
+	private static final long WORLDWIDE_WOE = 1L;
+	
 	private final Twitter twitter;
 
 	@Inject
@@ -33,10 +36,10 @@ public class TwitterTrendsController {
 		this.twitter = twitter;
 	}
 
-	@RequestMapping(value="/twitter/trends/daily", method=RequestMethod.GET)
+	@RequestMapping(value="/twitter/trends", method=RequestMethod.GET)
 	public String showTrends(Model model) {
-		model.addAttribute("trends", twitter.searchOperations().getDailyTrends().get(0));
-		return "twitter/dailyTrends";
+		model.addAttribute("trends", twitter.searchOperations().getLocalTrends(WORLDWIDE_WOE));
+		return "twitter/trends";
 	}
 	
 }

@@ -43,8 +43,6 @@ public class TwitterTimelineController {
 	public String showTimeline(@PathVariable("timelineType") String timelineType, Model model) {
 		if (timelineType.equals("Home")) {
 			model.addAttribute("timeline", twitter.timelineOperations().getHomeTimeline());
-		} else if(timelineType.equals("Public")) {
-			model.addAttribute("timeline", twitter.timelineOperations().getPublicTimeline());
 		} else if(timelineType.equals("User")) {
 			model.addAttribute("timeline", twitter.timelineOperations().getUserTimeline());
 		} else if(timelineType.equals("Mentions")) {
