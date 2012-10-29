@@ -99,7 +99,7 @@ public class NetFlixTemplate extends AbstractOAuth1ApiBinding implements NetFlix
 		}
 	}
 
-	private static final String SEARCH_TITLES_URL = "http://api.netflix.com/catalog/titles?term={term}&max_results=5&output=json";
-	private static final String CURRENT_USER_URL = "http://api.netflix.com/users/current?output=json";
+	private static final String SEARCH_TITLES_URL = "http://api-public.netflix.com/catalog/titles?term={term}&max_results=5&output=json";
+	private static final String CURRENT_USER_URL = "http://api-public.netflix.com/users/current?output=json";
 	private static final String QUEUE_PATH = "/queues/disc?output=json";
 }
