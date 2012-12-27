@@ -13,6 +13,7 @@
 	<li><a href="<c:url value="/twitter/followers"/>">Followers</a></li>
 	<li><a href="<c:url value="/twitter/messages"/>">Messages</a></li>
 	<li><a href="<c:url value="/twitter/trends"/>">Trends</a></li>
+	<li><a href="<c:url value="/twitter/lists"/>">Lists</a></li>
 </ul>
 </social:connected>
 

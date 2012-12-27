@@ -41,14 +41,19 @@ public class TwitterTimelineController {
 	
 	@RequestMapping(value="/twitter/timeline/{timelineType}", method=RequestMethod.GET)
 	public String showTimeline(@PathVariable("timelineType") String timelineType, Model model) {
-		if (timelineType.equals("Home")) {
+		switch(timelineType){
+		case "Home": 
 			model.addAttribute("timeline", twitter.timelineOperations().getHomeTimeline());
-		} else if(timelineType.equals("User")) {
+			break;
+		case "User":
 			model.addAttribute("timeline", twitter.timelineOperations().getUserTimeline());
-		} else if(timelineType.equals("Mentions")) {
+			break;
+		case "Mentions":
 			model.addAttribute("timeline", twitter.timelineOperations().getMentions());
-		} else if(timelineType.equals("Favorites")) {
+			break;
+		case "Favorites":
 			model.addAttribute("timeline", twitter.timelineOperations().getFavorites());
+			break;
 		}
 		model.addAttribute("timelineName", timelineType);
 		return "twitter/timeline";

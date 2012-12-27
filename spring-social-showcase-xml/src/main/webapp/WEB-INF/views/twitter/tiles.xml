@@ -22,5 +22,9 @@
 	<definition name="twitter/trends" extends="page">
 		<put-attribute name="content" value="/WEB-INF/views/twitter/trends.jsp" />
 	</definition>
+	
+	<definition name="twitter/lists" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/twitter/lists.jsp" />
+	</definition>
 
 </tiles-definitions>
