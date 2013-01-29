@@ -2,8 +2,7 @@ This sample app is a trimmed down version of Spring Social Showcase and demonstr
 service provider implementation that leverages an existing Java API binding. In this case, a new
 Twitter service provider is created that uses Twitter4J as the API binding.
 
-This sample also shows Spring XML config as an alternative to Java config. It also demonstrates using
-Spring Social with Spring 3.0.
+This sample also shows Spring XML config as an alternative to Java config.
 
 Finally, this sample shows how a user can connect to multiple provider accounts e.g. several Twitter accounts.
 
