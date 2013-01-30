@@ -1,3 +1,5 @@
+Spring Social Movies
+====================
 This sample app demonstrates how to create a new service provider implementation along with a new
 Java binding to the service's REST API. Specifically, this sample includes a service provider
 implementation and API binding for interacting with NetFlix' REST API.

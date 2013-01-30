@@ -1,3 +1,5 @@
+Spring Social Quickstart
+========================
 This sample is designed to get you up and running quickly.
 See the walkthrough at: https://github.com/SpringSource/spring-social/wiki/Quick-Start
 

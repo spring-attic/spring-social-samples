@@ -1,3 +1,5 @@
+Spring Social Showcase Twitter4j
+================================
 This sample app is a trimmed down version of Spring Social Showcase and demonstrates how to create a new
 service provider implementation that leverages an existing Java API binding. In this case, a new
 Twitter service provider is created that uses Twitter4J as the API binding.
