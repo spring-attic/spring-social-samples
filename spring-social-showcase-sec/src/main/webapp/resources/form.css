@@ -1,0 +1,11 @@
+form input, form select {
+	display: block;
+}
+
+form input[type=checkbox] {
+	display: inline;
+}
+
+span.error {
+	color: #D8000C;
+}

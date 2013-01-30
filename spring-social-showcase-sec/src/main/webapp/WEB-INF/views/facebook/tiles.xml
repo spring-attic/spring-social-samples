@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="facebook/profile" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/profile.jsp" />
+	</definition>
+
+	<definition name="facebook/feed" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/feed.jsp" />
+	</definition>
+
+	<definition name="facebook/friends" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/friends.jsp" />
+	</definition>
+
+	<definition name="facebook/albums" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/albums.jsp" />
+	</definition>
+
+	<definition name="facebook/album" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/facebook/album.jsp" />
+	</definition>
+
+</tiles-definitions>
