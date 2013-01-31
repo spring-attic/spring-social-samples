@@ -22,7 +22,7 @@
 	<linkedin:config app-id="${linkedin.consumerKey}" app-secret="${linkedin.consumerSecret}"/>
 
 	<social:jdbc-connection-repository/>	
-	<bean id="userIdSource" class="org.springframework.social.config.xml.SpringSecurityAuthenticationNameUserIdSource" />
+	<bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
 
  	<bean id="connectController" class="org.springframework.social.connect.web.ConnectController" autowire="constructor">
 		<property name="connectInterceptors">
