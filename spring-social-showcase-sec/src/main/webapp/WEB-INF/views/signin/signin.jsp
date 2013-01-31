@@ -38,12 +38,15 @@
 	<p>Or you can <a href="<c:url value="/signup"/>">signup</a> with a new account.</p>
 </form>
 
+	<h3>Sign in via a provider:</h3>
+	<p>(Uses SocialAuthenticationFilter)</p>
+
 	<!-- TWITTER SIGNIN -->
-    <a href="<c:url value="/auth/twitter"/>"><img src="<c:url value="/resources/social/twitter/sign-in-with-twitter-d.png"/>" border="0"/></a><br/>
+    <p><a href="<c:url value="/auth/twitter"/>"><img src="<c:url value="/resources/social/twitter/sign-in-with-twitter-d.png"/>" border="0"/></a></p>
 
 	<!-- FACEBOOK SIGNIN -->
-    <a href="<c:url value="/auth/facebook"/>"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" border="0"/></a><br/>
+    <p><a href="<c:url value="/auth/facebook"/>"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" border="0"/></a><br/></p>
  
 	<!-- LINKEDIN SIGNIN -->
-    <a href="<c:url value="/auth/linkedin"/>">Sign In with LinkedIn</a><br/>
+    <p><a href="<c:url value="/auth/linkedin"/>">Sign In with LinkedIn</a><br/></p>
 	
