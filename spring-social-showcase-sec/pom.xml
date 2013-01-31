@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.social.samples</groupId>
-	<artifactId>spring-social-showcase</artifactId>
-	<name>Spring Social Showcase</name>
+	<artifactId>spring-social-showcase-sec</artifactId>
+	<name>Spring Social Showcase - Security</name>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<properties>
