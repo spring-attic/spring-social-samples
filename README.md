@@ -9,6 +9,7 @@ Samples include:
  * **spring-social-showcase**, illustrating most of the features.
  * **spring-social-showcase-xml**, a version of spring-social-showcase that uses XML-based configuration.
  * **spring-social-showcase-sec**, a version of spring-social-showcase that uses SocialAuthenticationFilter instead of  ProviderSignInController for a tighter integration with Spring Security. 
+ * **spring-social-showcase-sec-xml**, a version of spring-social-showcase that uses both XML-based configuration and SocialAuthenticationFilter.
  * **spring-social-movies**, showing how to extend the framework to implement a new ServiceProvider + API binding.
  * **spring-social-twitter4j**, showing how to extend the framework and re-use an existing API binding (also shows XML config, multiple connections per provider, and is Spring 3.0.x compatible).
 
