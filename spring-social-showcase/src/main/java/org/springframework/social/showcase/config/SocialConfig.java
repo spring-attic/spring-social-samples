@@ -22,9 +22,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
-import org.springframework.social.config.xml.SpringSecurityAuthenticationNameUserIdSource;
-import org.springframework.social.config.xml.UserIdSource;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
@@ -33,6 +32,7 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.config.annotation.EnableFacebook;
 import org.springframework.social.facebook.web.DisconnectController;
 import org.springframework.social.linkedin.config.annotation.EnableLinkedIn;
+import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor;
 import org.springframework.social.showcase.signin.SimpleSignInAdapter;
 import org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor;
@@ -87,7 +87,7 @@ public class SocialConfig {
 	
 	@Bean
 	public UserIdSource userIdSource() {
-		return new SpringSecurityAuthenticationNameUserIdSource();
+		return new AuthenticationNameUserIdSource();
 	}
 
 }

@@ -9,12 +9,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SocialAuthenticationProvider;
 import org.springframework.social.security.SocialAuthenticationServiceLocator;
 import org.springframework.social.security.SocialUserDetailsService;
-import org.springframework.social.security.UserIdExtractor;
 import org.springframework.social.showcase.security.AuthenticationUserIdExtractor;
 import org.springframework.social.showcase.security.SimpleSocialUsersDetailService;
 
@@ -29,7 +29,7 @@ public class SocialSecurityConfig {
 	
 	@Bean 
 	public SocialAuthenticationFilter socialAuthenticationFilter(AuthenticationManager authenticationManager, RememberMeServices rememberMeServices, SocialAuthenticationServiceLocator authenticationServiceLocator) {
-		SocialAuthenticationFilter socialAuthenticationFilter = new SocialAuthenticationFilter(authenticationManager, userIdExtractor(), usersConnectionRepository, authenticationServiceLocator);
+		SocialAuthenticationFilter socialAuthenticationFilter = new SocialAuthenticationFilter(authenticationManager, userIdSource(), usersConnectionRepository, authenticationServiceLocator);
 		socialAuthenticationFilter.setFilterProcessesUrl("/auth");
 		socialAuthenticationFilter.setSignupUrl("/spring-social-showcase/signup"); // TODO: Fix filter to handle in-app paths
 		socialAuthenticationFilter.setRememberMeServices(rememberMeServices);
@@ -47,7 +47,7 @@ public class SocialSecurityConfig {
 	}
 	
 	@Bean
-	public UserIdExtractor userIdExtractor() {
+	public UserIdSource userIdSource() {
 		return new AuthenticationUserIdExtractor();
 	}
 	
