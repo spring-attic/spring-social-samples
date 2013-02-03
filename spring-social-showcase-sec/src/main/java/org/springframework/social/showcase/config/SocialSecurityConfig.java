@@ -30,7 +30,6 @@ public class SocialSecurityConfig {
 	@Bean 
 	public SocialAuthenticationFilter socialAuthenticationFilter(AuthenticationManager authenticationManager, RememberMeServices rememberMeServices, SocialAuthenticationServiceLocator authenticationServiceLocator) {
 		SocialAuthenticationFilter socialAuthenticationFilter = new SocialAuthenticationFilter(authenticationManager, userIdSource(), usersConnectionRepository, authenticationServiceLocator);
-		socialAuthenticationFilter.setFilterProcessesUrl("/auth");
 		socialAuthenticationFilter.setSignupUrl("/spring-social-showcase/signup"); // TODO: Fix filter to handle in-app paths
 		socialAuthenticationFilter.setRememberMeServices(rememberMeServices);
 		return socialAuthenticationFilter;

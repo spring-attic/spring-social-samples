@@ -14,7 +14,9 @@
 	<import resource="security.xml" />
 
 	<import resource="social.xml" />
-	
+
+	<import resource="social-security.xml" />
+
 	<context:component-scan base-package="org.springframework.social.showcase" />
 
 	<context:property-placeholder location="classpath:org/springframework/social/showcase/config/application.properties"/>
