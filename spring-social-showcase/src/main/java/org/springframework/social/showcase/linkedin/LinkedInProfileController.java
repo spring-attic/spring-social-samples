@@ -39,7 +39,7 @@ public class LinkedInProfileController {
 		if (connection == null) {
 			return "redirect:/connect/linkedin";
 		}
-		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfile());
+		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfileFull());
 		return "linkedin/profile";
 	}
 	

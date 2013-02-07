@@ -10,6 +10,8 @@
 <dl>
 	<dt>LinkedIn ID:</dt>
 	<dd><a href="<c:out value="${profile.publicProfileUrl}"/>" target="_blank"><c:out value="${profile.id}"/></a></dd>
+	<dt>Email Address:</dt>
+	<dd><c:out value="${profile.emailAddress}" /></dd>
 	<dt>Headline:</dt>
 	<dd><c:out value="${profile.headline}"/></dd>
 	<dt>Industry:</dt>

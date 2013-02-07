@@ -6,6 +6,7 @@
 <h3>Connect to LinkedIn</h3>
 
 <form action="<c:url value="/connect/linkedin" />" method="POST">
+	<input type="hidden" name="scope" value="r_basicprofile r_emailaddress" />
 	<div class="formInfo">
 		<p>
 			You haven't created any connections with LinkedIn yet. Click the button to connect Spring Social Showcase with your LinkedIn account. 
