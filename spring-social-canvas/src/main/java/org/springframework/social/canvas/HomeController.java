@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class FriendsController {
+public class HomeController {
 
 	private Facebook facebook;
 
 	@Inject
-	public FriendsController(Facebook facebook) {
+	public HomeController(Facebook facebook) {
 		this.facebook = facebook;
 	}
 	
-	@RequestMapping(value="/friends", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String homePage(Model model) {		
 		model.addAttribute("friends", facebook.friendOperations().getFriendProfiles());
 		return "friends";

@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.social.canvas.CanvasSignInController;
 import org.springframework.social.canvas.user.SecurityContext;
 import org.springframework.social.canvas.user.SimpleConnectionSignUp;
 import org.springframework.social.canvas.user.SimpleSignInAdapter;
@@ -39,9 +38,11 @@ import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.facebook.web.CanvasSignInController;
 
 /**
  * Spring Social Configuration.
+ * @author Craig Walls
  * @author Keith Donald
  */
 @Configuration
@@ -103,7 +104,7 @@ public class SocialConfig {
 	
 	@Bean
 	public CanvasSignInController canvasSignInController() {
-		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter(), environment);
+		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter(), environment.getProperty("facebook.clientId"), environment.getProperty("facebook.clientSecret"), environment.getProperty("facebook.canvasPage"));
 	}
-
+	
 }
