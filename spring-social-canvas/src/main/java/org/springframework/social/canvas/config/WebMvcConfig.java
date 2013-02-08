@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,20 @@
  */
 package org.springframework.social.canvas.config;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.social.canvas.user.UserInterceptor;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.facebook.web.SignedRequestArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -36,14 +40,16 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new UserInterceptor(usersConnectionRepository));
 	}
-
-	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addViewController("/signin");
+	
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new SignedRequestArgumentResolver(environment.getProperty("facebook.clientSecret")));
 	}
-
+	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -52,6 +58,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
+	private @Inject Environment environment;
+	
 	private @Inject UsersConnectionRepository usersConnectionRepository;
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.canvas.CanvasSignInController;
 import org.springframework.social.canvas.user.SecurityContext;
 import org.springframework.social.canvas.user.SimpleConnectionSignUp;
 import org.springframework.social.canvas.user.SimpleSignInAdapter;
@@ -35,7 +36,7 @@ import org.springframework.social.connect.NotConnectedException;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
@@ -95,14 +96,14 @@ public class SocialConfig {
 	    return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
 	
-	/**
-	 * The Spring MVC Controller that allows users to sign-in with their provider accounts.
-	 */
 	@Bean
-	public ProviderSignInController providerSignInController() {
-		ProviderSignInController signInController = new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter()); 
-		signInController.setPostSignInUrl("http://apps.facebook.com/springsocialcanvas/");
-		return signInController; 
+	public SignInAdapter signInAdapter() {
+		return new SimpleSignInAdapter();
+	}
+	
+	@Bean
+	public CanvasSignInController canvasSignInController() {
+		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter(), environment);
 	}
 
 }

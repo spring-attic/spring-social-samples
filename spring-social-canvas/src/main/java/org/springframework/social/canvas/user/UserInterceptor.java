@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * Before a request is handled:
@@ -41,12 +40,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		rememberUser(request, response);
-		handleSignOut(request, response);			
-		if (SecurityContext.userSignedIn() || requestForSignIn(request)) {
-			return true;
-		} else {
-			return requireSignIn(request, response);
-		}
+		return true;
 	}
 	
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
@@ -65,23 +59,6 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 			return;
 		}
 		SecurityContext.setCurrentUser(new User(userId));
-	}
-
-	private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {
-		if (SecurityContext.userSignedIn() && request.getServletPath().startsWith("/signout")) {
-			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId()).removeConnections("facebook");
-			userCookieGenerator.removeCookie(response);
-			SecurityContext.remove();			
-		}
-	}
-		
-	private boolean requestForSignIn(HttpServletRequest request) {
-		return request.getServletPath().startsWith("/signin");
-	}
-	
-	private boolean requireSignIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		new RedirectView("/signin", true).render(null, request, response);
-		return false;
 	}
 
 	private boolean userNotFound(String userId) {
