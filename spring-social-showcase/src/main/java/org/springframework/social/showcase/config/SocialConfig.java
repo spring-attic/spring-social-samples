@@ -27,12 +27,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.connect.web.ApiExceptionHandlingFilter;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.facebook.api.Facebook;
@@ -127,6 +129,25 @@ public class SocialConfig {
 	@Bean
 	public DisconnectController disconnectController() {
 		return new DisconnectController(usersConnectionRepository(), environment.getProperty("facebook.clientSecret"));
+	}
+	
+	@Bean
+	public ApiExceptionHandlingFilter apiExceptionHandler() {
+		return new ApiExceptionHandlingFilter(usersConnectionRepository(), userIdSource());
+	}
+	
+	@Bean
+	public UserIdSource userIdSource() {
+		return new UserIdSource() {			
+			@Override
+			public String getUserId() {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication == null) {
+					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+				}
+				return authentication.getName();
+			}
+		};
 	}
 
 }

@@ -99,7 +99,7 @@
 		
 	<filter>
 		<filter-name>apiExceptionHandler</filter-name>
-		<filter-class>org.springframework.social.connect.web.ApiExceptionHandlingFilter</filter-class>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 
 	<filter-mapping>

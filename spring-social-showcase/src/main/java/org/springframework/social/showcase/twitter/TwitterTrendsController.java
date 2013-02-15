@@ -19,9 +19,6 @@ import javax.inject.Inject;
 
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TwitterTrendsController {
@@ -33,10 +30,10 @@ public class TwitterTrendsController {
 		this.twitter = twitter;
 	}
 
-	@RequestMapping(value="/twitter/trends/daily", method=RequestMethod.GET)
-	public String showTrends(Model model) {
-		model.addAttribute("trends", twitter.searchOperations().getDailyTrends().get(0));
-		return "twitter/dailyTrends";
-	}
+//	@RequestMapping(value="/twitter/trends/daily", method=RequestMethod.GET)
+//	public String showTrends(Model model) {
+//		model.addAttribute("trends", twitter.searchOperations().getDailyTrends().get(0));
+//		return "twitter/dailyTrends";
+//	}
 	
 }
