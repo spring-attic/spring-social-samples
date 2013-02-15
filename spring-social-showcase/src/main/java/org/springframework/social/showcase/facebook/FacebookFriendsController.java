@@ -17,7 +17,6 @@ package org.springframework.social.showcase.facebook;
 
 import javax.inject.Inject;
 
-import org.springframework.social.connect.web.RequiresConnection;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,6 @@ public class FacebookFriendsController {
 	}
 
 	@RequestMapping(value="/facebook/friends", method=RequestMethod.GET)
-	@RequiresConnection(value="facebook", scope={"read_friends", "publish_stream", "eat_burrito"})
 	public String showFeed(Model model) {
 		model.addAttribute("friends", facebook.friendOperations().getFriendProfiles());
 		return "facebook/friends";
