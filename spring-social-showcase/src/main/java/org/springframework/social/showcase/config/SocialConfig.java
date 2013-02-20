@@ -31,6 +31,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.connect.web.ReconnectFilter;
 import org.springframework.social.facebook.config.annotation.EnableFacebook;
 import org.springframework.social.facebook.web.DisconnectController;
 import org.springframework.social.linkedin.config.annotation.EnableLinkedIn;
@@ -85,10 +86,20 @@ public class SocialConfig {
 	public DisconnectController disconnectController() {
 		return new DisconnectController(usersConnectionRepository, environment.getProperty("facebook.clientSecret"));
 	}
+
+	/*
+	 * ReconnectFilter only available in latest 1.1.0.BUILD-SNAPSHOT builds.
+	 * This comment will be removed when Spring Social 1.1.0.M3 is released.
+	 */
+	@Bean
+	public ReconnectFilter apiExceptionHandler() {
+		return new ReconnectFilter(usersConnectionRepository, userIdSource());
+	}
 	
 	@Bean
 	public UserIdSource userIdSource() {
-		return new UserIdSource() {
+		return new UserIdSource() {			
+			@Override
 			public String getUserId() {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				if (authentication == null) {
