@@ -34,9 +34,9 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.ApiExceptionHandlingFilter;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.connect.web.ReconnectFilter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
@@ -132,8 +132,8 @@ public class SocialConfig {
 	}
 	
 	@Bean
-	public ApiExceptionHandlingFilter apiExceptionHandler() {
-		return new ApiExceptionHandlingFilter(usersConnectionRepository(), userIdSource());
+	public ReconnectFilter apiExceptionHandler() {
+		return new ReconnectFilter(usersConnectionRepository(), userIdSource());
 	}
 	
 	@Bean
