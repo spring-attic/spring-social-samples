@@ -7,4 +7,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/linkedin/profile.jsp" />
 	</definition>
 
+	<definition name="linkedin/connections" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/linkedin/connections.jsp" />
+	</definition>
+
 </tiles-definitions>

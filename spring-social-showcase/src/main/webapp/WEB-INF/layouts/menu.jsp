@@ -29,5 +29,6 @@
 <social:connected provider="linkedin">
 <ul class="menu">
 	<li><a href="<c:url value="/linkedin"/>">User Profile</a></li>
+	<li><a href="<c:url value="/linkedin/connections"/>">Connections</a></li>
 </ul>
 </social:connected>
