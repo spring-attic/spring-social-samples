@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
-<%@ taglib uri="http://www.springframework.org/spring-social/facebook/tags" prefix="facebook" %>
 <%@ page session="false" %>
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
