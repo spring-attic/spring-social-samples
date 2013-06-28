@@ -117,3 +117,7 @@ div.accountConnection h4 {
 div.accountConnection h4 img {
 	vertical-align: middle;
 }
+
+div.authorizationError {
+	color: red;
+}
