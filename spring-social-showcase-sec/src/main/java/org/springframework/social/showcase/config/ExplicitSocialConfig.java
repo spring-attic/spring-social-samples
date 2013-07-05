@@ -108,7 +108,7 @@ public class ExplicitSocialConfig {
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
 	public Twitter twitter() {
 		Connection<Twitter> twitter = connectionRepository().findPrimaryConnection(Twitter.class);
-		return twitter != null ? twitter.getApi() : new TwitterTemplate();
+		return twitter != null ? twitter.getApi() : null;
 	}
 
 	@Bean

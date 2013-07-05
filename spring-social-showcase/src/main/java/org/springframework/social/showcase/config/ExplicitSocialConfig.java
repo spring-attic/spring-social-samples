@@ -46,7 +46,6 @@ import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterc
 import org.springframework.social.showcase.signin.SimpleSignInAdapter;
 import org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 /**
@@ -108,7 +107,7 @@ public class ExplicitSocialConfig {
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
 	public Twitter twitter() {
 		Connection<Twitter> twitter = connectionRepository().findPrimaryConnection(Twitter.class);
-		return twitter != null ? twitter.getApi() : new TwitterTemplate();
+		return twitter != null ? twitter.getApi() : null;
 	}
 
 	@Bean
