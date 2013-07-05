@@ -47,7 +47,7 @@ public class TwitterApiAdapter implements ApiAdapter<Twitter> {
 			values.setProviderUserId(Long.toString(user.getId()));
 			values.setDisplayName("@" + user.getScreenName());
 			values.setProfileUrl("http://twitter.com/" + user.getScreenName());
-			values.setImageUrl(user.getProfileImageURL().toExternalForm());
+			values.setImageUrl(user.getProfileImageURL());
 		} catch (TwitterException e) {
 		}		
 	}
