@@ -12,6 +12,6 @@ The pertinent details of the application's Facebook configuration is as follows:
  - __Namespace__: springsocialcanvas
  - __Canvas Page__: http://apps.facebook.com/springsocialcanvas
  - __Canvas URL__: http://localhost:8080/spring-social-canvas/canvas/
- - __Secure Canvas URL__: https://localhost:8080/spring-social-canvas/canvas/
+ - __Secure Canvas URL__: https://localhost:8443/spring-social-canvas/canvas/
 
 Discuss at forum.springsource.org and collaborate with the development team at jira.springframework.org/browse/SOCIAL.
