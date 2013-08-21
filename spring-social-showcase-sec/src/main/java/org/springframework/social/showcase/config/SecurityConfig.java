@@ -33,8 +33,7 @@ import org.springframework.social.UserIdSource;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.SocialAuthenticationServiceLocator;
 import org.springframework.social.security.SocialUserDetailsService;
-import org.springframework.social.security.SpringSocialAuthenticationConfigurer;
-import org.springframework.social.security.SpringSocialHttpConfigurer;
+import org.springframework.social.security.SpringSocialConfigurer;
 import org.springframework.social.showcase.security.AuthenticationUserIdExtractor;
 import org.springframework.social.showcase.security.SimpleSocialUsersDetailService;
 
@@ -61,10 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.dataSource(dataSource)
 				.usersByUsernameQuery("select username, password, true from Account where username = ?")
 				.authoritiesByUsernameQuery("select username, 'ROLE_USER' from Account where username = ?")
-				.passwordEncoder(passwordEncoder())
-			.and()
-				.apply(
-						new SpringSocialAuthenticationConfigurer(usersConnectionRepository, socialUsersDetailsService()));
+				.passwordEncoder(passwordEncoder());
 	}
 	
 	@Override
@@ -93,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.rememberMe()
 			.and()
 				.apply(
-					new SpringSocialHttpConfigurer(userIdSource(), usersConnectionRepository, authenticationServiceLocator)
+					new SpringSocialConfigurer(userIdSource(), usersConnectionRepository, authenticationServiceLocator, socialUsersDetailsService())
 				);
 	}
 	

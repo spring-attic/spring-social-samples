@@ -15,11 +15,8 @@
  */
 package org.springframework.social.showcase.config;
 
-import javax.inject.Inject;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
@@ -37,35 +34,19 @@ import org.springframework.social.twitter.config.annotation.EnableTwitter;
 
 /**
  * Spring Social Configuration.
- * 
  * This configuration is demonstrating the use of the simplified Spring Social configuration options from Spring Social 1.1.
- * It will only be used when the "simple" profile is active.
- * The more complex/explicit configuration is still available in ExplicitSocialConfig.java and will be used if the "explicit" profile is active.
  * 
  * @author Craig Walls
  */
 @Configuration
-@Profile("simple")
 @EnableJdbcConnectionRepository
 @EnableTwitter(appId="${twitter.consumerKey}", appSecret="${twitter.consumerSecret}")
 @EnableFacebook(appId="${facebook.clientId}", appSecret="${facebook.clientSecret}")
 @EnableLinkedIn(appId="${linkedin.consumerKey}", appSecret="${linkedin.consumerSecret}")
 public class SocialConfig {
 
-	@Inject
-	private Environment environment;
-	
-	@Inject
-	private ConnectionFactoryLocator connectionFactoryLocator;
-	
-	@Inject 
-	private ConnectionRepository connectionRepository;
-
-	@Inject 
-	private UsersConnectionRepository usersConnectionRepository;
-
 	@Bean
-	public ConnectController connectController() {
+	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		ConnectController connectController = new ConnectController(connectionFactoryLocator, connectionRepository);
 		connectController.addInterceptor(new PostToWallAfterConnectInterceptor());
 		connectController.addInterceptor(new TweetAfterConnectInterceptor());
@@ -73,7 +54,7 @@ public class SocialConfig {
 	}
 	
 	@Bean
-	public DisconnectController disconnectController() {
+	public DisconnectController disconnectController(UsersConnectionRepository usersConnectionRepository, Environment environment) {
 		return new DisconnectController(usersConnectionRepository, environment.getProperty("facebook.clientSecret"));
 	}
 	

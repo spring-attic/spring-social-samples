@@ -15,12 +15,6 @@
     	<param-value>org.springframework.social.showcase.config</param-value>
 	</context-param>
 	
-	<!-- Use the simplified configuration by default. -->
-	<context-param>
-		<param-name>spring.profiles.default</param-name>
-		<param-value>simple</param-value>
-	</context-param>
-
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -33,10 +27,6 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value></param-value>
-		</init-param>
-		<init-param>
-			<param-name>spring.profiles.default</param-name>
-			<param-value>simple</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
