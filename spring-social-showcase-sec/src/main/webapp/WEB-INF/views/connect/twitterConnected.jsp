@@ -4,6 +4,7 @@
 <h3>Connected to Twitter</h3>
 
 <form id="disconnect" method="post">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<div class="formInfo">
 		<p>The Spring Social Showcase sample application is already connected to your Twitter account.
 			Click the button if you wish to disconnect.			

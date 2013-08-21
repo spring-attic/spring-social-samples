@@ -22,6 +22,7 @@
 
 <c:url value="/connect/twitter" var="disconnectUrl"/>
 <form id="disconnect" action="${disconnectUrl}" method="post">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<button type="submit">Disconnect from Twitter</button>	
 	<input type="hidden" name="_method" value="delete" />
 </form>

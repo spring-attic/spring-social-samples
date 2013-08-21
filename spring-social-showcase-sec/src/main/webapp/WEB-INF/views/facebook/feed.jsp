@@ -6,6 +6,7 @@
 <h3>Your Facebook Feed</h3>
 	
 <form method="POST" action="<c:url value="/facebook/feed" />">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<p>Post to your Facebook wall:<p>
 	<textarea id="message" name="message" rows="2" cols="60"></textarea><br/>
 	<input type="submit" value="Post" />
