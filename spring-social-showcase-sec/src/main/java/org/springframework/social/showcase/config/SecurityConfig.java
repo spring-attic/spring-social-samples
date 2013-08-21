@@ -31,10 +31,9 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.security.SocialAuthenticationServiceLocator;
-import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
-import org.springframework.social.showcase.security.AuthenticationUserIdExtractor;
 import org.springframework.social.showcase.security.SimpleSocialUsersDetailService;
 
 /**
@@ -53,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Inject
 	private SocialAuthenticationServiceLocator authenticationServiceLocator;
-	
+
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
@@ -89,26 +88,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.rememberMe()
 			.and()
 				.apply(
-					new SpringSocialConfigurer(userIdSource(), usersConnectionRepository, authenticationServiceLocator, socialUsersDetailsService())
+					new SpringSocialConfigurer(
+							userIdSource(), 
+							usersConnectionRepository, 
+							authenticationServiceLocator, 
+							new SimpleSocialUsersDetailService(userDetailsService()))
 				);
 	}
 	
 	@Bean
-	public SocialUserDetailsService socialUsersDetailsService() {
-		return new SimpleSocialUsersDetailService(userDetailsService());
-	}
-	
-	@Bean
 	public UserIdSource userIdSource() {
-		return new AuthenticationUserIdExtractor();
+		return new AuthenticationNameUserIdSource();
 	}
 
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-    	return NoOpPasswordEncoder.getInstance();
+		return NoOpPasswordEncoder.getInstance();
 	}
-    
+
 	@Bean
 	public TextEncryptor textEncryptor() {
 		return Encryptors.noOpText();
