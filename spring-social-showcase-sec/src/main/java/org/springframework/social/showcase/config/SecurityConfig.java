@@ -18,6 +18,8 @@ package org.springframework.social.showcase.config;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,9 +32,8 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.UserIdSource;
-import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
-import org.springframework.social.security.SocialAuthenticationServiceLocator;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
 import org.springframework.social.showcase.security.SimpleSocialUsersDetailService;
 
@@ -44,15 +45,12 @@ import org.springframework.social.showcase.security.SimpleSocialUsersDetailServi
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private ApplicationContext context;
+	
 	@Inject
 	private DataSource dataSource;
 	
-	@Inject
-	private UsersConnectionRepository usersConnectionRepository;
-
-	@Inject
-	private SocialAuthenticationServiceLocator authenticationServiceLocator;
-
 	@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
@@ -87,13 +85,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 				.rememberMe()
 			.and()
-				.apply(
-					new SpringSocialConfigurer(
-							userIdSource(), 
-							usersConnectionRepository, 
-							authenticationServiceLocator, 
-							new SimpleSocialUsersDetailService(userDetailsService()))
-				);
+				.apply(new SpringSocialConfigurer())
+				.and().setSharedObject(ApplicationContext.class, context);
+	}
+	
+	@Bean
+	public SocialUserDetailsService socialUsersDetailService() {
+		return new SimpleSocialUsersDetailService(userDetailsService());
 	}
 	
 	@Bean
