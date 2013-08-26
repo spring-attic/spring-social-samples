@@ -18,7 +18,7 @@
 		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()"  />
-		<remember-me />
+		<remember-me services-alias="rememberMeServices" />
 		
 		<!--  Spring Social Security authentication filter -->
 		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />
