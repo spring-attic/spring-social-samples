@@ -11,7 +11,7 @@
 		c:_2-ref="usersConnectionRepository"
 		c:_3-ref="connectionFactoryLocator"
 		p:signupUrl="/spring-social-showcase/signup"
-		p:rememberMeServices-ref="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices#0" /> <!-- TODO: Figure out how to wire this without this name -->
+    p:rememberMeServices-ref="rememberMeServices" /> 		
 
 	<bean id="socialAuthenticationProvider" class="org.springframework.social.security.SocialAuthenticationProvider"
 		c:_0-ref="usersConnectionRepository"
