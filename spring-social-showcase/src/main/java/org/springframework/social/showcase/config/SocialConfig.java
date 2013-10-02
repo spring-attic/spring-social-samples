@@ -87,10 +87,6 @@ public class SocialConfig {
 		return new DisconnectController(usersConnectionRepository, environment.getProperty("facebook.clientSecret"));
 	}
 
-	/*
-	 * ReconnectFilter only available in latest 1.1.0.BUILD-SNAPSHOT builds.
-	 * This comment will be removed when Spring Social 1.1.0.M3 is released.
-	 */
 	@Bean
 	public ReconnectFilter apiExceptionHandler() {
 		return new ReconnectFilter(usersConnectionRepository, userIdSource());

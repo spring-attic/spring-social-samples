@@ -22,5 +22,4 @@ public class SimpleSocialUsersDetailService implements SocialUserDetailsService 
 		return new SocialUser(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
 	}
 
-	
 }
