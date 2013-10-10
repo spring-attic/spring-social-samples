@@ -5,6 +5,7 @@
 <h3>Connected to Facebook</h3>
 
 <form id="disconnect" method="post">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<div class="formInfo">
 		<p>
 			Spring Social Showcase is connected to your Facebook account.

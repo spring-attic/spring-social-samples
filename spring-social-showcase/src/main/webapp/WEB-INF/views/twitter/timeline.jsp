@@ -15,6 +15,7 @@
 <h4>Post a tweet</h4>
 <c:url var="tweetUrl" value="/twitter/tweet" />
 <form action="${tweetUrl}" method="post">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<textarea name="message" rows="2" cols="80"></textarea><br/>
 	<input type="submit" value="Post Tweet"/>
 </form>

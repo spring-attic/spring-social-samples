@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -78,8 +78,8 @@ public class SocialConfig {
 	}
 
 	@Bean
-	public ProviderSignInController providerSignInController(RequestCache requestCache) {
-		return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(requestCache));
+	public ProviderSignInController providerSignInController() {
+		return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
 	}
 	
 	@Bean

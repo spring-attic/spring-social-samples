@@ -2,6 +2,7 @@
 <%@ page session="false" %>
 
 <form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<div class="formInfo">
   		<c:if test="${param.error eq 'bad_credentials'}">
   		<div class="error">
@@ -18,9 +19,9 @@
 	</div>
 	<fieldset>
 		<label for="login">Username</label>
-		<input id="login" name="j_username" type="text" size="25" <c:if test="${not empty signinErrorMessage}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if> />
+		<input id="login" name="username" type="text" size="25" <c:if test="${not empty signinErrorMessage}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if> />
 		<label for="password">Password</label>
-		<input id="password" name="j_password" type="password" size="25" />	
+		<input id="password" name="password" type="password" size="25" />	
 	</fieldset>
 	<button type="submit">Sign In</button>
 	
@@ -36,17 +37,20 @@
 
 	<!-- TWITTER SIGNIN -->
 	<form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST">
+		<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 		<button type="submit"><img src="<c:url value="/resources/social/twitter/sign-in-with-twitter-d.png"/>" /></button>
 	</form>
 
 	<!-- FACEBOOK SIGNIN -->
 	<form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
-        <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+		<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
+		<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
 		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
 
 	<!-- LINKEDIN SIGNIN -->
 	<form name="li_signin" id="li_signin" action="<c:url value="/signin/linkedin"/>" method="POST">
+		<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 		<button type="submit">Sign In with LinkedIn</button>
 	</form>
 	

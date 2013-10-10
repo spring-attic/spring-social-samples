@@ -6,6 +6,7 @@
 <h3>Connect to LinkedIn</h3>
 
 <form action="<c:url value="/connect/linkedin" />" method="POST">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<input type="hidden" name="scope" value="r_basicprofile r_emailaddress r_network r_fullprofile rw_nus" />
 	<div class="formInfo">
 		<p>

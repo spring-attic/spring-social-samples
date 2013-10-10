@@ -11,6 +11,7 @@
 
 <c:url value="/signup" var="signupUrl" />
 <form:form id="signup" action="${signupUrl}" method="post" modelAttribute="signupForm">
+	<input type="hidden" name="_csrf" value="<c:out value="${_csrf.token}" />" />
 	<div class="formInfo">
 		<s:bind path="*">
 			<c:choose>
