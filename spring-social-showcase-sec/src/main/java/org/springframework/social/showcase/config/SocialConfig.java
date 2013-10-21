@@ -15,20 +15,36 @@
  */
 package org.springframework.social.showcase.config;
 
+import javax.inject.Inject;
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
-import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
+import org.springframework.social.config.annotation.EnableSocial;
+import org.springframework.social.config.annotation.SocialConfigurerAdapter;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
-import org.springframework.social.facebook.config.annotation.EnableFacebook;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.facebook.web.DisconnectController;
-import org.springframework.social.linkedin.config.annotation.EnableLinkedIn;
+import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor;
 import org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor;
-import org.springframework.social.twitter.config.annotation.EnableTwitter;
+import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 /**
  * Spring Social Configuration.
@@ -37,11 +53,37 @@ import org.springframework.social.twitter.config.annotation.EnableTwitter;
  * @author Craig Walls
  */
 @Configuration
-@EnableJdbcConnectionRepository
-@EnableTwitter(appId="${twitter.consumerKey}", appSecret="${twitter.consumerSecret}")
-@EnableFacebook(appId="${facebook.clientId}", appSecret="${facebook.clientSecret}")
-@EnableLinkedIn(appId="${linkedin.consumerKey}", appSecret="${linkedin.consumerSecret}")
-public class SocialConfig {
+@EnableSocial
+public class SocialConfig extends SocialConfigurerAdapter {
+
+	@Inject
+	private DataSource dataSource;
+
+	@Override
+	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
+		cfConfig.addConnectionFactory(new TwitterConnectionFactory(env.getProperty("twitter.consumerKey"), env.getProperty("twitter.consumerSecret")));
+		cfConfig.addConnectionFactory(new FacebookConnectionFactory(env.getProperty("facebook.clientId"), env.getProperty("facebook.clientSecret")));
+		cfConfig.addConnectionFactory(new LinkedInConnectionFactory(env.getProperty("linkedin.consumerKey"), env.getProperty("linkedin.consumerSecret")));
+	}
+	
+	@Override
+	public UserIdSource getUserIdSource() {
+		return new UserIdSource() {			
+			@Override
+			public String getUserId() {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication == null) {
+					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+				}
+				return authentication.getName();
+			}
+		};
+	}
+	
+	@Override
+	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
+		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+	}
 
 	@Bean
 	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
@@ -56,4 +98,25 @@ public class SocialConfig {
 		return new DisconnectController(usersConnectionRepository, environment.getProperty("facebook.clientSecret"));
 	}
 	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public Facebook facebook(ConnectionRepository repository) {
+		Connection<Facebook> connection = repository.findPrimaryConnection(Facebook.class);
+		return connection != null ? connection.getApi() : null;
+	}
+	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public Twitter twitter(ConnectionRepository repository) {
+		Connection<Twitter> connection = repository.findPrimaryConnection(Twitter.class);
+		return connection != null ? connection.getApi() : null;
+	}
+	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	public LinkedIn linkedin(ConnectionRepository repository) {
+		Connection<LinkedIn> connection = repository.findPrimaryConnection(LinkedIn.class);
+		return connection != null ? connection.getApi() : null;
+	}
+
 }
