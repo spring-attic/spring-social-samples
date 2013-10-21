@@ -39,6 +39,9 @@ dependencies {
 	compile "org.springframework.social:spring-social-facebook-web:$springSocialFacebookVersion"
 	compile "org.springframework.social:spring-social-twitter:$springSocialTwitterVersion"
 	compile "org.springframework.social:spring-social-linkedin:$springSocialLinkedInVersion"
+    compile("org.thymeleaf:thymeleaf-spring3:$thymeleafVersion")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:$thymeleafLayoutVersion")
+
 
 	compile "org.apache.httpcomponents:httpclient:$httpclientVersion"
 	compile "javax.validation:validation-api:$javaxValidationVersion"
