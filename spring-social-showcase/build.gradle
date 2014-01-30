@@ -55,7 +55,7 @@ dependencies {
 	compile "org.apache.tiles:tiles-jsp:$tilesVersion"
 	compile "org.apache.tiles:tiles-el:$tilesVersion"
 	compile "javax.inject:javax.inject:$javaxInjectVersion"
-	providedCompile "javax.servlet:servlet-api:$servletApiVersion"
+	providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion"
 	providedCompile "javax.servlet.jsp:jsp-api:$jspApiVersion"
 	providedCompile "javax.servlet.jsp:javax.servlet.jsp-api:$javaxJspApiVersion"
 	compile "javax.servlet.jsp.jstl:jstl-api:$jstlVersion"
