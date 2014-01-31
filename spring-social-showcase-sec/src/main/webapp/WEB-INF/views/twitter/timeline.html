@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+		<link rel="stylesheet" th:href="@{/resources/page.css}" type="text/css" media="screen"></link>
+		<link rel="stylesheet" th:href="@{/resources/form.css}" type="text/css" media="screen"></link>
+		<link rel="stylesheet" th:href="@{/resources/messages/messages.css}" type="text/css" media="screen"></link>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="leftNav">
+			Left nav menu
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Your Twitter <span th:text="${timelineName}">timelineName</span> Timeline</h3>
+
+			<h4>Post a tweet</h4>
+			<form th:action="@{/twitter/tweet}" method="post">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+				<textarea name="message" rows="2" cols="80"></textarea><br/>
+				<input type="submit" value="Post Tweet"/>
+			</form>
+			
+			<form th:action="@{/twitter/search}" method="get">
+				<p><input type="text" name="query" th:value="${param.query}" /> <input type="submit" value="Search"/></p>
+			</form>
+			
+			<ul class="choices">
+			<li><a th:href="@{/twitter/timeline} + '/Home'">Home Timeline</a></li>
+			<li><a th:href="@{/twitter/timeline} + '/User'">User Timeline</a></li>
+			<li><a th:href="@{/twitter/timeline} + '/Mentions'">Mentions</a></li>
+			<li><a th:href="@{/twitter/timeline} + '/Favorites'">Favorites</a></li>
+			</ul>
+			
+			<div class="feed">
+			<ul class="imagedList">
+				<li class="imagedItem" th:each="tweet : ${timeline}">
+					<div class="image" th:if="${!#strings.isEmpty(tweet.profileImageUrl)}">
+						<img th:src="${tweet.profileImageUrl}" align="left"/>
+					</div>
+					<div class="content">
+					<strong><a th:href="'http://twitter.com/' + ${tweet.fromUser}" th:text="${tweet.fromUser}">from user</a></strong><br/>
+					<span th:text="${tweet.text}">tweet text</span><br/>
+					<span class="postTime" th:text="${tweet.createdAt}">created at</span>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</body>
+</html>

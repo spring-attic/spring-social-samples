@@ -26,13 +26,14 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.spring3.SpringTemplateEngine;
-import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
 /**
  * Spring MVC Configuration.
+ * 
  * @author Craig Walls
  */
 @Configuration
@@ -40,40 +41,39 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/resources/**").addResourceLocations(
+				"/resources/");
 	}
-	
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/messages/messages");
-        return messageSource;
-    }
-    
-    
-    
-    
-    @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-      ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-      viewResolver.setTemplateEngine(templateEngine);
-      return viewResolver;
-    }
-    @Bean
-    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
-      SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-      templateEngine.setTemplateResolver(templateResolver);
-      templateEngine.addDialect(new SpringSocialDialect());
-      templateEngine.addDialect(new LayoutDialect());
-      return templateEngine;
-    }
 
-    @Bean
-    public TemplateResolver templateResolver() {
-      TemplateResolver templateResolver = new ServletContextTemplateResolver();
-      templateResolver.setPrefix("/WEB-INF/views/");
-      templateResolver.setSuffix(".html");
-      templateResolver.setTemplateMode("HTML5");
-      return templateResolver;
-    }
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("/WEB-INF/messages/messages");
+		return messageSource;
+	}
+
+	@Bean
+	public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine);
+		return viewResolver;
+	}
+
+	@Bean
+	public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		templateEngine.addDialect(new SpringSocialDialect());
+		templateEngine.addDialect(new LayoutDialect());
+		return templateEngine;
+	}
+
+	@Bean
+	public TemplateResolver templateResolver() {
+		TemplateResolver templateResolver = new ServletContextTemplateResolver();
+		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML5");
+		return templateResolver;
+	}
 }

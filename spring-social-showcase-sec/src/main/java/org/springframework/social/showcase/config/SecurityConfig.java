@@ -15,7 +15,6 @@
  */
 package org.springframework.social.showcase.config;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private ApplicationContext context;
 	
-	@Inject
+	@Autowired
 	private DataSource dataSource;
 	
-	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+	@Autowired
+	public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
 				.dataSource(dataSource)
 				.usersByUsernameQuery("select username, password, true from Account where username = ?")
@@ -85,8 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 				.rememberMe()
 			.and()
-				.apply(new SpringSocialConfigurer())
-				.and().setSharedObject(ApplicationContext.class, context);
+				.apply(new SpringSocialConfigurer());
 	}
 	
 	@Bean
