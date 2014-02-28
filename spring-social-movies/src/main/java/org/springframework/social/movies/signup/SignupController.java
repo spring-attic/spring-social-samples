@@ -33,10 +33,12 @@ import org.springframework.web.context.request.WebRequest;
 public class SignupController {
 
 	private final AccountRepository accountRepository;
+	private final ProviderSignInUtils providerSignInUtils;
 
 	@Inject
 	public SignupController(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
+		this.providerSignInUtils = new ProviderSignInUtils();
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -52,7 +54,7 @@ public class SignupController {
 		Account account = createAccount(form, formBinding);
 		if (account != null) {
 			SignInUtils.signin(account.getUsername());
-			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
+			providerSignInUtils.doPostSignUp(account.getUsername(), request);
 			return "redirect:/";
 		}
 		return null;
