@@ -22,7 +22,7 @@
 			<h3>Your Facebook Photo Album: <span th:text="${album.name}">album name</span></h3>
 				
 			<span th:each="photo : ${photos}">
-				<img th:src="${photo.albumImage.source}" align="middle"/>
+				<img th:src="${photo.images[0].source}" align="middle"/>
 			</span>
 		</div>
 	</body>
