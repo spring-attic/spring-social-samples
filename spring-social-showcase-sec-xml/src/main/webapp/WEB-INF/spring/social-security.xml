@@ -10,7 +10,7 @@
 		c:_1-ref="userIdSource"
 		c:_2-ref="usersConnectionRepository"
 		c:_3-ref="connectionFactoryLocator"
-		p:signupUrl="/spring-social-showcase/signup"
+		p:signupUrl="/signup"
 		p:rememberMeServices-ref="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices#0" /> <!-- TODO: Figure out how to wire this without this name -->
 
 	<bean id="socialAuthenticationProvider" class="org.springframework.social.security.SocialAuthenticationProvider"
