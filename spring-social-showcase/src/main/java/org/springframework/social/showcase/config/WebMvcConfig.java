@@ -17,6 +17,7 @@ package org.springframework.social.showcase.config;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,6 +57,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine);
+		viewResolver.setCharacterEncoding(CharEncoding.UTF_8);
+		viewResolver.setContentType("text/html; charset=utf-8");
 		return viewResolver;
 	}
 
@@ -74,6 +77,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
+		templateResolver.setCharacterEncoding(CharEncoding.UTF_8);
 		return templateResolver;
 	}
 }
