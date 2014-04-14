@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.6</java-version>
 		<org.springframework.social-version>1.1.0.RC1</org.springframework.social-version>
 		<org.springframework.social.facebook-version>1.1.0.RC1</org.springframework.social.facebook-version>
@@ -39,11 +40,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
