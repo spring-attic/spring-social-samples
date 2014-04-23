@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Home</title>
+	</head>
+	<body>
+	<ul>
+		<li><a th:href="@{/signout}">Sign Out</a></li>
+	</ul>
+	<h3>Your Facebook Friends</h3>
+	<ul>
+		<li th:each="friend : ${friends}"><img th:src="'http://graph.facebook.com/' + ${friend.id} + '/picture'" align="middle"/><span th:text="${friend.name}">name</span></li>
+	</ul>	
+	</body>
+</html>

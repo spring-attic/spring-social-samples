@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 the original author or authors.
+ * Copyright 2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,18 +24,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.canvas.user.SecurityContext;
 import org.springframework.social.canvas.user.SimpleConnectionSignUp;
 import org.springframework.social.canvas.user.SimpleSignInAdapter;
-import org.springframework.social.canvas.user.User;
-import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
+import org.springframework.social.config.annotation.EnableSocial;
+import org.springframework.social.config.annotation.SocialConfigurer;
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.NotConnectedException;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.facebook.web.CanvasSignInController;
@@ -43,68 +43,48 @@ import org.springframework.social.facebook.web.CanvasSignInController;
 /**
  * Spring Social Configuration.
  * @author Craig Walls
- * @author Keith Donald
  */
 @Configuration
-public class SocialConfig {
-
-	@Inject
-	private Environment environment;
+@EnableSocial
+public class SocialConfig implements SocialConfigurer {
 
 	@Inject
 	private DataSource dataSource;
 
-	/**
-	 * When a new provider is added to the app, register its {@link ConnectionFactory} here.
-	 * @see FacebookConnectionFactory
-	 */
-	@Bean
-	public ConnectionFactoryLocator connectionFactoryLocator() {
-		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
-				environment.getProperty("facebook.clientSecret")));
-		return registry;
+	@Override
+	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
+		cfConfig.addConnectionFactory(new FacebookConnectionFactory(env.getProperty("facebook.appKey"), env.getProperty("facebook.appSecret")));
 	}
 
 	/**
 	 * Singleton data access object providing access to connections across all users.
 	 */
-	@Bean
-	public UsersConnectionRepository usersConnectionRepository() {
-		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,
-				connectionFactoryLocator(), Encryptors.noOpText());
+	@Override
+	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
+		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 		repository.setConnectionSignUp(new SimpleConnectionSignUp());
 		return repository;
 	}
+	
+	public UserIdSource getUserIdSource() {
+		return new UserIdSource() {
+			@Override
+			public String getUserId() {
+				return SecurityContext.getCurrentUser().getId();
+			}
+		};
+	}
 
-	/**
-	 * Request-scoped data access object providing access to the current user's connections.
-	 */
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public ConnectionRepository connectionRepository() {
-	    User user = SecurityContext.getCurrentUser();
-	    return usersConnectionRepository().createConnectionRepository(user.getId());
-	}
-
-	/**
-	 * A proxy to a request-scoped object representing the current user's primary Facebook account.
-	 * @throws NotConnectedException if the user is not connected to facebook.
-	 */
-	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
-	public Facebook facebook() {
-	    return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
+	public Facebook facebook(ConnectionRepository repository) {
+		Connection<Facebook> connection = repository.findPrimaryConnection(Facebook.class);
+		return connection != null ? connection.getApi() : null;
 	}
 	
 	@Bean
-	public SignInAdapter signInAdapter() {
-		return new SimpleSignInAdapter();
-	}
-	
-	@Bean
-	public CanvasSignInController canvasSignInController() {
-		return new CanvasSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter(), environment.getProperty("facebook.clientId"), environment.getProperty("facebook.clientSecret"), environment.getProperty("facebook.canvasPage"));
+	public CanvasSignInController canvasSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository, Environment env) {
+		return new CanvasSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(), env.getProperty("facebook.appKey"), env.getProperty("facebook.appSecret"), env.getProperty("facebook.canvasPage"));
 	}
 	
 }

@@ -4,8 +4,14 @@ This sample app demonstrates how to use Spring Social within a Facebook Canvas a
 
 IMPORTANT: Note that the steps for running the sample differ slightly from the other Spring Social samples:
 
- 1. Deploy and start the application on a Servlet 2.5 or > container such as Tomcat 6 or 7 *and* ensure that HTTPS support is enabled. For convenience, you should be able to run the application using Maven with `mvn tomcat:run`.
- 2. Navigate to http://apps.facebook.com/springsocialcanvas in your browser. This is the canvas page configured in Facebook for the Spring Social Canvas sample.
+ 1. Build the application using Gradle:
+
+```sh
+$ gradlew build
+```
+
+ 2. Deploy and start the application on a Servlet 2.5 or > container such as Tomcat 6 or 7 *and* ensure that HTTPS support is enabled. For convenience, you should be able to run the application using Maven with `mvn tomcat:run`.
+ 3. Navigate to http://apps.facebook.com/springsocialcanvas in your browser. This is the canvas page configured in Facebook for the Spring Social Canvas sample.
 
 The pertinent details of the application's Facebook configuration is as follows:
  - __Display Name__: Spring Social Canvas

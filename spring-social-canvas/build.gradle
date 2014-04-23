@@ -1,0 +1,60 @@
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'tomcat'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.9'
+    }
+}
+
+war {
+  baseName = 'spring-social-canvas'
+}
+
+dependencies {
+	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+		"org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+	}
+
+	compile "org.springframework:spring-webmvc:$springVersion"
+	compile "org.springframework:spring-jdbc:$springVersion"
+	compile "org.springframework.social:spring-social-config:$springSocialVersion"
+	compile "org.springframework.social:spring-social-core:$springSocialVersion"
+	compile "org.springframework.social:spring-social-web:$springSocialVersion"
+	compile "org.springframework.social:spring-social-facebook:$springSocialFacebookVersion"
+	compile "org.springframework.social:spring-social-facebook-web:$springSocialFacebookVersion"
+	compile "org.springframework.security:spring-security-crypto:$springSecurityVersion"
+
+	compile("org.thymeleaf:thymeleaf-spring4:$thymeleafVersion")
+	compile "com.h2database:h2:$h2Version"
+	providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion"
+	compile "cglib:cglib-nodep:$cglibVersion"
+
+	compile "org.apache.httpcomponents:httpclient:$httpclientVersion"
+	compile "org.slf4j:slf4j-api:$slf4jVersion"
+	compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+	compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
+	compile "log4j:log4j:$log4jVersion"
+	compile "javax.inject:javax.inject:$javaxInjectVersion"
+}
+
+repositories {
+	mavenLocal()
+	maven { url 'http://maven.springframework.org/release' }
+	maven { url 'http://maven.springframework.org/milestone' }
+	maven { url 'http://maven.springframework.org/snapshot' }
+	maven { url 'http://download.java.net/maven/2' }
+	mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
