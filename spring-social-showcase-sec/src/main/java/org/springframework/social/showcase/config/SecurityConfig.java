@@ -85,9 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.rememberMe()
 			.and()
 				.apply(
-					new SpringSocialConfigurer()
-						.postLoginUrl("/twitter")
-						.alwaysUsePostLoginUrl(false));
+					new SpringSocialConfigurer());
 	}
 	
 	@Bean

@@ -36,6 +36,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.connect.web.ReconnectFilter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.facebook.web.DisconnectController;
@@ -97,7 +98,12 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	public DisconnectController disconnectController(UsersConnectionRepository usersConnectionRepository, Environment environment) {
 		return new DisconnectController(usersConnectionRepository, environment.getProperty("facebook.appSecret"));
 	}
-	
+
+	@Bean
+	public ReconnectFilter apiExceptionHandler(UsersConnectionRepository usersConnectionRepository, UserIdSource userIdSource) {
+		return new ReconnectFilter(usersConnectionRepository, userIdSource);
+	}
+
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public Facebook facebook(ConnectionRepository repository) {
