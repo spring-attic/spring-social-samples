@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.social.connect.web.SignInAdapter;
-import org.springframework.social.connect.web.thymeleaf.SpringSocialDialect;
 import org.springframework.social.showcase.signin.SimpleSignInAdapter;
 
 @ComponentScan(basePackages="org.springframework.social.showcase")
@@ -18,11 +17,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 	
-	@Bean
-	public SpringSocialDialect springSocialDialect() {
-		return new SpringSocialDialect();
-	}
-
 	@Bean
 	public SignInAdapter signInAdapter() {
 		return new SimpleSignInAdapter(new HttpSessionRequestCache());
