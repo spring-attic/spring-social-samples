@@ -66,7 +66,7 @@ public class MainConfig {
 	}
 
 	@Bean
-	public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 	
