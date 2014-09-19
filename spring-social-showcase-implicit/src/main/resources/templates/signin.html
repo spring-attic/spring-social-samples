@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+		<link rel="stylesheet" th:href="@{/page.css}" type="text/css" media="screen"></link>
+		<link rel="stylesheet" th:href="@{/form.css}" type="text/css" media="screen"></link>
+		<link rel="stylesheet" th:href="@{/messages/messages.css}" type="text/css" media="screen"></link>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="leftNav">
+			Left nav menu
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<br/>
+			<!-- FACEBOOK SIGNIN -->
+			<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}" method="POST">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
+				<button type="submit"><img th:src="@{/social/facebook/sign-in-with-facebook.png}"></img></button>
+			</form>
+		</div>		
+	</body>
+</html>
