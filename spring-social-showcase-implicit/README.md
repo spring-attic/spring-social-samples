@@ -1,8 +1,9 @@
-Spring Social Showcase (Spring Boot)
-====================================
-This sample app demonstrates many of the capabilities of the Spring Social project, including:
-* Connect to Facebook, Twitter, and LinkedIn
-* Sign in using Facebook, Twitter, and Linked in using ProviderSignInController for provider-signin
+Spring Social Showcase (Implicit)
+=================================
+This sample application demonstrates how to authenticate via a provider (Facebook in this case),
+using that provider as the sole source of user identity. In other words, there is no local user
+storage--When a user signs in via Facebook, their Facebook identity and authorization serves as
+sufficient for local authentication and identity.
 
 To run, simply import the project into your IDE and deploy to a Servlet 3.0 or > container such as Tomcat 6 or 7.
 Access the project at http://localhost:8080/spring-social-showcase
