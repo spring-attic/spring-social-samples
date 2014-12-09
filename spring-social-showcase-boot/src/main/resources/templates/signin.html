@@ -37,6 +37,13 @@
 				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
 				<button type="submit">Sign In with LinkedIn</button>
 			</form>
+
+			<!-- GITHUB SIGNIN -->
+			<form name="gh_signin" id="gh_signin" th:action="@{/signin/github}" method="POST">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
+				<button type="submit">Sign In with GitHub</button>
+			</form>
+
 		</div>		
 	</body>
 </html>
