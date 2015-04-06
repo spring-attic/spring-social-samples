@@ -25,6 +25,7 @@ eclipse {
 }
 
 repositories {
+  maven { url "http://repo.spring.io/milestone" }
   mavenLocal()
   mavenCentral()
   maven { url "http://repo.spring.io/libs-milestone" }
@@ -32,6 +33,7 @@ repositories {
 
 dependencies {
   compile("org.springframework.boot:spring-boot-starter-social-facebook")
+  compile("org.springframework.social:spring-social-facebook:2.0.0.RC1")
   compile("org.springframework.boot:spring-boot-starter-social-twitter")
   compile("org.springframework.boot:spring-boot-starter-social-linkedin")
   compile("org.springframework.boot:spring-boot-starter-actuator")
