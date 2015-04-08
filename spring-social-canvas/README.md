@@ -2,6 +2,14 @@ Spring Social Canvas
 ====================
 This sample app demonstrates how to use Spring Social within a Facebook Canvas application.
 
+Before you can run the application, you'll need to obtain application credentials from Facebook, Twitter, and LinkedIn by registering the application with each of the service providers:
+
+ * Facebook: https://developers.facebook.com/apps
+ * Twitter: https://apps.twitter.com/
+ * LinkedIn: https://www.linkedin.com/secure/developer
+
+Be sure to read each platform's usage policies carefully and understand how they impact your use of Spring Social with those platforms.
+
 IMPORTANT: Note that the steps for running the sample differ slightly from the other Spring Social samples:
 
  1. Build the application using Gradle:
