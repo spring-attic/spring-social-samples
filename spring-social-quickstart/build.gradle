@@ -13,6 +13,9 @@ buildscript {
     }
 }
 
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
 war {
   baseName = 'spring-social-quickstart'
 }
