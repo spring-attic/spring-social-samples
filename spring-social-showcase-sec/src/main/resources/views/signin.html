@@ -53,7 +53,14 @@
 			<p><a th:href="@{/auth/twitter}"><img th:src="@{/resources/social/twitter/sign-in-with-twitter-d.png}" border="0"/></a></p>
 		
 			<!-- FACEBOOK SIGNIN -->
-			<p><a th:href="@{/auth/facebook}"><img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}" border="0"/></a></p>
+				<form th:action="@{/auth/facebook}" method="GET">
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+				<p><button type="submit"><img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}"/></button></p>
+			</form>
+			
+			<hr/>
+			
+			<p><a th:href="@{/auth/facebook?scope=read_stream}"><img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}" border="0"/></a></p>
 		 
 			<!-- LINKEDIN SIGNIN -->
 			<p><a th:href="@{/auth/linkedin}">Sign In with LinkedIn</a></p>
