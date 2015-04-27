@@ -35,8 +35,8 @@ dependencies {
   compile("org.springframework.boot:spring-boot-starter-social-facebook")
 
   // Override Spring Boot's choice of Spring Social Facebook version
-  compile("org.springframework.social:spring-social-facebook:2.0.0.RELEASE")
-  compile("org.springframework.social:spring-social-facebook-web:2.0.0.RELEASE")
+  compile("org.springframework.social:spring-social-facebook:2.0.1.RELEASE")
+  compile("org.springframework.social:spring-social-facebook-web:2.0.1.RELEASE")
 
   compile("org.springframework.boot:spring-boot-starter-social-twitter")
   compile("org.springframework.boot:spring-boot-starter-social-linkedin")
