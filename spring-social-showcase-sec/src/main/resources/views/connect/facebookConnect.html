@@ -12,7 +12,7 @@
 			
 			<form th:action="@{/connect/facebook}" method="POST">
 				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+				<input type="hidden" name="scope" value="read_stream,user_posts,user_photos" />
 				<div class="formInfo">
 					<p>You aren't connected to Facebook yet. Click the button to connect Spring Social Showcase with your Facebook account.</p>
 				</div>

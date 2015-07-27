@@ -54,7 +54,7 @@
 		
 			<!-- FACEBOOK SIGNIN -->
 				<form th:action="@{/auth/facebook}" method="GET">
-				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+				<input type="hidden" name="scope" value="read_stream,user_posts,user_photos" />
 				<p><button type="submit"><img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}"/></button></p>
 			</form>
 			
