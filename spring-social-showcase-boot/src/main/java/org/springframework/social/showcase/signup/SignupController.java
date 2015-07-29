@@ -19,6 +19,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.showcase.account.Account;
 import org.springframework.social.showcase.account.AccountRepository;
@@ -40,9 +42,11 @@ public class SignupController {
 	private final ProviderSignInUtils providerSignInUtils;
 
 	@Inject
-	public SignupController(AccountRepository accountRepository) {
+	public SignupController(AccountRepository accountRepository, 
+		                    ConnectionFactoryLocator connectionFactoryLocator,
+		                    UsersConnectionRepository connectionRepository) {
 		this.accountRepository = accountRepository;
-		this.providerSignInUtils = new ProviderSignInUtils();
+		this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
