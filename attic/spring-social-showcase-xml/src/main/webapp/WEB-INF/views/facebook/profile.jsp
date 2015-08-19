@@ -15,7 +15,7 @@
 </dl>
 
 <c:url value="/connect/facebook" var="disconnectUrl"/>
-<form id="disconnect" action="${disconnectUrl}" method="post">
+<sf:form id="disconnect" action="${disconnectUrl}" method="post">
 	<button type="submit">Disconnect from Facebook</button>	
 	<input type="hidden" name="_method" value="delete" />
-</form>
+</sf:form>

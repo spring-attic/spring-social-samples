@@ -5,7 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/spring-social/facebook/tags" prefix="facebook" %>
 <%@ page session="false" %>
 
-<form id="signin" action="<c:url value="/signin/authenticate" />" method="post">
+<c:url value="/signin/authenticate" var="signinUrl" />
+
+<sf:form id="signin" action="${signinUrl}" method="post">
 	<div class="formInfo">
   		<c:if test="${param.error eq 'bad_credentials'}">
   		<div class="error">
@@ -22,21 +24,20 @@
 	</div>
 	<fieldset>
 		<label for="login">Username</label>
-		<input id="login" name="j_username" type="text" size="25" <c:if test="${not empty signinErrorMessage}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if> />
+		<input id="login" name="username" type="text" size="25" <c:if test="${not empty signinErrorMessage}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if> />
 		<label for="password">Password</label>
-		<input id="password" name="j_password" type="password" size="25" />	
+		<input id="password" name="password" type="password" size="25" />	
 	</fieldset>
 	<button type="submit">Sign In</button>
 	
 	<p>Some test user/password pairs you may use are:</p>
 	<ul>
 		<li>habuma/freebirds</li>
-		<li>kdonald/melbourne</li>
 		<li>rclarkson/atlanta</li>
 	</ul>
 	
 	<p>Or you can <a href="<c:url value="/signup"/>">signup</a> with a new account.</p>
-</form>
+</sf:form>
 
 	<!-- TWITTER SIGNIN -->
 	<form id="tw_signin" action="<c:url value="/signin/twitter"/>" method="POST">

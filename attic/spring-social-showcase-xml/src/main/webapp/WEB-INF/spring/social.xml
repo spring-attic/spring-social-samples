@@ -2,15 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:facebook="http://www.springframework.org/schema/social/facebook"
-	xmlns:twitter="http://www.springframework.org/schema/social/twitter"
 	xmlns:social="http://www.springframework.org/schema/social"
-	xmlns:linkedin="http://www.springframework.org/schema/social/linkedin"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/social/facebook http://www.springframework.org/schema/social/spring-social-facebook.xsd
-		http://www.springframework.org/schema/social/linkedin http://www.springframework.org/schema/social/spring-social-linkedin.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/social/twitter http://www.springframework.org/schema/social/spring-social-twitter.xsd
 		http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -18,8 +14,6 @@
 	<context:property-placeholder location="classpath:/org/springframework/social/showcase/config/application.properties" />
 
 	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
-	<twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>
-	<linkedin:config app-id="${linkedin.consumerKey}" app-secret="${linkedin.consumerSecret}"/>
 
 	<social:jdbc-connection-repository/>	
 	<bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
@@ -28,7 +22,6 @@
 		<property name="connectInterceptors">
 			<list>
 				<bean class="org.springframework.social.showcase.facebook.PostToWallAfterConnectInterceptor" />
-				<bean class="org.springframework.social.showcase.twitter.TweetAfterConnectInterceptor" />
 			</list>
 		</property>
 	</bean>
