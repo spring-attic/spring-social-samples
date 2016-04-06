@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Your Facebook Friends</h3>
+			<p><i>NOTE: Applications are limited to only seeing friends of the authorizing user
+			that are also users of the application. If your friend list is empty or seems
+			smaller than you expect, it may be that most/all of your Facebook friends are
+			not users of this application.</i></p>
+				
+			<ul class="friends">
+				<li th:each="friend : ${friends}"><img th:src="'http://graph.facebook.com/' + ${friend.id} + '/picture'" align="middle"/><span th:text="${friend.name}">name</span></li>
+			</ul>
+		</div>		
+	</body>
+</html>

@@ -1,0 +1,132 @@
+body {
+	padding-top: 70px;
+}
+
+a {
+	color: #6db33f;
+}
+
+ul.choices li {
+	list-style:none;
+	display:inline;
+	font-size:10pt;
+	padding-left: 5px;
+	border-left: 1px solid #000;
+}
+
+ul.choices li:first-child {
+	padding-left: 0px;
+	border-left: none;
+}
+
+ul.friends li {
+	padding-top:5px;
+	padding-bottom:5px;
+	list-style:none;
+}
+
+div.accountConnection {
+	margin: 10px;
+	width: 600px;
+	background-color: #ffffff;
+	border: 1px solid #006600;
+}
+
+div.accountConnection h4 {
+	margin-top: 0;
+	color: #ebf1e7;
+	background-color: #666;
+}
+
+div.accountConnection h4 img {
+	vertical-align: middle;
+}
+
+.jumbotron {
+	padding-top: 0px;
+	color: #ebf1e7;
+	background-color: #666;
+	font-family: "Varela Round",sans-serif;"
+}
+
+.navbar {
+	border-top: 4px solid #6db33f;
+	background-color: #34302d;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #eeeeee;
+}
+
+.navbar-default .navbar-brand {
+	color: #eeeeee;
+}
+
+
+.jumbotron h1 {
+    font-family: "Montserrat",sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    color: #ebf1e7;
+}
+
+.jumbotron p {
+	font-weight: 400;
+	font-size: 15px;
+	width: 50%;
+}
+
+.jumbotron .project-title {
+    display: inline-block;
+    border-top: 3px solid #6db33f;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    padding-top: 8px;
+    font-family: "Montserrat",sans-serif;
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.jumbotron label {
+	width: 100px;
+}
+
+.btn-form {
+	background-color: #34302d;
+    background-image: none;
+    border-radius: 0;
+    color: #f1f1f1;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: "Montserrat",sans-serif;
+    border: 2px solid #6db33f;
+    text-shadow: none;
+    transition: border 0.15s;
+    -webkit-transition: border 0.15s;
+    -moz-transition: border 0.15s;
+    -o-transition: border 0.15s;
+    -ms-transition: border 0.15s;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+	background-color: #34302d;
+    background-image: none;
+    border-radius: 0;
+    color: #f1f1f1;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: "Montserrat",sans-serif;
+    border: 2px solid #6db33f;
+    padding: 21px 60px;
+    text-shadow: none;
+    transition: border 0.15s;
+    -webkit-transition: border 0.15s;
+    -moz-transition: border 0.15s;
+    -o-transition: border 0.15s;
+    -ms-transition: border 0.15s;
+    text-transform: uppercase;
+}

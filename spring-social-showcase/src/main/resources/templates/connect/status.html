@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Your Connections</h3>
+			<!-- TODO: Thymeleaf seems to be tacking local/language on the end of properties..."facebook.displayName_en_US"...BECAUSE it's looking up a property and can't find it!!! -->
+			<div class="accountConnection" th:each="providerId : ${providerIds}">
+				<h4><img th:src="@{#{${providerId} + '.icon'}}" width="36" height="36" /><span th:text="#{${providerId} + '.displayName'}">provider name</span></h4>
+				<p>
+ 				<span th:if="${!#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span> as <span th:text="${connectionMap[__${providerId}__][0].displayName}">user display name</span>.
+				</span>
+				<span th:if="${#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are not yet connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span>.
+				</span>
+				Click <a th:href="@{'/connect/' + ${providerId}}">here</a> to manage your <span th:text="#{${providerId} + '.displayName'}">provider name</span> connection.
+				</p>
+ 			</div>
+		</div>
+	</body>
+</html>

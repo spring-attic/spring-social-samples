@@ -1,0 +1,8 @@
+spring:
+  social:
+    facebook:
+      app-id: 962223610477458
+      app-secret: b7dfec28b08ac4e8c2a09cbac4662c15
+    twitter:
+      app-id: yix4Ai9xDbWBKV3yFPFGs8Nkf
+      app-secret: 9rXtdeYe5v3wmGR5E96ubiXRDeWzZFgRt2ZYdgSKeQFivw0OtD

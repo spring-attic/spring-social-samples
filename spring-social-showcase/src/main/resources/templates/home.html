@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+	      <div class="jumbotron">
+	      	<img th:src="@{/project-icon-large.png}" style="float:right;opacity:0.15;"/>
+	      	
+	      	<div class="project-title">
+	      	Spring Social Samples
+	      	</div>
+	      	
+	        <h1>Spring Social Showcase</h1>
+	        <p>
+	          This sample application demonstrates how an application may use Spring Social to connect to and consume data from Facebook and Twitter.
+	        </p>
+	        <p>
+	          <a class="btn btn-lg btn-primary" href="http://projects.spring.io/spring-social/" role="button">About Spring Social &raquo;</a>
+	        </p>
+	      </div>
+		</div>		
+	</body>
+</html>
