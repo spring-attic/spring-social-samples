@@ -19,7 +19,6 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,6 +30,8 @@ import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SpringSocialConfigurer;
+import org.springframework.social.showcase.SimpleSocialUserDetailsService;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 /**
@@ -41,9 +42,6 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-	@Autowired
-	private ApplicationContext context;
-	
 	@Inject
 	private DataSource dataSource;
 	
@@ -80,7 +78,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.antMatchers("/", "/webjars/**", "/admin/**", "/favicon.ico", "/resources/**", "/auth/**", "/signin/**", "/signup/**", "/disconnect/facebook").permitAll()
 					.antMatchers("/**").authenticated()
 			.and()
-				.rememberMe();
+				.rememberMe()
+				
+			.and()
+				.apply(new SpringSocialConfigurer());
 	}
 
 	@Bean
@@ -96,6 +97,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public SpringSecurityDialect springSecurityDialect() {
 		return new SpringSecurityDialect();
+	}
+	
+	@Bean
+	public SimpleSocialUserDetailsService socialUserDetailsService() {
+		return new SimpleSocialUserDetailsService(userDetailsService());
 	}
 
 }

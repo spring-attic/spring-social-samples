@@ -71,7 +71,6 @@ public class SocialConfig implements SocialConfigurer {
 	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
 		cfConfig.addConnectionFactory(new TwitterConnectionFactory(env.getProperty("twitter.appKey"), env.getProperty("twitter.appSecret")));
 		cfConfig.addConnectionFactory(new FacebookConnectionFactory(env.getProperty("facebook.appKey"), env.getProperty("facebook.appSecret")));
-		cfConfig.addConnectionFactory(new LinkedInConnectionFactory(env.getProperty("linkedin.appKey"), env.getProperty("linkedin.appSecret")));
 	}
 	
 	@Override
@@ -108,13 +107,6 @@ public class SocialConfig implements SocialConfigurer {
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
 	public Twitter twitter(ConnectionRepository repository) {
 		Connection<Twitter> connection = repository.findPrimaryConnection(Twitter.class);
-		return connection != null ? connection.getApi() : null;
-	}
-	
-	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public LinkedIn linkedin(ConnectionRepository repository) {
-		Connection<LinkedIn> connection = repository.findPrimaryConnection(LinkedIn.class);
 		return connection != null ? connection.getApi() : null;
 	}
 	

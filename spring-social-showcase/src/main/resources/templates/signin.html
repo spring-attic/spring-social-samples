@@ -55,18 +55,25 @@
 				<p>Or you can <a th:href="@{/signup}">signup</a> with a new account.</p>
 			</form>
 
+
 			<!-- TWITTER SIGNIN -->
-			<form id="tw_signin" th:action="@{/signin/twitter}" method="POST">
-				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
+			<p><a th:href="@{/auth/twitter}"><img th:src="@{/social/twitter/sign-in-with-twitter-d.png}" border="0"/></a></p>
+		
+
+			<!-- FACEBOOK SIGNIN -->
+			<p><a th:href="@{/auth/facebook?scope=user_posts,user_photos}"><img th:src="@{/social/facebook/sign-in-with-facebook.png}" border="0"/></a></p>
+
+
+
+<!-- OPTIONAL BUTTON METHOD
+ 			<form id="tw_signin" th:action="@{/auth/twitter}" method="GET">
 				<button type="submit"><img th:src="@{/social/twitter/sign-in-with-twitter-d.png}"></img></button>
 			</form>
 		
-			<!-- FACEBOOK SIGNIN -->
-			<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}" method="POST">
-				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
-				<input type="hidden" name="scope" value="read_stream,user_posts,user_photos"></input>
+			<form name="fb_signin" id="fb_signin" th:action="@{/auth/facebook}" method="GET">
+				<input type="hidden" name="scope" value="user_posts,user_photos"></input>
 				<button type="submit"><img th:src="@{/social/facebook/sign-in-with-facebook.png}"></img></button>
-			</form>
+			</form> -->
 	      </div>
 		</div>	
 	</body>
