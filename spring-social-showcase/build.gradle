@@ -5,13 +5,13 @@ buildscript {
     mavenLocal()
   }
   dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.BUILD-SNAPSHOT")
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.0.RC1")
   }
 }
 
 apply plugin: 'eclipse'
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
   baseName = 'spring-social-showcase'
@@ -47,6 +47,8 @@ dependencies {
   compile("org.springframework.boot:spring-boot-devtools")
 
   compile("org.springframework.social:spring-social-security")
+  
+  compile("org.springframework.social:spring-social-web-thymeleaf2:2.0.0.M2")
   
   testCompile("org.springframework.boot:spring-boot-starter-test")
 }
