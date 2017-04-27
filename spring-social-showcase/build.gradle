@@ -41,20 +41,16 @@ repositories {
 
 dependencies {
   compile("org.springframework.boot:spring-boot-starter-social-facebook")
-
   compile("org.springframework.boot:spring-boot-starter-social-twitter")
   compile("org.springframework.boot:spring-boot-starter-security")
-  /*compile("org.springframework.boot:spring-boot-starter-thymeleaf")*/
-  compile("org.thymeleaf:thymeleaf-spring5:3.0.5.M3")
-  compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.2.1'
-  compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+  compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+  compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
   compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
   compile("org.springframework.boot:spring-boot-starter-web")
   compile("org.springframework.boot:spring-boot-starter-jdbc")
   compile("com.h2database:h2")
-  compile("org.apache.httpcomponents:httpclient:4.5.3")
+  compile("org.apache.httpcomponents:httpclient")
   compile("org.webjars:bootstrap:3.3.6")
-
   compile("org.springframework.boot:spring-boot-starter-actuator")
   compile("org.springframework.boot:spring-boot-devtools")
 
