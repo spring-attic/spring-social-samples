@@ -84,6 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 				.rememberMe()
 			.and()
+				.csrf()
+			.and()
 				.apply(
 					new SpringSocialConfigurer());
 	}
