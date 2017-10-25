@@ -6,3 +6,9 @@ spring:
     twitter:
       app-id: yix4Ai9xDbWBKV3yFPFGs8Nkf
       app-secret: 9rXtdeYe5v3wmGR5E96ubiXRDeWzZFgRt2ZYdgSKeQFivw0OtD
+  datasource:
+    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+management:
+  security:
+    enabled: false

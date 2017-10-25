@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+		springBootVersion = '2.0.0.M5'
 	}
 	repositories {
     mavenLocal()
@@ -20,6 +20,7 @@ apply plugin: 'io.spring.dependency-management'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jar {
   baseName = 'spring-social-showcase'
@@ -27,8 +28,8 @@ jar {
 
 eclipse {
   jdt {
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.5
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
   }
 }
 
@@ -53,10 +54,9 @@ dependencies {
   compile("org.webjars:bootstrap:3.3.6")
   compile("org.springframework.boot:spring-boot-starter-actuator")
   compile("org.springframework.boot:spring-boot-devtools")
-
   testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4'
+    gradleVersion = '4.0'
 }

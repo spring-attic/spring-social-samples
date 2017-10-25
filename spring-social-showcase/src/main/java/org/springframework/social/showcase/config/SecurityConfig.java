@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private ApplicationContext context;
-	
+
 	@Inject
 	private DataSource dataSource;
-	
+
 	@Autowired
 	public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
@@ -55,14 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.authoritiesByUsernameQuery("select username, 'ROLE_USER' from Account where username = ?")
 				.passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-				.antMatchers("/**/*.css", "/**/*.png", "/**/*.gif", "/**/*.jpg");
+				.antMatchers("/**/*.css", "/**/*.png", "/**/*.gif", "/**/*.jpg", "/h2-console/**");
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -92,7 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public TextEncryptor textEncryptor() {
 		return Encryptors.noOpText();
 	}
-	
+
 	@Bean
 	public SpringSecurityDialect springSecurityDialect() {
 		return new SpringSecurityDialect();
