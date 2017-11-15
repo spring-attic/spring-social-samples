@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M5'
+		springBootVersion = '2.0.0.M6'
 	}
 	repositories {
     mavenLocal()
@@ -54,6 +54,12 @@ dependencies {
   compile("org.webjars:bootstrap:3.3.6")
   compile("org.springframework.boot:spring-boot-starter-actuator")
   compile("org.springframework.boot:spring-boot-devtools")
+
+  compile("org.springframework.social:spring-social-autoconfigure:2.0.0.BUILD-SNAPSHOT")
+  compile("org.springframework.social:spring-social-facebook-autoconfigure:3.0.0.BUILD-SNAPSHOT")
+  compile("org.springframework.social:spring-social-twitter-autoconfigure:2.0.0.BUILD-SNAPSHOT")
+  
+  
   testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
