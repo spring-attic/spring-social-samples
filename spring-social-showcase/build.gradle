@@ -41,8 +41,6 @@ repositories {
 }
 
 dependencies {
-  compile("org.springframework.boot:spring-boot-starter-social-facebook")
-  compile("org.springframework.boot:spring-boot-starter-social-twitter")
   compile("org.springframework.boot:spring-boot-starter-security")
   compile("org.springframework.boot:spring-boot-starter-thymeleaf")
   compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
