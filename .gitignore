@@ -1,5 +1,4 @@
 **/target
-**/.idea
 **/.classpath
 **/.project
 **/.settings
@@ -7,5 +6,6 @@
 **/bin
 **/build
 .DS_Store
+.idea
 .gradle
 *.log

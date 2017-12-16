@@ -136,7 +136,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/tr/edu/boun/secretary/config/AuthUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+              <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -166,7 +166,7 @@
         <entry file="file://$PROJECT_DIR$/twitterapi.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
             <state relative-caret-position="-28414">
-              <caret line="29" column="8" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+              <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -655,6 +655,11 @@
               <item name="spring-social-showcase" type="b2602c69:ProjectViewProjectNode" />
               <item name="spring-social-showcase" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
+            <path>
+              <item name="spring-social-showcase" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-social-showcase" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name=".gradle" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -873,12 +878,12 @@
       <updated>1512920626700</updated>
       <workItem from="1512920629784" duration="14147000" />
       <workItem from="1513375235335" duration="321000" />
-      <workItem from="1513375592733" duration="18503000" />
+      <workItem from="1513375592733" duration="18868000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32971000" />
+    <option name="totallyTimeSpent" value="33336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-792" width="1920" height="1080" extended-state="0" />
@@ -1247,7 +1252,7 @@
         <state relative-caret-position="285">
           <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1320,7 +1325,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/tr/edu/boun/secretary/config/AuthUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1344,7 +1349,7 @@
     <entry file="file://$PROJECT_DIR$/twitterapi.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
         <state relative-caret-position="-28414">
-          <caret line="29" column="8" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
         </state>
       </provider>
     </entry>
