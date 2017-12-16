@@ -6,4 +6,7 @@
 **/bin
 **/build
 .DS_Store
+.idea
 .gradle
+*.iml
+*.log

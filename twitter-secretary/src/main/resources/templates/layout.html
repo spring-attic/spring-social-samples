@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>Navbar Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/showcase.css}" rel="stylesheet"/>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Twitter Secretary Beta</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a th:href="@{/}">Home</a></li>
+              <li class="dropdown" sec:authorize="isAuthenticated()"><a th:href="@{/connect}">Connections</a></li>
+              <li class="dropdown" sec:authorize="isAuthenticated()">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Twitter <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                	<li><a th:href="@{/connect/twitter}">Connection</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter}">Twitter Profile</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter/timeline}">Timeline</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter/friends}">Friends</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter/followers}">Followers</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter/unfollowers}">Unfollowers</a></li>
+					<li social:connected="twitter"><a th:href="@{/twitter/trends}">Trends</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li sec:authorize="!isAuthenticated()"><a th:href="@{/signin}">Sign In</a></li>
+              <li sec:authorize="isAuthenticated()"><a href="javascript:document.logoutForm.submit();">Sign out <span sec:authentication="name">Bob</span></a></li>
+            </ul>
+            <form method="POST" th:action="@{/signout}" name="logoutForm"></form>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+	  <div id="content" layout:fragment="content">
+		Content goes here
+	  </div>	
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9/dist/umd/popper.min.js}"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+    <script th:src="@{/webjars/bootstrap/4.0.0-beta.2/js/bootstrap.min.js}"></script>
+  </body>
+</html>
