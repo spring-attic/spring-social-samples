@@ -7,7 +7,3 @@ CREATE TABLE account (
   `lastname`  VARCHAR(60) NOT NULL,
   CONSTRAINT pk_account PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 COMMENT='Stores Service and Component Mapping Data.';
-
-insert into account (username, password, firstname, lastname) values ('habuma', 'tacos', 'Craig', 'Walls');
-insert into account (username, password, firstname, lastname) values ('rclarkson', 'atlanta', 'Roy', 'Clarkson');
-
