@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: javax:javaee-api:8.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax/javaee-api/8.0/5595992a15bf40ceda8a831c77ecfe4043f8f161/javaee-api-8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax/javaee-api/8.0/d20c2404766162f9f7797943131a918e0ee45414/javaee-api-8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

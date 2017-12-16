@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.social:spring-social-core:1.1.4.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-core/1.1.4.RELEASE/cb43c308fa99cbe16f476fabfd6ded2c6b8bb8ed/spring-social-core-1.1.4.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-core/1.1.4.RELEASE/dcae9407440ba8862e89f8a2fe901df371ec7f3c/spring-social-core-1.1.4.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
