@@ -44,24 +44,29 @@ div.accountConnection h4 img {
 
 .jumbotron {
 	padding-top: 0px;
-	color: #ebf1e7;
-	background-color: #666;
+	color: #000000;
+	background-color: #00a3a0;
 	font-family: "Varela Round",sans-serif;"
 }
 
 .navbar {
-	border-top: 4px solid #6db33f;
+	border-top: 4px solid #000000;
 	background-color: #34302d;
 }
 
 .navbar-default .navbar-nav>li>a {
-	color: #eeeeee;
+	color: #6fb246;
 }
 
 .navbar-default .navbar-brand {
-	color: #eeeeee;
+	color: #000000;
 }
 
+.navbar-toggler {
+    color: rgba(0, 252, 255, 0.5);
+    border-color: indigo;
+    background: orchid;
+}
 
 .jumbotron h1 {
     font-family: "Montserrat",sans-serif;
@@ -69,7 +74,7 @@ div.accountConnection h4 img {
     font-size: 24px;
     line-height: 24px;
     margin-bottom: 20px;
-    color: #ebf1e7;
+    color: #000000;
 }
 
 .jumbotron p {
