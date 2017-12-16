@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:social="http://spring.io/springsocial"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+	<head>
+		<title>Spring Social Showcase</title>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a th:href="@{/}">Spring Social Showcase</a></h1>
+		</div>
+		
+		<div id="content" layout:fragment="content">
+			<h3>Your Twitter Friends</h3>
+			
+			<ul class="imagedList">
+				<li class="imagedItem" th:each="profile : ${profiles}">
+					<img th:src="${profile.profileImageUrl}" width="48" height="48"/>
+					<a th:href="'http://twitter.com/' + ${profile.screenName}" th:text="${profile.screenName}">screen name</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
