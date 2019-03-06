@@ -1,6 +1,6 @@
 buildscript {
   repositories {
-    maven { url "http://repo.spring.io/libs-snapshot" }
+    maven { url "https://repo.spring.io/libs-snapshot" }
     mavenLocal()
   }
   dependencies {
@@ -27,7 +27,7 @@ eclipse {
 repositories {
   mavenLocal()
   mavenCentral()
-  maven { url "http://repo.spring.io/libs-milestone" }
+  maven { url "https://repo.spring.io/libs-milestone" }
 }
 
 dependencies {
