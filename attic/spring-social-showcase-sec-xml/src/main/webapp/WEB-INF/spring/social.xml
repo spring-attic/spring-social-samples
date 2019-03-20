@@ -7,12 +7,12 @@
 	xmlns:linkedin="http://www.springframework.org/schema/social/linkedin"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/social/facebook http://www.springframework.org/schema/social/spring-social-facebook.xsd
-		http://www.springframework.org/schema/social/linkedin http://www.springframework.org/schema/social/spring-social-linkedin.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/social/twitter http://www.springframework.org/schema/social/spring-social-twitter.xsd
-		http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/social/facebook https://www.springframework.org/schema/social/spring-social-facebook.xsd
+		http://www.springframework.org/schema/social/linkedin https://www.springframework.org/schema/social/spring-social-linkedin.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/social/twitter https://www.springframework.org/schema/social/spring-social-twitter.xsd
+		http://www.springframework.org/schema/social https://www.springframework.org/schema/social/spring-social.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
 	<context:property-placeholder location="classpath:/org/springframework/social/showcase/config/application.properties" />
