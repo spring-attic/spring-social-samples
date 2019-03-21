@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
 
-<script src="http://platform.twitter.com/anywhere.js?id=7yWLgCOuQhIpPyffm0o2Vg&v=1" type="text/javascript"></script>
+<script src="https://platform.twitter.com/anywhere.js?id=7yWLgCOuQhIpPyffm0o2Vg&v=1" type="text/javascript"></script>
 <script type="text/javascript">
   twttr.anywhere(function (T) {
     T(".feed").linkifyUsers();
@@ -19,7 +19,7 @@
 		<c:if test="${not empty profile.profileImageUrl}"><img src="<c:out value="${profile.profileImageUrl}"/>" width="48" height="48" align="left"/></c:if>
 		</div>
 		<div class="content">
-		<p><a href="http://twitter.com/<c:out value="${profile.screenName}" />"><c:out value="${profile.screenName}"/></a></p>
+		<p><a href="https://twitter.com/<c:out value="${profile.screenName}" />"><c:out value="${profile.screenName}"/></a></p>
 		</div>
 	</li>
 </c:forEach>
