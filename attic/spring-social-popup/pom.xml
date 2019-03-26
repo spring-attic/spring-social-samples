@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.social.samples</groupId>
 	<artifactId>spring-social-popup</artifactId>
@@ -183,7 +183,7 @@
 		<repository>
 			<id>org.springframework.maven.release</id>
 			<name>Spring Maven Release Repository</name>
-			<url>http://repo.springsource.org/libs-release-local</url>
+			<url>https://repo.springsource.org/libs-release-local</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
@@ -191,7 +191,7 @@
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
 			<name>Spring Maven Snapshot Repository</name>
-			<url>http://repo.springsource.org/libs-snapshot-local</url>
+			<url>https://repo.springsource.org/libs-snapshot-local</url>
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
@@ -199,7 +199,7 @@
 		<repository>
 			<id>org.springframework.maven.milestone</id>
 			<name>Spring Maven Milestone Repository</name>
-			<url>http://repo.springsource.org/libs-milestone-local</url>
+			<url>https://repo.springsource.org/libs-milestone-local</url>
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 	</repositories>
