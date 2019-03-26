@@ -24,9 +24,9 @@ public final class NetFlixServiceProvider extends AbstractOAuth1ServiceProvider<
 	public NetFlixServiceProvider(String consumerKey, String consumerSecret) {
 		super(consumerKey, consumerSecret, 
 			new NetFlixOAuth1Template(consumerKey, consumerSecret, 
-				"http://api.netflix.com/oauth/request_token",
+				"https://api.netflix.com/oauth/request_token",
 				"https://api-user.netflix.com/oauth/login",
-				"http://api.netflix.com/oauth/access_token"));
+				"https://api.netflix.com/oauth/access_token"));
 	}
 
 	@Override

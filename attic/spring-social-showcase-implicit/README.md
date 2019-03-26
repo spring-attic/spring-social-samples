@@ -45,6 +45,6 @@ When running the application from the command line, you can access it at http://
 Step 4: Participate in the Spring Social community
 --------------------------------------------------
 
-Discuss Spring Social on StackOverflow at http://stackoverflow.com/questions/tagged/spring-social. We welcome you to ask questions and we encourage you to answer any you might have insight into.
+Discuss Spring Social on StackOverflow at https://stackoverflow.com/questions/tagged/spring-social. We welcome you to ask questions and we encourage you to answer any you might have insight into.
 
 If you run into any problems or have a suggested new feature, let us know at https://jira.spring.io/browse/SOCIAL. Or better yet, fork Spring Social on GitHub and send us a pull request to fix a bug or introduce a new feature.

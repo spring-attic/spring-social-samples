@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:social="http://spring.io/springsocial"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="https://www.thymeleaf.org"
+	  xmlns:social="https://spring.io/springsocial"
+	  xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
 	  layout:decorator="layout">
 	<head>
 		<title>Spring Social Showcase</title>
@@ -46,7 +46,7 @@
 						<img th:src="${tweet.profileImageUrl}" align="left"/>
 					</div>
 					<div class="content">
-					<strong><a th:href="'http://twitter.com/' + ${tweet.fromUser}" th:text="${tweet.fromUser}">from user</a></strong><br/>
+					<strong><a th:href="'https://twitter.com/' + ${tweet.fromUser}" th:text="${tweet.fromUser}">from user</a></strong><br/>
 					<span th:text="${tweet.text}">tweet text</span><br/>
 					<span class="postTime" th:text="${tweet.createdAt}">created at</span>
 					</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:social="http://spring.io/springsocial"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="https://www.thymeleaf.org"
+	  xmlns:social="https://spring.io/springsocial"
+	  xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
 	  layout:decorator="layout">
 	<head>
 		<title>Spring Social Showcase</title>
@@ -17,7 +17,7 @@
 			<ul class="imagedList">
 				<li class="imagedItem" th:each="profile : ${profiles}">
 					<img th:src="${profile.profileImageUrl}" width="48" height="48"/>
-					<a th:href="'http://twitter.com/' + ${profile.screenName}" th:text="${profile.screenName}">screen name</a>
+					<a th:href="'https://twitter.com/' + ${profile.screenName}" th:text="${profile.screenName}">screen name</a>
 				</li>
 			</ul>
 		</div>
