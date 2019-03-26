@@ -75,7 +75,7 @@ public class NetFlixTemplate extends AbstractOAuth1ApiBinding implements NetFlix
 
 	private String findItemId(List<Map<String, String>> linkList) {
 		for (Map<String, String> linkMap : linkList) {
-			if(linkMap.get("rel").equals("http://schemas.netflix.com/catalog/title")) {
+			if(linkMap.get("rel").equals("https://schemas.netflix.com/catalog/title")) {
 				return linkMap.get("href");
 			}
 		}
