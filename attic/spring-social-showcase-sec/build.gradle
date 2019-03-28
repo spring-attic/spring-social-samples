@@ -5,7 +5,7 @@ apply plugin: 'tomcat'
 
 buildscript {
     repositories {
-        mavenCentral()
+        maven { url 'https://repo.maven.apache.org/maven2/' }
     }
 
     dependencies {
@@ -66,7 +66,7 @@ repositories {
 	maven { url 'http://repo.spring.io/milestone' }
 	maven { url 'http://repo.spring.io/snapshot' }
 	maven { url 'http://download.java.net/maven/2' }
-	mavenCentral()
+	maven { url 'https://repo.maven.apache.org/maven2/' }
 }
 
 task wrapper(type: Wrapper) {
