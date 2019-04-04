@@ -4,7 +4,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page session="false" %>
 
-<script src="http://platform.twitter.com/anywhere.js?id=7yWLgCOuQhIpPyffm0o2Vg&v=1" type="text/javascript"></script>
+<script src="https://platform.twitter.com/anywhere.js?id=7yWLgCOuQhIpPyffm0o2Vg&v=1" type="text/javascript"></script>
 <script type="text/javascript">
   twttr.anywhere(function (T) {
     T(".feed").linkifyUsers();
@@ -36,7 +36,7 @@
 			<c:if test="${not empty dm.sender.profileImageUrl}"><img src="<c:out value="${dm.sender.profileImageUrl}"/>" align="left"/></c:if>
 		</div>
 		<div class="content">
-		<strong><a href="http://twitter.com/<c:out value="${dm.sender.screenName}" />"><c:out value="${dm.sender.screenName}" /></a></strong><br/>
+		<strong><a href="https://twitter.com/<c:out value="${dm.sender.screenName}" />"><c:out value="${dm.sender.screenName}" /></a></strong><br/>
 		<span class="dmRecipient">to <c:out value="${dm.recipient.screenName}"/></span><br/>
 		<c:out value="${dm.text}" /><br/>
 		<span class="postTime"><c:out value="${dm.createdAt}"/></span>
