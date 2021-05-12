@@ -12,7 +12,7 @@
 		<org.springframework.social-version>1.1.2.RELEASE</org.springframework.social-version>
 		<org.springframework.social.facebook-version>2.0.2.RELEASE</org.springframework.social.facebook-version>
 		<org.springframework-version>4.2.0.RELEASE</org.springframework-version>
-		<org.springframework.security-version>4.0.0.RELEASE</org.springframework.security-version>
+		<org.springframework.security-version>5.2.10.RELEASE</org.springframework.security-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 	</properties>
 	<dependencies>
