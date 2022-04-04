@@ -1,3 +1,5 @@
+# spring-social-samples is no longer actively maintained by VMware, Inc.
+
 Spring Social Samples
 =====================
 This repository contains sample projects illustrating usage of the Spring Social project.
