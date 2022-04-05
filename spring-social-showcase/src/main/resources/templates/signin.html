@@ -64,7 +64,7 @@
 			<!-- FACEBOOK SIGNIN -->
 			<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}" method="POST">
 				<input type="hidden" name="_csrf" th:value="${_csrf.token}"></input>
-				<input type="hidden" name="scope" value="read_stream,user_posts,user_photos"></input>
+				<input type="hidden" name="scope" value="email, user_about_me, public_profile, user_friends, user_posts,user_photos"></input>
 				<button type="submit"><img th:src="@{/social/facebook/sign-in-with-facebook.png}"></img></button>
 			</form>
 	      </div>

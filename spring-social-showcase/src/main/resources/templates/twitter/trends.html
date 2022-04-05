@@ -15,7 +15,7 @@
 			<h3>Daily Twitter Trends</h3>
 			
 			<span th:each="trend : ${trends.trends}">
-				<a href="@{'/twitter/search?query=' + ${trend.query}" th:text="${trend.name}">trend name</a><br/>
+				<a th:href="@{'/twitter/search?query=' + ${trend.query}}" th:text="${trend.name}">trend name</a><br/>
 			</span>
 		</div>
 	</body>
